@@ -36,4 +36,4 @@ COPY /react-app/build/* app/static/
 RUN pip install -r requirements.txt
 RUN pip install psycopg2
 
-CMD gunicorn --worker-class eventlet -w 1 app:app
+CMD gunicorn app:app
