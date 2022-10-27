@@ -5,6 +5,10 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
+from datetime import datetime
+from pycoingecko import CoinGeckoAPI
+cg = CoinGeckoAPI()
+
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
@@ -70,3 +74,30 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+
+@app.route('/api/testcg')
+def get_market_chart_range():
+    '''
+    this route will give btc price from inception to date until now
+    '''
+    response =  cg.get_coin_market_chart_range_by_id(
+                                                    id='bitcoin',
+                                                    vs_currency='usd',
+                                                    from_timestamp=1392577232,
+                                                    to_timestamp=datetime.now().timestamp()
+                                                    )
+
+
+    for key in response:
+        print(key == 'prices')
+
+    # converted_data = [ [datetime.fromtimestamp(timestamp), price] for [timestamp, price] in response['prices'] ]
+
+    first_timestamp = response['prices'][0][0]
+    last_timestamp = response['prices'][ len(response['prices']) - 1][0]
+
+    print(first_timestamp)
+    print(last_timestamp)
+
+
+    return response
