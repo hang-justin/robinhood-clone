@@ -16,7 +16,7 @@ class Transaction(db.Model):
                         db.String(50),
                         nullable=False)
     type = db.Column(
-                        db.String(10),
+                        db.String(20),
                         nullable=False)
     quantity = db.Column(
                         db.Float,
