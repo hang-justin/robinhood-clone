@@ -22,6 +22,7 @@ class Asset(db.Model):
     quantity = db.Column(
                         db.Float)
 
+
     # COLUMN: asset_id
     # Must be a unique identifier for use with other APIs
     # Finnhub to pull stocks and use its symbol for asset_id
@@ -34,6 +35,15 @@ class Asset(db.Model):
     owner_id = db.Column(
                         db.Integer,
                         db.ForeignKey('users.id'))
+
+
+    # Unique constraint amongst combination of asset_id and owner_id col
+    # Unique Index = uix
+    # __table_args__ expects a tuple
+    __table_args__ = (db.UniqueConstraint(
+                                asset_id,
+                                owner_id,
+                                name='uix_asset_owner'),)
 
 
     # Bidrectional one-to-many

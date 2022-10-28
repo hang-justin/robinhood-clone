@@ -1,8 +1,8 @@
 """test
 
-Revision ID: c04458be2f26
+Revision ID: 566396e22c74
 Revises: 
-Create Date: 2022-10-28 01:10:52.356359
+Create Date: 2022-10-28 02:03:29.167875
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c04458be2f26'
+revision = '566396e22c74'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -40,7 +40,8 @@ def upgrade():
     sa.Column('quantity', sa.Float(), nullable=True),
     sa.Column('owner_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('asset_id', 'owner_id', name='uix_asset_owner')
     )
     op.create_table('transactions',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -60,7 +61,8 @@ def upgrade():
     sa.Column('name', sa.String(length=64), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name', 'owner_id', name='uix_name_owner')
     )
     op.create_table('watchlist_item',
     sa.Column('watchlist_id', sa.Integer(), nullable=False),

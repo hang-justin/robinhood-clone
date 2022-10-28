@@ -18,6 +18,14 @@ class Watchlist(db.Model):
                         db.ForeignKey('users.id'))
 
 
+    # Unique constraint amongst combination of watchlist name and owner_id
+    # Unique Index = uix
+    # __table_args__ expects a tuple
+    __table_args__ = (db.UniqueConstraint(
+                                name,
+                                owner_id,
+                                name='uix_name_owner'),)
+
     # Bidrectional one-to-many (user-to-watchlists)
     owner = db.relationship('User', back_populates='watchlists')
 
