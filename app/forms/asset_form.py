@@ -1,19 +1,15 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
-from wtforms.validators import DataRequired, ValidationError
-from app.models import Watchlist
+from wtforms import StringField, IntegerField, FloatField
+from wtforms.validators import DataRequired
 
-def unique_watchlist_name_for_user(form, field):
-    user_id = form.data['owner_id']
-    name = field.data
-    watchlist_name_used = Watchlist.query.filter(Watchlist.owner_id == user_id, Watchlist.name == name).first()
-
-    if watchlist_name_used:
-        raise ValidationError("You've already used that name. Try another.")
-
-
-class WatchlistForm(FlaskForm):
-    owner_id = StringField('owner_id',
+class AssetForm(FlaskForm):
+    owner_id = IntegerField('owner_id')
+    asset_id = IntegerField('asset_id',
+                            validators=[DataRequired()])
+    symbol = StringField('symbol',
                             validators=[DataRequired()])
     name = StringField('name',
-                            validators=[DataRequired(), unique_watchlist_name_for_user])
+                            validators=[DataRequired()])
+    type = StringField('type',
+                            validators=[DataRequired()])
+    quantity = FloatField('quantity')
