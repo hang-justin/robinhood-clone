@@ -14,7 +14,9 @@ def seed_watchlists():
                             owner_id = 3,
                             name = 'My First List')
 
+
     watchlist_assets = Asset.query.filter(Asset.quantity == None).all()
+
 
     for asset in watchlist_assets:
         demo_watchlist.items.append(asset)
