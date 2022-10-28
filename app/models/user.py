@@ -26,10 +26,10 @@ class User(db.Model, UserMixin):
                         db.String(255),
                         nullable=False)
     created_at = db.Column(
-                        db.Datetime,
+                        db.DateTime,
                         nullable=False)
     updated_at = db.Column(
-                        db.Datetime,
+                        db.DateTime,
                         nullable=False)
 
 

@@ -1,5 +1,4 @@
 from .db import db
-from .watchlist import watchlist_asset
 
 class Transaction(db.Model):
     __tablename__ = 'transactions'
