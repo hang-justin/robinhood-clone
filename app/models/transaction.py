@@ -6,7 +6,10 @@ class Transaction(db.Model):
     id = db.Column(
                         db.Integer,
                         primary_key=True)
-    ticker = db.Column(
+    asset_id = db.Column(
+                        db.String(20),
+                        nullable=False)
+    symbol = db.Column(
                         db.String(10),
                         nullable=False)
     name = db.Column(
@@ -39,7 +42,8 @@ class Transaction(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'ticker': self.ticker,
+            'asset_id': self.asset_id,
+            'symbol': self.symbol,
             'name': self.name,
             'type': self.type,
             'quantity': self.quantity,

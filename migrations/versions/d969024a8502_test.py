@@ -1,8 +1,8 @@
 """test
 
-Revision ID: 76ab77e80af2
+Revision ID: d969024a8502
 Revises: 
-Create Date: 2022-10-27 22:14:10.460150
+Create Date: 2022-10-28 00:23:05.251392
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '76ab77e80af2'
+revision = 'd969024a8502'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,9 +33,10 @@ def upgrade():
     )
     op.create_table('assets',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('ticker', sa.String(length=10), nullable=False),
+    sa.Column('asset_id', sa.String(length=20), nullable=False),
+    sa.Column('symbol', sa.String(length=10), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('type', sa.String(length=10), nullable=False),
+    sa.Column('type', sa.String(length=20), nullable=False),
     sa.Column('quantity', sa.Float(), nullable=True),
     sa.Column('owner_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
@@ -43,7 +44,8 @@ def upgrade():
     )
     op.create_table('transactions',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('ticker', sa.String(length=10), nullable=False),
+    sa.Column('asset_id', sa.String(length=20), nullable=False),
+    sa.Column('symbol', sa.String(length=10), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('type', sa.String(length=10), nullable=False),
     sa.Column('quantity', sa.Float(), nullable=False),

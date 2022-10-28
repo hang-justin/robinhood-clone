@@ -7,17 +7,27 @@ class Asset(db.Model):
     id = db.Column(
                         db.Integer,
                         primary_key=True)
-    ticker = db.Column(
+    asset_id = db.Column(
+                        db.String(20),
+                        nullable=False)
+    symbol = db.Column(
                         db.String(10),
                         nullable=False)
     name = db.Column(
                         db.String(50),
                         nullable=False)
     type = db.Column(
-                        db.String(10),
+                        db.String(20),
                         nullable=False)
     quantity = db.Column(
                         db.Float)
+
+    # COLUMN: asset_id
+    # Must be a unique identifier for use with other APIs
+    # Finnhub to pull stocks and use its symbol for asset_id
+    # CoinGecko (CG) to pull coins. CG has its an id for each coin
+    #       type=coin   => asset_id = coin_id
+    #       type=stock  => asset_id = symbol
 
 
     # Foreign Key Columns
@@ -40,7 +50,8 @@ class Asset(db.Model):
 
     def to_dict_owner_asset(self):
         return {
-            'ticker': self.ticker,
+            'asset_id': self.asset_id,
+            'symbol': self.symbol,
             'name': self.name,
             'type': self.type,
             'quantity': self.quantity
@@ -49,7 +60,8 @@ class Asset(db.Model):
 
     def to_dict_watchlist_item(self):
         return {
-            'ticker': self.ticker,
+            'asset_id': self.asset_id,
+            'symbol': self.symbol,
             'name': self.name,
             'type': self.type,
         }
