@@ -19,7 +19,7 @@ def get_all_transactions():
 
 @transaction_routes.route('/new', methods=['POST'])
 @login_required
-def get_all_transactions():
+def post_transactions():
     party_id = current_user.id
 
     form = TransactionForm()
@@ -41,7 +41,7 @@ def get_all_transactions():
         transaction_B.party_id = party_id
 
 
-        if transaction_A.asset_id is not '$$$$$':
+        if transaction_A.asset_id != '$$$$$':
             transaction_A.total = -transaction_A.total
 
             transaction_B.asset_id = '$$$$$'
@@ -64,6 +64,7 @@ def get_all_transactions():
         else:
             # if asset_id is $$$$$
             # then it was a deposit
+            # transaction_A.type will be Bank deposit
             transaction_B.quantity = -transaction_A.quantity
             transaction_B.total = -transaction_A.quantity
             transaction_B.type = 'Bank Withdrawl'

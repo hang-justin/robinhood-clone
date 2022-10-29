@@ -71,7 +71,7 @@ def edit_watchlist_name(watchlist_id):
 
 
 # Add/remove item to/from watchlist
-@watchlist_routes.route('/<int:watchlist_id>/<str:edit_action>/<str:asset_id>', methods=['POST'])
+@watchlist_routes.route('/<int:watchlist_id>/<string:edit_action>/<int:asset_id>', methods=['POST'])
 @login_required
 def edit_watchlist_items(watchlist_id, edit_action, asset_id):
     '''

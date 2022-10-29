@@ -35,7 +35,7 @@ def add_funds():
 
 
 
-@asset_routes.route('/<str:asset_id>/buy', methods=['POST'])
+@asset_routes.route('/<string:asset_id>/buy', methods=['POST'])
 @login_required
 def buy_asset(asset_id):
     form = AssetForm()
@@ -80,7 +80,7 @@ def buy_asset(asset_id):
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
-@asset_routes.route('/<str:asset_id>/sell', methods=['POST'])
+@asset_routes.route('/<string:asset_id>/sell', methods=['POST'])
 @login_required
 def sell_asset(asset_id):
     form = AssetForm()
@@ -121,7 +121,7 @@ def sell_asset(asset_id):
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
-@asset_routes.route('/<str:asset_id>/sell/all', methods=['DELETE'])
+@asset_routes.route('/<string:asset_id>/sell/all', methods=['DELETE'])
 @login_required
 def sell_all_asset(asset_id):
     form = AssetForm()
