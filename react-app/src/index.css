@@ -1,1 +1,22 @@
 /* TODO Add site wide styles */
+:root {
+    --main-green: #00c805;
+    --crypto-watchlist-green: #698420;
+}
+
+* {
+    text-decoration: none;
+    font-family: 'Poppins';
+}
+
+body {
+    margin: 0
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+.main-green-text {
+    color: var(--main-green)
+}
