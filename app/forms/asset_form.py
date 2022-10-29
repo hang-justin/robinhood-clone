@@ -10,7 +10,6 @@ class AssetForm(FlaskForm):
     The nullable fields are for directly adding those assets to the DB
     for the sole purpose of using those assets as watchlist items
     '''
-    owner_id = IntegerField('owner_id')
     asset_id = IntegerField('asset_id',
                             validators=[DataRequired()])
     symbol = StringField('symbol',
@@ -20,4 +19,6 @@ class AssetForm(FlaskForm):
     type = StringField('type',
                             validators=[DataRequired()])
     quantity = FloatField('quantity',
+                            validators=[DataRequired()])
+    total = FloatField('total',
                             validators=[DataRequired()])

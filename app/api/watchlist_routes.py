@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.forms import WatchlistForm
-from app.models import db, Watchlist, Asset
+from app.models import db, Watchlist, Watchitem
 
 watchlist_routes = Blueprint('watchlists', __name__)
 
@@ -46,11 +46,34 @@ def create_watchlist():
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+# Edit a watchlist
+@watchlist_routes.route('/<int:watchlist_id>', methods=['POST'])
+@login_required
+def edit_watchlist_name(watchlist_id):
+    form = WatchlistForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    watchlist = Watchlist.query.get(watchlist_id)
+
+    if watchlist is None:
+        return { 'message' : 'Watchlist not found'}, 404
+
+    if current_user.id != watchlist.owner_id:
+        return { 'message' : 'You do not have permission to edit this watchlist.' }, 403
+
+    if form.validate_on_submit():
+        form.populate_obj(watchlist)
+        db.session.commit()
+        return {
+            'message': 'Successfully updated watchlist.',
+            'watchlist': watchlist.to_dict()}, 200
+    else:
+        return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+
 
 # Add/remove item to/from watchlist
 @watchlist_routes.route('/<int:watchlist_id>/<str:edit_action>/<str:asset_id>', methods=['POST'])
 @login_required
-def edit_watchlist(watchlist_id, edit_action, asset_id):
+def edit_watchlist_items(watchlist_id, edit_action, asset_id):
     '''
     Adds/remove asset to/from a watchlist
     '''
@@ -75,17 +98,17 @@ def edit_watchlist(watchlist_id, edit_action, asset_id):
 
     # Second/last db connection
     # Maybe we can search current_watchlist.items to see if those
-    # Asset objects have the id of asset_id have the requested asset_id
-    watchlist_item = Asset.query.filter(Asset.asset_id == asset_id, Asset.owner_id == None)
+    # Watchitem objects have the id of asset_id have the requested asset_id
+    watchlist_item = Watchitem.query.filter(Watchitem.asset_id == asset_id, Watchitem.owner_id == None)
 
     if not watchlist_item:
-        return { 'message' : 'Asset not supported or found. Unable to add to watchlist' }, 400
+        return { 'message' : 'Item not supported or found. Unable to add to watchlist' }, 400
 
     if watchlist_item in current_watchlist.items and edit_action == 'add':
-        return { 'message' : 'Asset is already in watchlist.' }, 400
+        return { 'message' : 'Item is already in watchlist.' }, 400
 
     if watchlist_item not in current_watchlist.items and edit_action == 'remove':
-        return { 'message' : 'Asset not found in watchlist. Unable to remove.' }, 400
+        return { 'message' : 'Item not found in watchlist. Unable to remove.' }, 400
 
     if (edit_action == 'remove'):
         current_watchlist.items.remove(watchlist_item)

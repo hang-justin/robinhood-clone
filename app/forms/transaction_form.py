@@ -3,8 +3,8 @@ from wtforms import StringField, IntegerField, FloatField, DateTimeField
 from wtforms.validators import DataRequired, ValidationError
 
 class TransactionForm(FlaskForm):
-    party_id = IntegerField('party_id',
-                            validators=[DataRequired()])
+    # party_id = IntegerField('party_id',
+    #                         validators=[DataRequired()])
     asset_id = IntegerField('asset_id',
                             validators=[DataRequired()])
     symbol = StringField('symbol',
@@ -17,5 +17,5 @@ class TransactionForm(FlaskForm):
                             validators=[DataRequired()])
     total = FloatField('total',
                             validators=[DataRequired()])
-    timestamp = DateTimeField('timestamp',
-                            validators=[DataRequired()])
+    # timestamp = DateTimeField('timestamp',
+    #                         validators=[DataRequired()])

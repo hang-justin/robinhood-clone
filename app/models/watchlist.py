@@ -32,7 +32,7 @@ class Watchlist(db.Model):
 
     # many-to-many
     items = db.relationship(
-        'Asset',
+        'Watchitem',
         secondary=watchlist_item,
         back_populates='in_watchlists'
     )
