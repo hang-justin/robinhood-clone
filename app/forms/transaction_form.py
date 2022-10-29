@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, FloatField, DateTimeField
 from wtforms.validators import DataRequired, ValidationError
 
-class AssetForm(FlaskForm):
+class TransactionForm(FlaskForm):
     party_id = IntegerField('party_id',
                             validators=[DataRequired()])
     asset_id = IntegerField('asset_id',

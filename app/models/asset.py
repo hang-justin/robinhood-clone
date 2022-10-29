@@ -58,6 +58,14 @@ class Asset(db.Model):
     )
 
 
+    def add_to_asset(self, quantity):
+        self.quantity = self.quantity + quantity
+
+    def deduct_from_asset(self, quantity):
+        if (quantity > self.quantity):
+            return 'Insufficient funds. Unable to deduct more than holdings in asset.'
+        self.quantity = self.quantity - quantity
+
     def to_dict_owner_asset(self):
         return {
             'asset_id': self.asset_id,
