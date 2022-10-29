@@ -3,7 +3,13 @@ from wtforms import StringField, IntegerField, FloatField
 from wtforms.validators import DataRequired
 
 class AssetForm(FlaskForm):
-    owner_id = IntegerField('owner_id')
+    '''
+    This asset form is used for transactions so quantity will be required
+    DB however reflects that owner_id and quantity is a nullable field
+
+    The nullable fields are for directly adding those assets to the DB
+    for the sole purpose of using those assets as watchlist items
+    '''
     asset_id = IntegerField('asset_id',
                             validators=[DataRequired()])
     symbol = StringField('symbol',
@@ -12,4 +18,7 @@ class AssetForm(FlaskForm):
                             validators=[DataRequired()])
     type = StringField('type',
                             validators=[DataRequired()])
-    quantity = FloatField('quantity')
+    quantity = FloatField('quantity',
+                            validators=[DataRequired()])
+    total = FloatField('total',
+                            validators=[DataRequired()])

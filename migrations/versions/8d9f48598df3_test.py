@@ -1,8 +1,8 @@
 """test
 
-Revision ID: 566396e22c74
+Revision ID: 8d9f48598df3
 Revises: 
-Create Date: 2022-10-28 02:03:29.167875
+Create Date: 2022-10-29 08:54:23.729071
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '566396e22c74'
+revision = '8d9f48598df3'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,13 +31,22 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
+    op.create_table('watchitems',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('asset_id', sa.String(length=20), nullable=False),
+    sa.Column('symbol', sa.String(length=10), nullable=False),
+    sa.Column('name', sa.String(length=50), nullable=False),
+    sa.Column('type', sa.String(length=20), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('asset_id')
+    )
     op.create_table('assets',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('asset_id', sa.String(length=20), nullable=False),
     sa.Column('symbol', sa.String(length=10), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('type', sa.String(length=20), nullable=False),
-    sa.Column('quantity', sa.Float(), nullable=True),
+    sa.Column('quantity', sa.Float(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id'),
@@ -67,7 +76,7 @@ def upgrade():
     op.create_table('watchlist_item',
     sa.Column('watchlist_id', sa.Integer(), nullable=False),
     sa.Column('item_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['item_id'], ['assets.id'], ),
+    sa.ForeignKeyConstraint(['item_id'], ['watchitems.id'], ),
     sa.ForeignKeyConstraint(['watchlist_id'], ['watchlists.id'], ),
     sa.PrimaryKeyConstraint('watchlist_id', 'item_id')
     )
@@ -80,5 +89,6 @@ def downgrade():
     op.drop_table('watchlists')
     op.drop_table('transactions')
     op.drop_table('assets')
+    op.drop_table('watchitems')
     op.drop_table('users')
     # ### end Alembic commands ###

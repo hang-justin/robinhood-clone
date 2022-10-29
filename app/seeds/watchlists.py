@@ -1,4 +1,4 @@
-from app.models import db, Watchlist, Asset
+from app.models import db, Watchlist, Watchitem
 from datetime import datetime
 
 def seed_watchlists():
@@ -15,13 +15,13 @@ def seed_watchlists():
                             name = 'My First List')
 
 
-    watchlist_assets = Asset.query.filter(Asset.quantity == None).all()
+    watchlist_items = Watchitem.query.all()
 
 
-    for asset in watchlist_assets:
-        demo_watchlist.items.append(asset)
-        marnie_watchlist.items.append(asset)
-        bobbie_watchlist.items.append(asset)
+    for item in watchlist_items:
+        demo_watchlist.items.append(item)
+        marnie_watchlist.items.append(item)
+        bobbie_watchlist.items.append(item)
 
     db.session.add(demo_watchlist)
     db.session.add(marnie_watchlist)

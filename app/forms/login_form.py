@@ -32,4 +32,4 @@ class LoginForm(FlaskForm):
                         validators=[DataRequired(), Email(), user_exists])
     password = StringField(
                         'password',
-                        validators=[DataRequired(), Email(), password_matches])
+                        validators=[DataRequired(), password_matches])
