@@ -2,6 +2,7 @@
 :root {
     --main-green: #00c805;
     --crypto-watchlist-green: #698420;
+    --sidebar-border: #30363a;
 }
 
 * {
@@ -57,4 +58,31 @@ a:visited {
 .flx-col {
     display: flex;
     flex-direction: column;
+}
+
+.flx-col-justify-ctr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flx-col-align-ctr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flx-col-justify-align-ctr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.justify-space-btw {
+    justify-content: space-between;
+}
+
+.text-align-ctr {
+    text-align: center;
 }
