@@ -10,7 +10,8 @@
 }
 
 body {
-    margin: 0
+    margin: 0;
+    min-width: 1300px;
 }
 
 a:visited {
@@ -19,4 +20,41 @@ a:visited {
 
 .main-green-text {
     color: var(--main-green)
+}
+
+.black-text {
+    color: black;
+}
+
+.white-text {
+    color: white;
+}
+
+.flx-grow-one {
+    flex-grow: 1;
+}
+
+.flx-row {
+    display: flex;
+}
+
+.flx-row-justify-ctr {
+    display: flex;
+    justify-content: center;
+}
+
+.flx-row-align-ctr {
+    display: flex;
+    align-items: center;
+}
+
+.flx-row-justify-align-ctr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flx-col {
+    display: flex;
+    flex-direction: column;
 }

@@ -1,0 +1,9 @@
+#user-home-sidebar {
+    box-sizing: border-box;
+    width: 350px;
+
+    padding: 20px;
+    margin: 24px 36px;
+
+    border: 1px solid #30363a;
+}
