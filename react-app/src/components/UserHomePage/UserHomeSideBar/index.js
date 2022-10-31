@@ -4,6 +4,8 @@ import SidebarRow from './SidebarRow'
 import Watchlist from './Watchlist'
 
 import './UserHomeSideBar.css'
+import { useState } from 'react'
+import CreateWatchlistRow from './CreateWatchlistRow'
 
 const UserHomeSideBar = () => {
 
@@ -16,6 +18,11 @@ const UserHomeSideBar = () => {
     const allWatchlists = useSelector(state => state.watchlists)
     const allWatchlistIds = Object.keys(allWatchlists)
 
+    const [showCreateWatchlist, setShowCreateWatchlist] = useState(false);
+
+    const toggleCreateWatchlist = () => {
+        setShowCreateWatchlist(prev => !prev)
+    }
 
     return (
         <div id='user-home-sidebar' className='flx-col'>
@@ -27,7 +34,19 @@ const UserHomeSideBar = () => {
                                                         asset={allOwnedAssets[nonCashAssetId]} />)
             }
 
-            <span className='sidebar-row-header'>Lists</span>
+            <span className='sidebar-row-header justify-space-btw'>
+                <span>Lists</span>
+
+                <span id='add-list' className="material-symbols-outlined" onClick={toggleCreateWatchlist}>
+                    add
+                </span>
+            </span>
+
+            {showCreateWatchlist &&
+                <CreateWatchlistRow setShowCreateWatchlist={setShowCreateWatchlist} />
+            }
+
+
             {!!allWatchlistIds.length &&
                 allWatchlistIds.reverse().map(watchlistId => <Watchlist
                                                         key={`watchlist-id-${watchlistId}`}

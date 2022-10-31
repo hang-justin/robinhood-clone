@@ -25,8 +25,8 @@ const Watchlist = ({ watchlist }) => {
                     <span className='watchlist-emoji'>💡</span> <span className='watchlist-name'>{watchlist.name}</span>
                 </div>
 
-                <div className='watchlist-buttons'>
-                    <span class={`material-symbols-outlined ${watchlistStatus ? 'collapsed' : 'expanded'}`}>
+                <div className='watchlist-buttons flx-row-justify-align-ctr'>
+                    <span id='expand-collapse' className={`material-symbols-outlined ${watchlistStatus ? 'collapsed' : 'expanded'}`}>
                         arrow_forward_ios
                     </span>
                 </div>
@@ -35,7 +35,7 @@ const Watchlist = ({ watchlist }) => {
             {showWatchlistItems &&
                 watchlistItemsArr.map(item => {
                     const hasHoldingsInItem = ownedAssets[item.asset_id]
-                    return <SidebarRow asset={hasHoldingsInItem ? hasHoldingsInItem : item} />
+                    return <SidebarRow key={`watchlist_id-${watchlist.id}-item-${item.id}`} asset={hasHoldingsInItem ? hasHoldingsInItem : item} />
                 })
             }
         </>

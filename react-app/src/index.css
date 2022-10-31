@@ -1,7 +1,7 @@
 /* TODO Add site wide styles */
 :root {
     --main-green: #00c805;
-    --main-red-loss-hover: #ff5000;
+    --main-red-loss: #ff5000;
     --crypto-watchlist-green: #698420;
     --sidebar-border: #30363a;
 }
@@ -24,6 +24,10 @@ a:visited {
     color: var(--main-green)
 }
 
+.main-red-text {
+    color: var(--main-red-loss)
+}
+
 .black-text {
     color: black;
 }
@@ -33,6 +37,7 @@ a:visited {
 }
 
 .flx-grow-one {
+    display: flex;
     flex-grow: 1;
 }
 
@@ -81,9 +86,19 @@ a:visited {
 }
 
 .justify-space-btw {
+    display: flex;
     justify-content: space-between;
 }
 
 .text-align-ctr {
     text-align: center;
+}
+
+
+.margin-left-auto {
+    margin-left: auto;
+}
+
+.margin-right-auto {
+    margin-right: auto;
 }

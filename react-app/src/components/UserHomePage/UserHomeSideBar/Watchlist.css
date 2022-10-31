@@ -6,24 +6,24 @@
     align-items: center;
 }
 
+.watchlist-buttons {
+    min-width: 24px;
+}
+
 .user-watchlist:hover {
     background-color: #1e2124;
 }
 
-.material-symbols-outlined {
+#expand-collapse.material-symbols-outlined {
     font-size: 16px;
     rotate: 90deg;
     transition: rotate 0.5s;
 }
 
-.material-symbols-outlined.collapsed {
+#expand-collapse.material-symbols-outlined.collapsed {
     rotate: 270deg;
 }
 
 .user-watchlist:hover .watchlist-buttons{
     color: var(--main-green)
-}
-
-.watchlist-emoji {
-    font-size: 18px;
 }

@@ -3,7 +3,7 @@ import sparkline from '../../img/sparkline.PNG'
 import './SidebarRow.css'
 
 const SidebarRow = ({ asset }) => {
-    console.log('asset passed into SidebarRow is :', asset)
+    
     return (
         <div className='sidebar-row  sidebar-row-content flx-row-align-ctr justify-space-btw'>
 

@@ -8,3 +8,58 @@
     width: 1300px;
     margin: 0 auto;
 }
+
+.watchlist-emoji {
+    font-size: 18px;
+    padding-right: 10px;
+}
+
+#create-watchlist-input {
+    height: 35px;
+    margin: 10px 0;
+    padding: 0 5px;
+
+    border-radius: 5px;
+    border: none;
+}
+
+#create-watchlist-input:focus {
+    outline: 1px solid var(--main-green)
+}
+
+#watchlist-dropdown-btns-container {
+    gap: 10px;
+}
+
+.watchlist-action-btns {
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    height: 35px;
+    padding: 0 25px;
+
+    border: 0.5px solid var(--main-green);
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+#create-watchlist-btn {
+    background-color: var(--main-green);
+    color: white
+}
+
+#cancel-watchlist-btn {
+    background-color: white;
+    color: var(--main-green)
+}
+
+#cancel-watchlist-btn:hover {
+    background-color: #e5f9e6;
+}
+
+#char-limit-indicator {
+    width: 280px;
+}
