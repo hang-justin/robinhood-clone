@@ -1,6 +1,7 @@
 /* TODO Add site wide styles */
 :root {
     --main-green: #00c805;
+    --main-red-loss-hover: #ff5000;
     --crypto-watchlist-green: #698420;
     --sidebar-border: #30363a;
 }

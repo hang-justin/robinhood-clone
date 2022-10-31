@@ -2,10 +2,9 @@
     box-sizing: border-box;
     width: 350px;
 
-    gap: 5px;
-
     margin: 24px 36px;
     border: 0.5px solid var(--sidebar-border);
+    border-radius: 5px;
 }
 
 .sidebar-row-header {
@@ -15,7 +14,7 @@
 
     box-sizing: border-box;
     height: 50px;
-    padding: 5px 20px 0 20px;
+    padding: 5px 20px;
     border-top: 0.5px solid var(--sidebar-border);
     border-bottom: 0.5px solid var(--sidebar-border);
 }

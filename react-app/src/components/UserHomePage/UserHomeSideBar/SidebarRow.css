@@ -1,3 +1,15 @@
 .sidebar-row {
     padding: 0 20px;
 }
+
+.sidebar-row-content {
+    cursor: pointer;
+}
+
+.sidebar-row-content:hover {
+    background-color: #1e2124;
+}
+
+.sidebar-row {
+    font-size: small;
+}
