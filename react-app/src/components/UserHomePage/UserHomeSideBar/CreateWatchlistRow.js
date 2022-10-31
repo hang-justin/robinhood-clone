@@ -1,11 +1,23 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createWatchlist } from "../../../store/watchlist";
 
 
 
 const CreateWatchlistRow = ({ setShowCreateWatchlist }) => {
+    const dispatch = useDispatch();
 
     const [watchlistName, setWatchlistName] = useState('')
     const [watchlistNameLengthLimitColor, setWatchlistNameLengthLimitColor] = useState('')
+
+    const userWatchlists = useSelector(state => state.watchlists)
+    const userWatchlistsArr = Object.values(userWatchlists)
+    const [uniqueNameErr, setUniqueNameErr] = useState(false);
+
+    useEffect(() => {
+        const isNameTaken = !!userWatchlistsArr.find(watchlist => watchlist.name === watchlistName)
+        setUniqueNameErr(isNameTaken)
+    }, [watchlistName])
 
     useEffect(() => {
         if (watchlistName.length >= 64) {
@@ -22,12 +34,18 @@ const CreateWatchlistRow = ({ setShowCreateWatchlist }) => {
     const handleCreateWatchlist = e => {
         e.preventDefault();
 
-        alert('work in progress... Hold up!')
+        if (!!watchlistNameLengthLimitColor.length || uniqueNameErr) return;
+
         if (watchlistName.trim().length === 0) return;
         if (watchlistName.trim().length > 64) {
             alert(`I don't know how you bypassed the character limit, but you aren't supposed to. So please don't do that`)
             return;
         }
+
+        const newWatchlist = { name: watchlistName }
+
+        dispatch(createWatchlist(newWatchlist))
+            .then(() => setShowCreateWatchlist(false))
 
     }
 
@@ -56,6 +74,12 @@ const CreateWatchlistRow = ({ setShowCreateWatchlist }) => {
                 />
 
             </form>
+
+            {uniqueNameErr &&
+                <div id='name-taken-indicator' className='sidebar-row margin-left-auto main-red-text'>
+                    You've already used that name. Try another.
+                </div>
+            }
 
             <div id='char-limit-indicator' className='flx-row sidebar-row margin-left-auto'>
                 {watchlistName.length >= 64 &&

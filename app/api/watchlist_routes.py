@@ -28,10 +28,8 @@ def create_watchlist():
     Returns watchlist object upon successful validation
     '''
 
-    owner_id = current_user.id
-
     form = WatchlistForm()
-    form.owner_id = owner_id
+    form['owner_id'].data = current_user.id
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
