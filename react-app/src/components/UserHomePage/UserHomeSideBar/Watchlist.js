@@ -1,21 +1,45 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import SidebarRow from "./SidebarRow"
 
 import './Watchlist.css'
 import arrow from '../../img/up-arrow.png'
+import WatchlistDropdownOptions from "./WatchlistDropdownOptions"
 
 const Watchlist = ({ watchlist }) => {
     const [showWatchlistItems, setShowWatchlistItems] = useState(false)
-    const [watchlistStatus, setWatchlistStatus] = useState(false)
     const ownedAssets = useSelector(state => state.assets)
 
+    const [watchlistDisplayStatus, setWatchlistDisplayStatus] = useState(false)
     const watchlistItemsArr = watchlist.items
+
+    const [showWatchlistOptions, setShowWatchlistOptions] = useState(false);
+
+    useEffect(() => {
+        // add event listener here for the showWatchlistOptions
+        if (!showWatchlistOptions) return;
+
+        const closeWatchlistOptions = () => {
+            setShowWatchlistOptions(false)
+        }
+
+        document.addEventListener('click', closeWatchlistOptions);
+
+        return () => document.removeEventListener('click', closeWatchlistOptions)
+
+    }, [showWatchlistOptions])
 
     const toggleItemDisplay = () => {
         setShowWatchlistItems(prev => !prev)
-        setWatchlistStatus((prev) => !prev)
+        setWatchlistDisplayStatus(prev => !prev)
     }
+
+    const toggleWatchlistOptionsDisplay = (e) => {
+        e.stopPropagation();
+        setShowWatchlistOptions(prev => !prev)
+    }
+
+
 
     return (
         <>
@@ -25,8 +49,19 @@ const Watchlist = ({ watchlist }) => {
                     <span className='watchlist-emoji'>💡</span> <span className='watchlist-name'>{watchlist.name}</span>
                 </div>
 
-                <div className='watchlist-buttons flx-row-justify-align-ctr'>
-                    <span id='expand-collapse' className={`material-symbols-outlined ${watchlistStatus ? 'collapsed' : 'expanded'}`}>
+                <div className='watchlist-buttons flx-row-justify-align-ctr margin-left-auto'>
+                    <span id='watchlist-more-options' className={`material-symbols-outlined ${showWatchlistOptions ? 'vis-visible' : 'vis-hidden'} pos-rel`} onClick={toggleWatchlistOptionsDisplay}>
+                        more_horiz
+
+                        {showWatchlistOptions &&
+                            <WatchlistDropdownOptions
+                                setShowWatchlistOptions={setShowWatchlistOptions}
+                                watchlist={watchlist}
+                            />
+                        }
+                    </span>
+
+                    <span id='expand-collapse' className={`material-symbols-outlined ${watchlistDisplayStatus ? 'collapsed' : 'expanded'}`}>
                         arrow_forward_ios
                     </span>
                 </div>

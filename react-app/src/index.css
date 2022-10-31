@@ -101,3 +101,23 @@ a:visited {
 .margin-right-auto {
     margin-right: auto;
 }
+
+.disp-none {
+    display: none;
+}
+
+.vis-hidden {
+    visibility: hidden;
+}
+
+.pos-rel {
+    position: relative;
+}
+
+.pos-abs {
+    position: absolute;
+}
+
+.vis-visible {
+    visibility: visible;
+}
