@@ -1,0 +1,76 @@
+#edit-watchlist-container {
+    color: white;
+    background-color: #1e2124;
+    border-radius: 10px;
+}
+
+#edit-watchlist-header {
+    width: 400px;
+    margin: 0 20px;
+}
+
+#edit-watchlist-name-input {
+    box-sizing: border-box;
+    padding: 8px 5px;
+
+    border-radius: 5px;
+    border: none;
+    outline: none;
+
+    color: white;
+    background-color: var(--sidebar-border);
+}
+
+#edit-watchlist-name-input:hover {
+    background-color: transparent;
+    outline: 1px solid #40494e;
+}
+
+#edit-watchlist-name-input:focus {
+    background-color: transparent;
+    outline: 1px solid var(--main-green);
+}
+
+form#edit-watchlist-name {
+    padding: 5px 30px;
+}
+
+#edit-watchlist__name-taken-indicator,
+#edit-watchlist__char-limit-indicator {
+    width: 350px;
+    padding-right: 30px;
+}
+
+#save-watchlist-name {
+    border: none;
+    margin: 15px 30px;
+    height: 40px;
+
+    border-radius: 25px;
+
+    color: black;
+    background-color: var(--main-green);
+}
+
+.edit-watchlist-row {
+    margin: 0 20px;
+}
+
+#close-edit-watchlist {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+
+    height: 40px;
+    width: 40px;
+
+    font-size: xx-large;
+}
+
+#close-edit-watchlist:hover {
+    background-color: var(--sidebar-border);
+}

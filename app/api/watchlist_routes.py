@@ -28,10 +28,8 @@ def create_watchlist():
     Returns watchlist object upon successful validation
     '''
 
-    owner_id = current_user.id
-
     form = WatchlistForm()
-    form.owner_id = owner_id
+    form['owner_id'].data = current_user.id
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
@@ -59,6 +57,8 @@ def edit_watchlist_name(watchlist_id):
 
     if current_user.id != watchlist.owner_id:
         return { 'message' : 'You do not have permission to edit this watchlist.' }, 403
+
+    form['owner_id'].data = current_user.id
 
     if form.validate_on_submit():
         form.populate_obj(watchlist)

@@ -1,0 +1,87 @@
+.user-watchlist {
+    padding: 0 20px;
+    cursor: pointer;
+    height: 60px;
+
+    align-items: center;
+}
+
+.watchlist-buttons {
+    min-width: 24px;
+}
+
+.user-watchlist:hover {
+    background-color: #1e2124;
+}
+
+#expand-collapse.material-symbols-outlined {
+    font-size: 16px;
+    rotate: 90deg;
+    transition: rotate 0.5s;
+}
+
+#expand-collapse.material-symbols-outlined.collapsed {
+    rotate: 270deg;
+}
+
+#watchlist-more-options:hover + #expand-collapse {
+    color: white;
+}
+
+.user-watchlist:hover #expand-collapse {
+    color: var(--main-green)
+}
+
+.user-watchlist:hover #watchlist-more-options {
+    visibility: visible;
+}
+
+.user-watchlist:hover #watchlist-more-options:hover {
+    color: var(--main-green);
+}
+
+#watchlist-more-options {
+    margin-right: 10px;
+}
+
+#watchlist-dropdown-options {
+    visibility: visible;
+    right: 0;
+    outline: 0.25px solid var(--main-green);
+    background-color: black;
+}
+
+#watchlist-setting-icon {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
+}
+
+.dropdown-option-list {
+    gap: 10px;
+    width: 180px;
+    padding: 10px 20px;
+
+    font-size: 14px;
+    color: white;
+}
+
+.dropdown-option-list:hover {
+    color: var(--main-green);
+}
+
+#edit-watchlist-modal {
+    background-color: white;
+    width: 100px;
+    height: 100px;
+}
+
+.watchlist-name-header {
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
+}
