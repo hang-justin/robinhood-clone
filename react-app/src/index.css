@@ -16,6 +16,10 @@ body {
     min-width: 1300px;
 }
 
+button {
+    cursor: pointer;
+}
+
 a:visited {
     text-decoration: none;
 }

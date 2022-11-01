@@ -38,11 +38,11 @@ const CreateWatchlistRow = ({ setShowCreateWatchlist }) => {
 
         if (watchlistName.trim().length === 0) return;
         if (watchlistName.trim().length > 64) {
-            alert(`I don't know how you bypassed the character limit, but you aren't supposed to. So please don't do that`)
+            alert(`I don't know how you bypassed the character limit, but you aren't supposed to. So please don't do that.`)
             return;
         }
 
-        const newWatchlist = { name: watchlistName }
+        const newWatchlist = { name: watchlistName.trim() }
 
         dispatch(createWatchlist(newWatchlist))
             .then(() => setShowCreateWatchlist(false))
@@ -70,6 +70,7 @@ const CreateWatchlistRow = ({ setShowCreateWatchlist }) => {
                     className='flx-grow-one'
                     placeholder='List Name'
                     value={watchlistName}
+                    required={true}
                     onChange={handleWatchlistNameInput}
                 />
 

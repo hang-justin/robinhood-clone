@@ -5,31 +5,40 @@ import SidebarRow from "./SidebarRow"
 import './Watchlist.css'
 import arrow from '../../img/up-arrow.png'
 import WatchlistDropdownOptions from "./WatchlistDropdownOptions"
+import { Modal } from "../../../context/Modal"
+import EditWatchlistForm from "./WatchlistModals/EditWatchlistForm"
+import DeleteWatchlistForm from "./WatchlistModals/DeleteWatchlistForm"
 
 const Watchlist = ({ watchlist }) => {
     const [showWatchlistItems, setShowWatchlistItems] = useState(false)
     const ownedAssets = useSelector(state => state.assets)
 
-    const [watchlistDisplayStatus, setWatchlistDisplayStatus] = useState(false)
+    // For display items in watchlist
+    // Display status is for rotating the expand/collapse indicator
     const watchlistItemsArr = watchlist.items
+    const [watchlistDisplayStatus, setWatchlistDisplayStatus] = useState(false)
 
+    // Displays dropdown options for each watchlist
     const [showWatchlistOptions, setShowWatchlistOptions] = useState(false);
 
+    // For modals
+    const [showEditWatchlistModal, setShowEditWatchlistModal] = useState(false);
+    const [showDeleteWatchlistModal, setShowDeleteWatchlistModal] = useState(false);
+
     useEffect(() => {
-        // add event listener here for the showWatchlistOptions
+        // Closes watchlist options display when clicking elsewhere
+        // Add event listener here for the showWatchlistOptions when displayed
         if (!showWatchlistOptions) return;
+        // Guard clause... Don't add event listener if there's no options being displayed
 
-        const closeWatchlistOptions = () => {
-            setShowWatchlistOptions(false)
-        }
-
+        const closeWatchlistOptions = () => setShowWatchlistOptions(false)
         document.addEventListener('click', closeWatchlistOptions);
 
         return () => document.removeEventListener('click', closeWatchlistOptions)
-
     }, [showWatchlistOptions])
 
     const toggleItemDisplay = () => {
+        // To display/hide items and to flip the expand/collapse indicator
         setShowWatchlistItems(prev => !prev)
         setWatchlistDisplayStatus(prev => !prev)
     }
@@ -56,6 +65,8 @@ const Watchlist = ({ watchlist }) => {
                         {showWatchlistOptions &&
                             <WatchlistDropdownOptions
                                 setShowWatchlistOptions={setShowWatchlistOptions}
+                                setShowEditWatchlistModal={setShowEditWatchlistModal}
+                                setShowDeleteWatchlistModal={setShowDeleteWatchlistModal}
                                 watchlist={watchlist}
                             />
                         }
@@ -67,12 +78,26 @@ const Watchlist = ({ watchlist }) => {
                 </div>
             </div>
 
+            {showEditWatchlistModal &&
+                <Modal onClose={() => setShowEditWatchlistModal(false)}>
+                    <EditWatchlistForm watchlist={watchlist} setShowEditWatchlistModal={setShowEditWatchlistModal} />
+                </Modal>
+            }
+
+            {showDeleteWatchlistModal &&
+                <Modal onClose={() => setShowDeleteWatchlistModal(false)}>
+                    <DeleteWatchlistForm watchlist={watchlist} setShowDeleteWatchlistModal={setShowDeleteWatchlistModal} />
+                </Modal>
+            }
+
             {showWatchlistItems &&
                 watchlistItemsArr.map(item => {
                     const hasHoldingsInItem = ownedAssets[item.asset_id]
                     return <SidebarRow key={`watchlist_id-${watchlist.id}-item-${item.id}`} asset={hasHoldingsInItem ? hasHoldingsInItem : item} />
                 })
             }
+
+
         </>
     )
 }
