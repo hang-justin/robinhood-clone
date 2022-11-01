@@ -1,1 +1,127 @@
 /* TODO Add site wide styles */
+:root {
+    --main-green: #00c805;
+    --main-red-loss: #ff5000;
+    --crypto-watchlist-green: #698420;
+    --sidebar-border: #30363a;
+}
+
+* {
+    text-decoration: none;
+    font-family: 'Poppins';
+}
+
+body {
+    margin: 0;
+    min-width: 1300px;
+}
+
+button {
+    cursor: pointer;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+.main-green-text {
+    color: var(--main-green)
+}
+
+.main-red-text {
+    color: var(--main-red-loss)
+}
+
+.black-text {
+    color: black;
+}
+
+.white-text {
+    color: white;
+}
+
+.flx-grow-one {
+    display: flex;
+    flex-grow: 1;
+}
+
+.flx-row {
+    display: flex;
+}
+
+.flx-row-justify-ctr {
+    display: flex;
+    justify-content: center;
+}
+
+.flx-row-align-ctr {
+    display: flex;
+    align-items: center;
+}
+
+.flx-row-justify-align-ctr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flx-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flx-col-justify-ctr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flx-col-align-ctr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flx-col-justify-align-ctr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.justify-space-btw {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-align-ctr {
+    text-align: center;
+}
+
+.margin-left-auto {
+    margin-left: auto;
+}
+
+.margin-right-auto {
+    margin-right: auto;
+}
+
+.disp-none {
+    display: none;
+}
+
+.vis-hidden {
+    visibility: hidden;
+}
+
+.pos-rel {
+    position: relative;
+}
+
+.pos-abs {
+    position: absolute;
+}
+
+.vis-visible {
+    visibility: visible;
+}

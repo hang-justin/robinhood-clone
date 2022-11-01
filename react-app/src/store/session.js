@@ -1,3 +1,6 @@
+import { loadAssets } from "./asset";
+import { loadWatchlist } from "./watchlist";
+
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
@@ -24,7 +27,21 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+
+    if (data.watchlists) {
+      dispatch(loadWatchlist(data.watchlists))
+
+      const watchlistIdArr = data.watchlists.map(watchlist => watchlist.id)
+      data.watchlists = watchlistIdArr
+    }
+
+    if (data.assets) {
+      dispatch(loadAssets(data.assets))
+
+      const assetIdArr = data.assets.map(asset => asset.asset_id)
+      data.assets = assetIdArr
+    }
+
     dispatch(setUser(data));
   }
 }
@@ -40,8 +57,8 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -82,7 +99,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
       password,
     }),
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))

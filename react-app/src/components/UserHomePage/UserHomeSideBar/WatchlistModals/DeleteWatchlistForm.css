@@ -1,0 +1,69 @@
+#delete-watchlist-form {
+    background-color: #1e2124;
+    padding: 15px;
+    width: 400px;
+    gap: 15px;
+
+    border-radius: 10px;
+}
+
+#delete-watchlist-form > * {
+    color: white;
+}
+
+#delete-confirm-question {
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-all;
+}
+
+#delete-watchlist-form > span {
+    font-size: 12px;
+}
+
+#delete-form-header {
+    color: white;
+}
+
+#close-delete-watchlist {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+
+    border-radius: 5px;
+
+    height: 40px;
+    width: 40px;
+
+    font-size: xx-large;
+}
+
+#close-delete-watchlist:hover {
+    background-color: var(--sidebar-border);
+}
+
+#delete-watchlist-btn {
+    border: none;
+    box-sizing: border-box;
+    height: 40px;
+    padding: 0 10px;
+
+    border-radius: 25px;
+
+    background-color: var(--main-red-loss);
+
+    font-weight: 600;
+    color: black;
+
+    white-space: nowrap;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
+}
+
+#delete-watchlist-btn:hover {
+    background-color: #ff6a26;
+}
