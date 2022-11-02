@@ -29,7 +29,7 @@ const updateWatchlistInStore = (watchlist) => {
 
 const deleteWatchlistFromStore = (watchlist) => {
     return {
-        type:DELETE_A_WATCHLIST,
+        type: DELETE_A_WATCHLIST,
         watchlist
     }
 }

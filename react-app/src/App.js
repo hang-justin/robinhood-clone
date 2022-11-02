@@ -11,6 +11,9 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import TestCoinGecko from './components/TestCoinGecko';
 import UserHomePage from './components/UserHomePage';
+import AssetPage from './components/AssetPage';
+import CryptoMasterList from './components/CryptoMasterList';
+import { getAllLatestPrices } from './store/market';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -19,6 +22,7 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      await dispatch(getAllLatestPrices())
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -51,6 +55,14 @@ function App() {
 
         <ProtectedRoute path='/' exact={true} >
           <UserHomePage />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/lists/yuanhood/crypto' exact={true} >
+          <CryptoMasterList />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/crypto/:symbol' exact={true} >
+          <AssetPage />
         </ProtectedRoute>
 
         <Route path='/testcg'>
