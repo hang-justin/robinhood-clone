@@ -4,6 +4,7 @@
     --main-red-loss: #ff5000;
     --crypto-watchlist-green: #698420;
     --sidebar-border: #30363a;
+    --gray-hover: #1e2124;
 }
 
 * {
@@ -47,6 +48,11 @@ a:visited {
 
 .flx-row {
     display: flex;
+}
+
+.flx-row-justify-end {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .flx-row-justify-ctr {

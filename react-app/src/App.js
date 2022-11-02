@@ -12,7 +12,7 @@ import User from './components/User';
 import TestCoinGecko from './components/TestCoinGecko';
 import UserHomePage from './components/UserHomePage';
 import AssetPage from './components/AssetPage';
-import CryptoMasterList from './components/CryptoMasterList';
+import CryptoList from './components/CryptoList';
 import { getAllLatestPrices } from './store/market';
 
 function App() {
@@ -25,6 +25,10 @@ function App() {
       await dispatch(getAllLatestPrices())
       setLoaded(true);
     })();
+
+    // const latestPricesInterval = setInterval(() => dispatch(getAllLatestPrices()), 5000)
+
+    // return () => clearInterval(latestPricesInterval)
   }, [dispatch]);
 
   if (!loaded) {
@@ -57,8 +61,8 @@ function App() {
           <UserHomePage />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/lists/yuanhood/crypto' exact={true} >
-          <CryptoMasterList />
+        <ProtectedRoute path='/lists/:userId/:listId' exact={true} >
+          <CryptoList />
         </ProtectedRoute>
 
         <ProtectedRoute path='/crypto/:symbol' exact={true} >

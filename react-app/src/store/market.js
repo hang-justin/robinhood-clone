@@ -15,16 +15,28 @@ const initialState = {
         'steth': 'staked-ether'
     },
     asset_id_to_symbol: {
-        'bitcoin' : 'btc',
-        'ethereum' : 'eth',
-        'binancecoin' : 'bnb',
-        'ripple' : 'xrp',
-        'cardano' : 'ada',
-        'solana' : 'sol',
-        'dogecoin' : 'doge',
-        'matic-network' : 'matic',
-        'polkadot' : 'dot',
-        'staked-ether' : 'steth',
+        'bitcoin' : 'BTC',
+        'ethereum' : 'ETH',
+        'binancecoin' : 'BNB',
+        'ripple' : 'XRP',
+        'cardano' : 'ADA',
+        'solana' : 'SOL',
+        'dogecoin' : 'DOGE',
+        'matic-network' : 'MATIC',
+        'polkadot' : 'DOT',
+        'staked-ether' : 'stETH',
+    },
+    asset_id_to_name: {
+        'bitcoin': 'Bitcoin',
+        'ethereum': 'Ethereum',
+        'binancecoin': 'Binance Coin',
+        'ripple': 'Ripple',
+        'cardano': 'Cardano',
+        'solana': 'Solana',
+        'dogecoin': 'Dogecoin',
+        'matic-network': 'Polygon',
+        'polkadot': 'Polkadot',
+        'staked-ether': 'Lido Staked Ether'
     }
 }
 
