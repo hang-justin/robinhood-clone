@@ -34,7 +34,7 @@ const CreateWatchlistRow = ({ setShowCreateWatchlist }) => {
     const handleCreateWatchlist = e => {
         e.preventDefault();
 
-        if (!!watchlistNameLengthLimitColor.length || uniqueNameErr) return;
+        if ((!!watchlistNameLengthLimitColor.length && watchlistName.length > 64) || uniqueNameErr) return;
 
         if (watchlistName.trim().length === 0) return;
         if (watchlistName.trim().length > 64) {

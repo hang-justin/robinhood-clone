@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import getNumberRep from "../../../util/getNumberRep"
 
 import posChange from '../../img/pos_change_history.png'
@@ -6,9 +6,14 @@ import negChange from '../../img/neg_change_history.png'
 import { useState } from "react"
 import { Modal } from "../../../context/Modal"
 import AddToListModal from "./AddToListModal"
+import formatMoney from "../../../util/formatMoney"
+import { removeItemFromWatchlist } from "../../../store/watchlist"
 
-const WatchlistDetailRow = ({ userId, asset_id }) => {
+const WatchlistDetailRow = ({ userId, listId, asset_id }) => {
+    const dispatch = useDispatch();
+
     const allAssets = useSelector(state => state.assets)
+    const allWatchlists = useSelector(state => state.watchlists)
     const latestInfoOfAllCoins = useSelector(state => state.market.allLatest)
 
     const currentCoinSymbol = useSelector(state => state.market.asset_id_to_symbol[asset_id])
@@ -26,19 +31,33 @@ const WatchlistDetailRow = ({ userId, asset_id }) => {
         setShowAddToListModal(true)
     }
 
-    const addToList =(
+    const handleRemovalFromWatchlist = (e) => {
+        e.stopPropagation();
+        dispatch(removeItemFromWatchlist(allWatchlists[listId], asset_id))
+    }
+
+    const addToList = (
                         <span
                             className='material-symbols-outlined add-to-watchlist-icon'
                             onClick={handleAddToListModal}
                         >
                             add
                         </span>
-                    )
+                    );
+
+    const removeFromList = (
+                        <span
+                        id=''
+                        className='material-symbols-outlined remove-from-watchlist-icon'
+                        onClick={handleRemovalFromWatchlist}>
+                            close
+                        </span>
+    )
 
     // Either render a delete or add to list
     const editOption = userId === 'yuanhood' ?
                                     addToList :
-                                    'x'
+                                    removeFromList
 
     return (
         <>
@@ -61,7 +80,10 @@ const WatchlistDetailRow = ({ userId, asset_id }) => {
                 </div>
 
                 <div className='price-col'>
-                    ${currentCoinInfo.usd}
+                    {currentCoinInfo.usd > 1 ?
+                        formatMoney(currentCoinInfo.usd) :
+                        '$' + currentCoinInfo.usd.toString()
+                    }
                 </div>
 
                 <div className={`day-change-col flx-row-align-ctr ${percentageChangeTextColor}`}>

@@ -47,7 +47,8 @@
 #watchlist-dropdown-options {
     visibility: visible;
     right: 0;
-    outline: 0.25px solid var(--main-green);
+    box-shadow: 0 0 10px var(--main-green);
+    border-radius: 10px;
     background-color: black;
 }
 
@@ -68,8 +69,12 @@
     color: white;
 }
 
-.dropdown-option-list:hover {
+.dropdown-option-edit:hover {
     color: var(--main-green);
+}
+
+.dropdown-option-delete:hover {
+    color: var(--main-red-loss);
 }
 
 #edit-watchlist-modal {
@@ -79,9 +84,35 @@
 }
 
 .watchlist-name-header {
-    width: 80%;
+    height: 50px;
+    max-width: 70%;
     white-space: nowrap;
     overflow: hidden;
     word-break: break-all;
     text-overflow: ellipsis;
+}
+
+.sidebar__navlink-wrapper {
+    white-space: nowrap;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
+}
+
+.sidebar-navlink {
+    padding: 10px;
+    border-radius: 5px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
+}
+
+.sidebar-navlink:hover {
+    background-color: #1a1a1a;
+}
+
+.active__sidebar-navlink {
+    background-color: #1a1a1a;
 }

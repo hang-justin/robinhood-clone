@@ -46,6 +46,11 @@ a:visited {
     flex-grow: 1;
 }
 
+.flx-grow-null {
+    display: flex;
+    flex-grow: 0;
+}
+
 .flx-row {
     display: flex;
 }
@@ -130,4 +135,12 @@ a:visited {
 
 .vis-visible {
     visibility: visible;
+}
+
+.navlink {
+    color: white;
+}
+
+.navlink:hover {
+    color: var(--main-green)
 }

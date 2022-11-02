@@ -61,7 +61,15 @@
 }
 
 .add-to-watchlist-icon:hover {
-    color: var(--main-green)
+    color: var(--main-green);
+}
+
+.remove-from-watchlist-icon {
+    cursor: pointer;
+}
+
+.remove-from-watchlist-icon:hover {
+    color: var(--main-red-loss);
 }
 
 #add-list-modal {
@@ -133,4 +141,14 @@
 #add-list-modal__header {
     min-width: 350px;
     margin-bottom: 15px;
+}
+
+.choose-list-for-asset {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.choose-list-for-asset:hover {
+    background-color: var(--sidebar-border);
 }

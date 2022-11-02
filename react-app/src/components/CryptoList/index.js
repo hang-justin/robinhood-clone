@@ -6,7 +6,9 @@ import './CryptoList.css';
 import WatchlistDetail from './WatchlistDetail';
 
 const CryptoList = () => {
-    const { userId, listId } = useParams();
+    let { userId, listId } = useParams();
+
+    if (userId !== 'yuanhood') userId = +userId
 
     const user = useSelector(state => state.session.user)
     const allWatchlists = useSelector(state => state.watchlists)
@@ -16,6 +18,7 @@ const CryptoList = () => {
     // NOTE
     // Where to redirect of userId doesn't match up with user.id?
     // Be mindful where userId === yuanhood
+    console.log(userId)
 
     if (userId  !== user.id && userId !== 'yuanhood') return <Redirect to='/' />
     if (userId === user.id && !allWatchlists[listId]) return <Redirect to='/' />
@@ -35,7 +38,7 @@ const CryptoList = () => {
             <div id='crypto-list-content' className='flx-row-justify-ctr'>
 
 
-                <WatchlistDetail userId={userId} itemIds={itemIds} />
+                <WatchlistDetail userId={userId} listId={listId} itemIds={itemIds} />
 
                 <UserHomeSideBar />
 

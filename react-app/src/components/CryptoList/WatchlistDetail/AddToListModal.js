@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { addItemToWatchlist, removeItemFromWatchlist } from "../../../store/watchlist"
 
 const AddToListInput = ({ asset_id, watchlist }) => {
     const [checkedStatus, setCheckedStatus] = useState(!!watchlist.items.find(item => item.asset_id === asset_id))
@@ -16,7 +17,7 @@ const AddToListInput = ({ asset_id, watchlist }) => {
                     onChange={() => setCheckedStatus(prev => !prev)}
                 />
 
-                <label for={`add-to=list-input-for-${watchlist.id}`} className='flx-row flx-grow-one'>
+                <label htmlFor={`add-to=list-input-for-${watchlist.id}`} className='flx-row flx-grow-one choose-list-for-asset'>
                     <div className='add-to-list-emoji-wrapper flx-row-justify-align-ctr'>
                         <span className='add-to-list-emoji'>💡</span>
                     </div>
@@ -32,10 +33,14 @@ const AddToListInput = ({ asset_id, watchlist }) => {
 }
 
 const AddToListModal = ({ asset_id, currentCoinName, setShowAddToListModal }) => {
-    const allWatchlists = Object.values(useSelector(state => state.watchlists))
+    const dispatch = useDispatch();
 
-    const watchlistsIncludesAssetId = allWatchlists.map(watchlist => {
-        return !!watchlist.items.find(item => item.asset_id === asset_id)
+    const allWatchlists = useSelector(state => state.watchlists)
+    const allWatchlistsArr = Object.values(allWatchlists)
+
+    let watchlistsIncludesAssetId = {}
+    allWatchlistsArr.forEach(watchlist => {
+            watchlistsIncludesAssetId[watchlist.id] = !!watchlist.items.find(item => item.asset_id === asset_id)
     })
 
     console.log(`watchlistId includes ${asset_id}:`, watchlistsIncludesAssetId)
@@ -43,11 +48,39 @@ const AddToListModal = ({ asset_id, currentCoinName, setShowAddToListModal }) =>
     const handleFormSubmission = e => {
         e.preventDefault();
 
-        const values = allWatchlists.map(watchlist => {
-            return document.getElementById(`add-to=list-input-for-${watchlist.id}`).checked
+        const checkedValues = {}
+        allWatchlistsArr.forEach(watchlist => {
+            checkedValues[watchlist.id] = document.getElementById(`add-to=list-input-for-${watchlist.id}`).checked
         })
 
-        console.log('values are :', values)
+        // Compare the values of watchlistsIncludesAssetId and values
+        // If they are different, indicates that values must change
+        // If watchlistsIncludesAssetId is true, values at that same ind will be false
+        //      which indicates a removal
+        // If watchlistsIncludesAssetId is false, values at that same ind will be true
+        //      which indicates an addition
+
+        Object.keys(checkedValues).forEach(watchlist_id => {
+            console.log('watchlist_id in the forEach is :', watchlist_id)
+            const itemUpdated = checkedValues[watchlist_id] ^ watchlistsIncludesAssetId[watchlist_id]
+
+            if (!itemUpdated) return;
+            console.log('itemUpdated is:', itemUpdated )
+            // checkedValues[watchlist_id] === true => addition
+            //                             === false => removal
+            console.log('watchlist_id to be updated is :', watchlist_id)
+            console.log('watchlist to update is :', allWatchlists[watchlist_id])
+            if (checkedValues[watchlist_id]) {
+                dispatch(addItemToWatchlist(allWatchlists[watchlist_id], asset_id))
+                    .catch(e => console.log('add to watchlist err msg: ',e))
+            }
+            else {
+                dispatch(removeItemFromWatchlist(allWatchlists[watchlist_id], asset_id))
+                    .catch(e => console.log('remove from watchlist err msg: ', e))
+            }
+        })
+
+        setShowAddToListModal(false);
     }
 
     return (
@@ -62,7 +95,7 @@ const AddToListModal = ({ asset_id, currentCoinName, setShowAddToListModal }) =>
             </div>
 
             <form id='add-asset-to-list-form' className='flx-col' onSubmit={handleFormSubmission}>
-                {allWatchlists.map(watchlist => <AddToListInput key={watchlist.id} asset_id={asset_id} watchlist={watchlist} />)}
+                {allWatchlistsArr.map(watchlist => <AddToListInput key={watchlist.id} asset_id={asset_id} watchlist={watchlist} />)}
 
                 <button
                     id='add-to-list-modal-save-changes'

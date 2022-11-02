@@ -4,7 +4,7 @@ import WatchlistDetailRow from './WatchlistDetailRow';
 
 import './WatchlistDetail.css';
 
-const WatchlistDetail = ({ userId, itemIds }) => {
+const WatchlistDetail = ({ userId, listId, itemIds }) => {
 
     return (
         <>
@@ -38,7 +38,7 @@ const WatchlistDetail = ({ userId, itemIds }) => {
 
                 </div>
 
-                {itemIds.map(id => <WatchlistDetailRow key={id} userId={userId} asset_id={id} /> )}
+                {itemIds.map(id => <WatchlistDetailRow key={id} userId={userId} listId={listId} asset_id={id} /> )}
             </div>
         </>
     )
