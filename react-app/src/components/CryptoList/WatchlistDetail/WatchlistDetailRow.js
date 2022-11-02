@@ -41,49 +41,56 @@ const WatchlistDetailRow = ({ userId, asset_id }) => {
                                     'x'
 
     return (
-        <div className='flx-row-align-ctr watchlist-detail-row watchlist-detail-redirect' onClick={() => alert(`clicking on ${currentCoinName}`)}>
+        <>
+            <div className='flx-row-align-ctr watchlist-detail-row watchlist-detail-redirect' onClick={() => alert(`clicking on ${currentCoinName}`)}>
 
-            <div className='name-col flx-col'>
-                <span>
-                    {currentCoinName}
-                </span>
-
-                {holdingInAsset &&
+                <div className='name-col flx-col'>
                     <span>
-                        {holdingInAsset}
+                        {currentCoinName}
                     </span>
-                }
-            </div>
 
-            <div className='symbol-col'>
-                {currentCoinSymbol}
-            </div>
+                    {holdingInAsset &&
+                        <span>
+                            {holdingInAsset}
+                        </span>
+                    }
+                </div>
 
-            <div className='price-col'>
-                ${currentCoinInfo.usd}
-            </div>
+                <div className='symbol-col'>
+                    {currentCoinSymbol}
+                </div>
 
-            <div className={`day-change-col flx-row-align-ctr ${percentageChangeTextColor}`}>
-                <img className='watchlist-detail__change' src={changeIconSrc} />
+                <div className='price-col'>
+                    ${currentCoinInfo.usd}
+                </div>
 
-                {Math.abs(dailyChangePercentage)}%
-            </div>
+                <div className={`day-change-col flx-row-align-ctr ${percentageChangeTextColor}`}>
+                    <img className='watchlist-detail__change' src={changeIconSrc} />
 
-            <div className='market-cap-col'>
-                {getNumberRep(currentCoinInfo.usd_market_cap)}
-            </div>
+                    {Math.abs(dailyChangePercentage)}%
+                </div>
 
-            <div className='add-to-list-col flx-row-justify-end'>
-                {editOption}
+                <div className='market-cap-col'>
+                    {getNumberRep(currentCoinInfo.usd_market_cap)}
+                </div>
+
+                <div className='add-to-list-col flx-row-justify-end'>
+                    {editOption}
+                </div>
+
             </div>
 
             {showAddToListModal &&
                 <Modal onClose={() => setShowAddToListModal(false)}>
-                    <AddToListModal currentCoinName={currentCoinName} asset_id={asset_id} />
+                    <AddToListModal
+                        setShowAddToListModal={setShowAddToListModal}
+                        currentCoinName={currentCoinName}
+                        asset_id={asset_id}
+                    />
                 </Modal>
             }
 
-        </div>
+        </>
     )
 }
 

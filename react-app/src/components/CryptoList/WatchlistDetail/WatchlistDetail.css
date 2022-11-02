@@ -65,5 +65,72 @@
 }
 
 #add-list-modal {
+    padding: 20px;
+    color: white;
     background-color: var(--gray-hover);
+}
+
+#close-add-to-list-modal {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+
+    height: 40px;
+    width: 40px;
+
+    font-size: xx-large;
+}
+
+#close-add-to-list-modal:hover {
+    background-color: var(--sidebar-border);
+}
+
+#add-asset-to-list-form {
+    gap: 15px;
+}
+
+.add-to-list-emoji {
+    font-size: x-large;
+}
+
+.add-to-list-emoji-wrapper {
+    box-sizing: border-box;
+    height: 64px;
+    width: 48px;
+
+    border-radius: 5px;
+
+    margin-right: 10px;
+
+    background-color: var(--sidebar-border);
+}
+
+.add-asset-to-list-input-container {
+    gap: 15px;
+}
+
+#add-to-list-modal-save-changes {
+    border: none;
+    height: 40px;
+
+    border-radius: 20px;
+}
+
+.enabled-save-changes-bg {
+    background-color: var(--main-green);
+    color: var(--gray-hover)
+}
+
+.disabled-save-changes-bg {
+    background-color: #626c70;
+    color: #232729;
+}
+
+#add-list-modal__header {
+    min-width: 350px;
+    margin-bottom: 15px;
 }
