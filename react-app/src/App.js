@@ -24,7 +24,7 @@ function App() {
     (async() => {
       await dispatch(authenticate());
       await dispatch(getAllLatestPrices())
-      setLoaded(true);
+        .then(() => setLoaded(true))
     })();
 
     // const latestPricesInterval = setInterval(() => dispatch(getAllLatestPrices()), 5000)
@@ -37,13 +37,13 @@ function App() {
   //   const interval = setInterval(() => {
   //     dispatch(getAllLatestPrices())
 
-  //     if (!hasLoaded) {
-  //       setTimeout(()=> {
-  //         setHasLoaded(true)
-  //       }, 2000)
-  //     }
+  //     // if (!hasLoaded) {
+  //     //   setTimeout(()=> {
+  //     //     setHasLoaded(true)
+  //     //   }, 2000)
+  //     // }
 
-  //   }, 5000)
+  //   }, 10000)
 
   //   return () => clearInterval(interval)
   // }, [])

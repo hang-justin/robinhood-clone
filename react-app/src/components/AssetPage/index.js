@@ -13,7 +13,6 @@ const AssetPage = () => {
             <div id='asset-main-content' className='flx-row-justify-ctr'>
 
                 <div id='asset-feed' className='flx-col flx-grow-one'>
-                    Temporarily render PortfolioChart here. Will have to create AssetChart later and render it here.
                     <PortfolioChart />
                     <span>Followed by newsfeed</span>
                 </div>
