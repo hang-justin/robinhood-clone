@@ -17,6 +17,7 @@ import { getAllLatestPrices } from './store/market';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  // const [hasLoaded, setHasLoaded] = useState(false)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,6 +31,22 @@ function App() {
 
     // return () => clearInterval(latestPricesInterval)
   }, [dispatch]);
+
+  // NOTE: THIS DOESN'T APPEAR TO WORK SINCE IT KEEPS GIVING A CACHED RESPONSE
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     dispatch(getAllLatestPrices())
+
+  //     if (!hasLoaded) {
+  //       setTimeout(()=> {
+  //         setHasLoaded(true)
+  //       }, 2000)
+  //     }
+
+  //   }, 5000)
+
+  //   return () => clearInterval(interval)
+  // }, [])
 
   if (!loaded) {
     return null;

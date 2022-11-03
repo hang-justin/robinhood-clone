@@ -12,13 +12,13 @@ const CryptoList = () => {
 
     const user = useSelector(state => state.session.user)
     const allWatchlists = useSelector(state => state.watchlists)
-    const latestPricesOfAllCoins = useSelector(state => state.market.allLatest)
+    const market = useSelector(state => state.market)
+    const latestPricesOfAllCoins = market.allLatest
     let itemIds;
 
     // NOTE
     // Where to redirect of userId doesn't match up with user.id?
     // Be mindful where userId === yuanhood
-    console.log(userId)
 
     if (userId  !== user.id && userId !== 'yuanhood') return <Redirect to='/' />
     if (userId === user.id && !allWatchlists[listId]) return <Redirect to='/' />

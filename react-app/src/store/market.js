@@ -65,7 +65,7 @@ const marketReducer = (state=initialState, action) => {
 
         case LOAD_ALL_LATEST_PRICES:
             newState = { ...state }
-            newState.allLatest = action.allPrices;
+            newState.allLatest = { ...action.allPrices };
             return newState;
 
         default:
