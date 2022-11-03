@@ -8,9 +8,11 @@ import { Modal } from "../../../context/Modal"
 import AddToListModal from "./AddToListModal"
 import formatMoney from "../../../util/formatMoney"
 import { removeItemFromWatchlist } from "../../../store/watchlist"
+import { useHistory } from "react-router-dom"
 
 const WatchlistDetailRow = ({ userId, listId, asset_id }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const allAssets = useSelector(state => state.assets)
     const allWatchlists = useSelector(state => state.watchlists)
@@ -61,7 +63,7 @@ const WatchlistDetailRow = ({ userId, listId, asset_id }) => {
 
     return (
         <>
-            <div className='flx-row-align-ctr watchlist-detail-row watchlist-detail-redirect' onClick={() => alert(`clicking on ${currentCoinName}`)}>
+            <div className='flx-row-align-ctr watchlist-detail-row watchlist-detail-redirect' onClick={() => history.push(`/crypto/${currentCoinSymbol.toUpperCase()}`)}>
 
                 <div className='name-col flx-col'>
                     <span>

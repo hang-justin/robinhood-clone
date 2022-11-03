@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import formatMoney from '../../../util/formatMoney';
@@ -20,6 +20,69 @@ const AssetSidebar = () => {
     const [transactionAmount, setTransactionAmount] = useState('')
     const [amountPlaceholder, setAmountPlaceholder] = useState('$0.00')
 
+    const [transactionTotal, setTransactionTotal] = useState('0.00')
+
+    const [availableCurrency, setAvailableCurrency] = useState(formatMoney(userAssets.$$$$$.quantity))
+
+    const listenForValidCurrencyInputs = (keydown) => {
+        // Only want this event listener to apply for USD
+        if (transactionCurrencyType !== 'USD') return;
+
+        const validInputs = '0123456789.'
+        const validNavigation = ['Backspace', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Delete']
+        if (!validInputs.includes(keydown.key) && !validNavigation.includes(keydown.key)) keydown.preventDefault();
+
+        const amountInputField = document.getElementById('amount-order-input')
+        if (keydown.key === '.' && amountInputField.value.includes('.')) keydown.preventDefault();
+    }
+
+    useEffect(() => {
+        if (transactionType === 'Buy') {
+            setAvailableCurrency(
+                formatMoney(userAssets.$$$$$.quantity)
+            )
+            return;
+        }
+
+        if (transactionCurrencyType === 'USD') {
+            setAvailableCurrency(
+                formatMoney(userHasCurrentAsset.quantity * currentAssetLatestInfo.usd)
+            )
+            return;
+        }
+
+        setAvailableCurrency(
+            userHasCurrentAsset.quantity.toString() + ' ' + transactionCurrencyType
+        )
+
+
+    }, [transactionType, transactionCurrencyType])
+
+    useEffect(() => {
+        if (transactionCurrencyType !== 'USD') {
+            setTransactionTotal(formatMoney(currentAssetLatestInfo.usd * transactionAmount))
+        } else {
+            let tempTotal = (transactionAmount / currentAssetLatestInfo.usd).toString();
+            const [whole, fraction] = tempTotal.split('.')
+            if (fraction && fraction.length > 2) tempTotal = (transactionAmount / currentAssetLatestInfo.usd).toFixed(8).toString()
+            else tempTotal = (transactionAmount / currentAssetLatestInfo.usd).toFixed(2).toString();
+
+            setTransactionTotal(tempTotal)
+        }
+
+
+    }, [transactionCurrencyType, transactionAmount, currentAssetLatestInfo])
+
+    useEffect(() => {
+        if (transactionCurrencyType !== 'USD') return;
+
+        const amountInputField = document.getElementById('amount-order-input')
+
+        amountInputField.addEventListener('keydown', listenForValidCurrencyInputs)
+
+        return () => amountInputField.removeEventListener('keydown', listenForValidCurrencyInputs)
+    }, [transactionCurrencyType])
+
     const handleCurrencyTypeChange = (e) => {
         if (transactionCurrencyType === e.target.value) return;
 
@@ -30,11 +93,19 @@ const AssetSidebar = () => {
         setTransactionAmount('');
     }
 
-    const handleAmountChange = (e) => {
-        if (transactionCurrencyType === 'USD') {
-            setTransactionAmount(e.target.value)
-        }
-        else setTransactionAmount(e.target.value)
+    const handleAmountInputChange = (e) => {
+        // If currency type !== USD => then the input type
+        // will be a number so there no need to reformat
+        if (e.target.value[0] === '0') return;
+        if (transactionCurrencyType !== 'USD') return setTransactionAmount(e.target.value)
+
+        // else we will reformat so that
+        const [dollars, cents] = e.target.value.split('.')
+        if (cents && cents.length > 2) return;
+
+        console.log('formatted money')
+        console.log(formatMoney(e.target.value))
+        setTransactionAmount(e.target.value)
     }
 
     const handleOrderSubmit = (e) => {
@@ -66,7 +137,7 @@ const AssetSidebar = () => {
 
                     </div>
 
-                    <form id='transaction-input-container' className='flx-col' onSubmit={handleOrderSubmit}>
+                    <form id='transaction-input-container' className='flx-col' onSubmit={handleOrderSubmit} autocomplete="off">
                         <div id='set-transaction-type' className='flx-row-align-ctr flx-grow-one justify-space-btw'>
                             <div>
                                 {transactionType} in
@@ -89,11 +160,12 @@ const AssetSidebar = () => {
 
                             <input
                             id='amount-order-input'
-                            type='number'
+                            type={transactionCurrencyType !== 'USD' ? 'number' : ''}
                             className='order-input'
                             placeholder={amountPlaceholder}
-                            onChange={handleAmountChange}
+                            onChange={handleAmountInputChange}
                             value={transactionAmount}
+                            required
                             />
                         </div>
 
@@ -116,7 +188,7 @@ const AssetSidebar = () => {
                             </div>
 
                             <div>
-                                math
+                                {transactionTotal}
                             </div>
                         </div>
 
@@ -126,7 +198,7 @@ const AssetSidebar = () => {
                     </form>
 
                     <div id='buying-power' className='flx-row-justify-align-ctr flx-grow-one'>
-                        {formatMoney(userAssets.$$$$$.quantity)} available
+                        {availableCurrency} available
                     </div>
 
                 </div>
