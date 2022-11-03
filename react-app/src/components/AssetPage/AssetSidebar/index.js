@@ -32,8 +32,7 @@ const AssetSidebar = () => {
 
     const handleAmountChange = (e) => {
         if (transactionCurrencyType === 'USD') {
-            console.log(formatMoney(e.target.value))
-            setTransactionAmount(formatMoney(e.target.value))
+            setTransactionAmount(e.target.value)
         }
         else setTransactionAmount(e.target.value)
     }
@@ -90,6 +89,7 @@ const AssetSidebar = () => {
 
                             <input
                             id='amount-order-input'
+                            type='number'
                             className='order-input'
                             placeholder={amountPlaceholder}
                             onChange={handleAmountChange}
@@ -112,7 +112,7 @@ const AssetSidebar = () => {
 
                         <div id='est-cost' className='flx-row-align-ctr flx-grow-one justify-space-btw'>
                             <div>
-                                Est. Cost
+                                Est. {transactionCurrencyType === 'USD' ? symbol.toUpperCase() : transactionType === 'Buy' ? 'Cost' : 'Credit'}
                             </div>
 
                             <div>
