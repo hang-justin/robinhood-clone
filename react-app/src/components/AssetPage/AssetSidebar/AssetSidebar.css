@@ -22,7 +22,6 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 0 15px;
 }
 
-
 #transaction-type {
     align-self: flex-start;
 
@@ -32,6 +31,7 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom: 0.5px solid #40494e;
 }
 
+.transaction-confirmed-header,
 .transaction-type-selection {
     cursor: pointer;
     border-bottom: 2px solid transparent;
@@ -149,4 +149,16 @@ option {
 
 .order-error-header {
     font-weight: bold;
+}
+
+#add-to-list-btn {
+    margin: 20px 15px;
+    border: none;
+    background-color: var(--crypto-watchlist-green);
+    border-radius: 30px;
+    padding: 10px 0;
+}
+
+#add-to-list-btn:hover {
+    background-color: var(--main-green);
 }

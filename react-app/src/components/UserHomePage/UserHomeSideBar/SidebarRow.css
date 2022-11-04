@@ -14,6 +14,13 @@
     font-size: small;
 }
 
+.sidebar-row__left > span {
+    white-space: nowrap;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
+}
+
 .sidebar-row__left,
 .sparkline,
 .sidebar-row__right {
