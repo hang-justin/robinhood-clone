@@ -3,6 +3,9 @@ const LOAD_WATCHLISTS = 'watchlists/LOAD_WATCHLISTS'
 const ADD_A_WATCHLIST = 'watchlists/ADD_A_WATCHLIST'
 const UPDATE_A_WATCHLIST = 'watchlists/EDIT_A_WATCHLIST'
 const DELETE_A_WATCHLIST = 'watchlists/DELETE_A_WATCHLIST'
+const ADD_ITEM_TO_WATCHLIST = 'watchlists/ADD_ITEM_TO_WATCHLIST'
+const REMOVE_ITEM_FROM_WATCHLIST = 'watchlists/REMOVE_ITEM_FROM_WATCHLIST'
+const UPDATE_WATCHLIST_ITEMS = 'watchlists/UPDATE_WATCHLIST_ITEM'
 
 const initialState = {};
 
@@ -29,7 +32,28 @@ const updateWatchlistInStore = (watchlist) => {
 
 const deleteWatchlistFromStore = (watchlist) => {
     return {
-        type:DELETE_A_WATCHLIST,
+        type: DELETE_A_WATCHLIST,
+        watchlist
+    }
+}
+
+const watchlistItemAdditionUpdate = (watchlist) => {
+    return {
+        type: ADD_ITEM_TO_WATCHLIST,
+        watchlist
+    }
+}
+
+const watchlistItemRemovalUpdate = (watchlist) => {
+    return {
+        type: REMOVE_ITEM_FROM_WATCHLIST,
+        watchlist
+    }
+}
+
+const watchlistItemUpdate = (watchlist) => {
+    return {
+        type: UPDATE_WATCHLIST_ITEMS,
         watchlist
     }
 }
@@ -80,6 +104,32 @@ export const deleteWatchlist = (watchlist) => async dispatch => {
     }
 }
 
+export const addItemToWatchlist = (watchlist, asset_id) => async dispatch => {
+    const response = await fetch(`/api/watchlists/${watchlist.id}/add/${asset_id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/JSON' },
+    }).catch(e => console.log('error is: ', e))
+
+    if (response.ok) {
+        const updatedWatchlistResponse = await response.json();
+        const updatedWatchlist = updatedWatchlistResponse.watchlist
+        dispatch(updateWatchlistInStore(updatedWatchlist))
+    }
+}
+
+export const removeItemFromWatchlist = (watchlist, asset_id) => async dispatch => {
+    const response = await fetch(`/api/watchlists/${watchlist.id}/remove/${asset_id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/JSON' },
+    }).catch(e => console.log('error is: ', e))
+
+    if (response.ok) {
+        const updatedWatchlistResponse = await response.json();
+        const updatedWatchlist = updatedWatchlistResponse.watchlist;
+        dispatch(updateWatchlistInStore(updatedWatchlist))
+    }
+}
+
 const watchlistReducer = (state = initialState, action) => {
     let newState;
 
@@ -105,6 +155,16 @@ const watchlistReducer = (state = initialState, action) => {
         case DELETE_A_WATCHLIST:
             newState = { ...state };
             delete newState[action.watchlist.id];
+            return newState;
+
+        case ADD_ITEM_TO_WATCHLIST:
+            newState = { ... state };
+            newState[action.watchlist.id] = action.watchlist;
+            return newState;
+
+        case UPDATE_WATCHLIST_ITEMS:
+            newState = { ...state };
+            newState[action.watchlist.id] = action.watchlist
             return newState;
 
         default:

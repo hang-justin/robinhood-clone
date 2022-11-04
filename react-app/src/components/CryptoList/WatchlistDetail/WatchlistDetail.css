@@ -1,0 +1,154 @@
+#current-list-items {
+    margin-left: 36px;
+    margin-top: 24px;
+}
+
+.watchlist-detail-col-header {
+    color: #8892a1;
+}
+
+.watchlist-detail-row {
+    box-sizing: border-box;
+    height: 60px;
+    padding: 0 10px;
+
+    border-bottom: 0.5px solid var(--sidebar-border);
+}
+
+.watchlist-detail-redirect {
+    cursor: pointer;
+}
+
+.watchlist-detail-redirect:hover {
+    background-color: var(--gray-hover);
+}
+
+.watchlist-detail-row > * {
+    font-size: 14px;
+}
+
+.watchlist-detail__change {
+    height: 14px;
+    padding-right: 5px;
+}
+
+.name-col {
+    width: 35%;
+}
+
+.symbol-col {
+    width: 12.5%;
+}
+
+.price-col {
+    width: 20%;
+}
+
+.day-change-col {
+    width: 15%
+}
+
+.market-cap-col {
+    width: 12.5%;
+}
+
+.add-to-list-col {
+    width: 5%;
+}
+
+.add-to-watchlist-icon {
+    cursor: pointer;
+}
+
+.add-to-watchlist-icon:hover {
+    color: var(--main-green);
+}
+
+.remove-from-watchlist-icon {
+    cursor: pointer;
+}
+
+.remove-from-watchlist-icon:hover {
+    color: var(--main-red-loss);
+}
+
+#add-list-modal {
+    padding: 20px;
+    color: white;
+    background-color: var(--gray-hover);
+}
+
+#close-add-to-list-modal {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+
+    height: 40px;
+    width: 40px;
+
+    font-size: xx-large;
+}
+
+#close-add-to-list-modal:hover {
+    background-color: var(--sidebar-border);
+}
+
+#add-asset-to-list-form {
+    gap: 15px;
+}
+
+.add-to-list-emoji {
+    font-size: x-large;
+}
+
+.add-to-list-emoji-wrapper {
+    box-sizing: border-box;
+    height: 64px;
+    width: 48px;
+
+    border-radius: 5px;
+
+    margin-right: 10px;
+
+    background-color: var(--sidebar-border);
+}
+
+.add-asset-to-list-input-container {
+    gap: 15px;
+}
+
+#add-to-list-modal-save-changes {
+    border: none;
+    height: 40px;
+
+    border-radius: 20px;
+}
+
+.enabled-save-changes-bg {
+    background-color: var(--main-green);
+    color: var(--gray-hover)
+}
+
+.disabled-save-changes-bg {
+    background-color: #626c70;
+    color: #232729;
+}
+
+#add-list-modal__header {
+    min-width: 350px;
+    margin-bottom: 15px;
+}
+
+.choose-list-for-asset {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.choose-list-for-asset:hover {
+    background-color: var(--sidebar-border);
+}

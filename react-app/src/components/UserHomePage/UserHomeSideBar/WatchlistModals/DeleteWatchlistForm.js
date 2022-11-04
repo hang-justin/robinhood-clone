@@ -1,10 +1,12 @@
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { deleteWatchlist } from '../../../../store/watchlist';
 
 import './DeleteWatchlistForm.css'
 
 const DeleteWatchlistForm = ({ watchlist, setShowDeleteWatchlistModal }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleDeleteWatchlist = (e) => {
         e.preventDefault();
@@ -13,6 +15,7 @@ const DeleteWatchlistForm = ({ watchlist, setShowDeleteWatchlistModal }) => {
         // { message: 'Watchlist successfully deleted' }
         dispatch(deleteWatchlist(watchlist))
             .then(() => setShowDeleteWatchlistModal(false))
+            .then(() => history.push('/'))
     }
 
     return (

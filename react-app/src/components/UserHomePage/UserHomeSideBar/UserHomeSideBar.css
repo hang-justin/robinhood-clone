@@ -19,6 +19,14 @@
     border-bottom: 0.5px solid var(--sidebar-border);
 }
 
+.sidebar-nav {
+    color: white;
+}
+
+.sidebar-nav:hover {
+    color: var(--main-green);
+}
+
 #add-list {
     cursor: pointer;
 }

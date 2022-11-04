@@ -1,11 +1,12 @@
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 import SidebarRow from './SidebarRow'
 import Watchlist from './Watchlist'
+import CreateWatchlistRow from './CreateWatchlistRow'
 
 import './UserHomeSideBar.css'
-import { useState } from 'react'
-import CreateWatchlistRow from './CreateWatchlistRow'
 
 const UserHomeSideBar = () => {
 
@@ -27,7 +28,8 @@ const UserHomeSideBar = () => {
     return (
         <div id='user-home-sidebar' className='flx-col'>
 
-            <span className='sidebar-row-header'>Cryptocurrencies</span>
+            <span className='sidebar-row-header'><NavLink to='/lists/yuanhood/crypto' className='navlink sidebar-nav'>Cryptocurrencies</NavLink></span>
+
             {!!nonCashAssetIds.length &&
                 nonCashAssetIds.map(nonCashAssetId => <SidebarRow
                                                         key={`owned-${nonCashAssetId}`}
