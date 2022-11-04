@@ -3,9 +3,11 @@
     min-height: calc(100vh - 65px);
     background-color: black;
     color: white;
+
 }
 
 #crypto-list-content {
+    box-sizing: border-box;
     width: 1300px;
     margin: 0 auto;
 }

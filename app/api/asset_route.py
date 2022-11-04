@@ -29,6 +29,10 @@ def add_funds():
                                     Asset.asset_id == '$$$$$').first()
         buying_power.add_to_asset(form.data['quantity'])
         db.session.commit()
+        return {
+                'message' : 'Asset successfully updated.',
+                'update' : { buying_power.asset_id: buying_power.to_dict_owner_asset() }
+                }, 200
     else:
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
@@ -68,9 +72,11 @@ def buy_asset(asset_id):
             db.session.commit()
 
             return {
-                'message' : 'Asset successfully posted.',
-                asset_posting.asset_id: asset_posting.to_dict_owner_asset(),
-                buying_power.asset_id: buying_power.to_dict_owner_asset()}, 201
+                'message' : 'Asset successfully posted and updated.',
+                'update' : {
+                            asset_posting.asset_id: asset_posting.to_dict_owner_asset(),
+                            buying_power.asset_id: buying_power.to_dict_owner_asset()}
+                    }, 201
 
         # If users already owns that asset, add onto the quantity of that asset
         if current_holding_in_asset is not None:
@@ -78,9 +84,11 @@ def buy_asset(asset_id):
             buying_power.add_to_asset(transaction_total)
             db.session.commit()
             return {
-                    'message' : 'Asset successfully posted.',
-                    current_holding_in_asset.asset_id: current_holding_in_asset.to_dict_owner_asset(),
-                    buying_power.asset_id: buying_power.to_dict_owner_asset()}, 200
+                    'message' : 'Assets successfully updated.',
+                    'update' : {
+                                current_holding_in_asset.asset_id: current_holding_in_asset.to_dict_owner_asset(),
+                                buying_power.asset_id: buying_power.to_dict_owner_asset()}
+                    }, 200
 
     else:
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
@@ -116,17 +124,19 @@ def sell_asset(asset_id):
             db.session.delete(current_holding_in_asset)
             db.session.commit()
             return {
-                    'message': 'Successfully sold all holdings in asset.',
-                    current_holding_in_asset.asset_id: current_holding_in_asset.to_dict_owner_asset(),
-                    buying_power.asset_id: buying_power.to_dict_owner_asset()}, 200
+                'message': 'Successfully sold all holdings in asset.',
+                'delete' : { current_holding_in_asset.asset_id: current_holding_in_asset.to_dict_owner_asset() },
+                'update' : { buying_power.asset_id: buying_power.to_dict_owner_asset()} }, 200
         try:
             current_holding_in_asset.deduct_from_asset(sell_quantity)
             buying_power.add_to_asset(transaction_total)
             db.session.commit()
             return {
                     'message' : 'Successfully deducted holdings from asset.',
-                    current_holding_in_asset.asset_id: current_holding_in_asset.to_dict_owner_asset(),
-                    buying_power.asset_id: buying_power.to_dict_owner_asset()}, 200
+                    'update' : {
+                                current_holding_in_asset.asset_id: current_holding_in_asset.to_dict_owner_asset(),
+                                buying_power.asset_id: buying_power.to_dict_owner_asset()}
+                    }, 200
         except:
             return { 'message' : 'Insufficient funds. Unable to deduct more than current holdings in asset.' }, 412
     else:
@@ -158,7 +168,7 @@ def sell_all_asset(asset_id):
         db.session.commit()
         return {
                 'message': 'Successfully sold all holdings in asset.',
-                current_holding_in_asset.asset_id: current_holding_in_asset.to_dict_owner_asset(),
-                buying_power.asset_id: buying_power.to_dict_owner_asset()}, 200
+                'delete' : { current_holding_in_asset.asset_id: current_holding_in_asset.to_dict_owner_asset() },
+                'update' : { buying_power.asset_id: buying_power.to_dict_owner_asset()} }, 200
     else:
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
