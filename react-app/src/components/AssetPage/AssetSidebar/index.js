@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { processOrder } from '../../../store/asset';
 import formatMoney from '../../../util/formatMoney';
 
 import './AssetSidebar.css';
 
 const AssetSidebar = () => {
+    const dispatch = useDispatch();
     const { symbol } = useParams();
 
     const market = useSelector(state => state.market)
@@ -193,9 +195,12 @@ const AssetSidebar = () => {
         if (!orderError) {
             return setOrderInformation({
                 transactionType,
+                asset_id: currentAssetId,
+                symbol,
+                name: currentAssetName,
+                transactionTotal,
                 transactionAmount,
                 transactionCurrencyType,
-                asset_id: currentAssetId,
                 asset_price: currentAssetLatestInfo.usd
             })
         }
@@ -259,6 +264,19 @@ const AssetSidebar = () => {
                 })
             }
         }
+
+        if (!orderError) {
+            return setOrderInformation({
+                transactionType,
+                asset_id: currentAssetId,
+                symbol,
+                name: currentAssetName,
+                transactionTotal,
+                transactionAmount,
+                transactionCurrencyType,
+                asset_price: currentAssetLatestInfo.usd
+            })
+        }
     }
 
     const validateOrder = () => {
@@ -287,6 +305,11 @@ const AssetSidebar = () => {
         setDisplaySellOption(true);
         setDisplayBuyOption(true);
         setOrderInformation('')
+    }
+
+    const submitOrder = (e) => {
+        e.preventDefault();
+        dispatch(processOrder(orderInformation))
     }
 
     return (
@@ -395,7 +418,7 @@ const AssetSidebar = () => {
                         {disabledInputs && !orderError &&
                         <button
                             id='submit-buy-order'
-                            onClick={cancelOrder}
+                            onClick={submitOrder}
                             >
                             Submit {transactionType}
                         </button>}

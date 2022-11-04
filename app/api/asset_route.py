@@ -49,7 +49,7 @@ def buy_asset(asset_id):
                                     Asset.owner_id == current_user.id,
                                     Asset.asset_id == '$$$$$').first()
 
-    transaction_total = form.data['total']
+    transaction_total = -form.data['total']
     if buying_power.quantity < transaction_total:
         return { 'message' : 'Insufficient cash funds.' }, 412
 
@@ -67,14 +67,20 @@ def buy_asset(asset_id):
             buying_power.add_to_asset(transaction_total)
             db.session.commit()
 
-            return { 'message' : 'Asset successfully posted.' }, 201
+            return {
+                'message' : 'Asset successfully posted.',
+                asset_posting.asset_id: asset_posting.to_dict_owner_asset(),
+                buying_power.asset_id: buying_power.to_dict_owner_asset()}, 201
 
         # If users already owns that asset, add onto the quantity of that asset
         if current_holding_in_asset is not None:
             current_holding_in_asset.add_to_asset(form.data['quantity'])
             buying_power.add_to_asset(transaction_total)
             db.session.commit()
-            return { 'message' : 'Asset successfully posted.' }, 200
+            return {
+                    'message' : 'Asset successfully posted.',
+                    current_holding_in_asset.asset_id: current_holding_in_asset.to_dict_owner_asset(),
+                    buying_power.asset_id: buying_power.to_dict_owner_asset()}, 200
 
     else:
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
@@ -109,12 +115,18 @@ def sell_asset(asset_id):
             buying_power.add_to_asset(transaction_total)
             db.session.delete(current_holding_in_asset)
             db.session.commit()
-            return { 'message': 'Successfully sold all holdings in asset.' }, 200
+            return {
+                    'message': 'Successfully sold all holdings in asset.',
+                    current_holding_in_asset.asset_id: current_holding_in_asset.to_dict_owner_asset(),
+                    buying_power.asset_id: buying_power.to_dict_owner_asset()}, 200
         try:
             current_holding_in_asset.deduct_from_asset(sell_quantity)
             buying_power.add_to_asset(transaction_total)
             db.session.commit()
-            return { 'message' : 'Successfully deducted holdings from asset.' }, 200
+            return {
+                    'message' : 'Successfully deducted holdings from asset.',
+                    current_holding_in_asset.asset_id: current_holding_in_asset.to_dict_owner_asset(),
+                    buying_power.asset_id: buying_power.to_dict_owner_asset()}, 200
         except:
             return { 'message' : 'Insufficient funds. Unable to deduct more than current holdings in asset.' }, 412
     else:
@@ -144,5 +156,9 @@ def sell_all_asset(asset_id):
         db.session.delete(current_holding_in_asset)
         buying_power.add_to_asset(transaction_total)
         db.session.commit()
+        return {
+                'message': 'Successfully sold all holdings in asset.',
+                current_holding_in_asset.asset_id: current_holding_in_asset.to_dict_owner_asset(),
+                buying_power.asset_id: buying_power.to_dict_owner_asset()}, 200
     else:
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400

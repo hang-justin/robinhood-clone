@@ -33,20 +33,20 @@ function App() {
   }, [dispatch]);
 
   // NOTE: THIS DOESN'T APPEAR TO WORK SINCE IT KEEPS GIVING A CACHED RESPONSE
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     dispatch(getAllLatestPrices())
+  useEffect(() => {
+    const interval = setInterval(() => {
+      dispatch(getAllLatestPrices())
 
-  //     // if (!hasLoaded) {
-  //     //   setTimeout(()=> {
-  //     //     setHasLoaded(true)
-  //     //   }, 2000)
-  //     // }
+      // if (!hasLoaded) {
+      //   setTimeout(()=> {
+      //     setHasLoaded(true)
+      //   }, 2000)
+      // }
 
-  //   }, 10000)
+    }, 10 * 60 * 1000)
 
-  //   return () => clearInterval(interval)
-  // }, [])
+    return () => clearInterval(interval)
+  }, [])
 
   if (!loaded) {
     return null;
