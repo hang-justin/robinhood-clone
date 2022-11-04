@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { Modal } from '../../../context/Modal';
+import { processOrder } from '../../../store/asset';
 import formatMoney from '../../../util/formatMoney';
+import AddToListModal from '../../CryptoList/WatchlistDetail/AddToListModal';
 
 import './AssetSidebar.css';
+import OrderComplete from './OrderComplete';
 
 const AssetSidebar = () => {
+    const dispatch = useDispatch();
+    const [showCompletedOrder, setShowCompletedOrder] = useState(false)
     const { symbol } = useParams();
 
     const market = useSelector(state => state.market)
@@ -32,6 +38,8 @@ const AssetSidebar = () => {
 
     const [orderError, setOrderError] = useState('');
     const [orderInformation, setOrderInformation] = useState('')
+
+    const [showAddToListModal, setShowAddToListModal] = useState(false);
 
     const listenForValidCurrencyInputs = (keydown) => {
         // Only want this event listener to apply for USD
@@ -129,6 +137,8 @@ const AssetSidebar = () => {
     }
 
     const validateBuyOrder = () => {
+        console.log('validating buy order')
+        console.log('transaction amoutn is :', transactionAmount)
         if (transactionCurrencyType === 'USD') {
             if (!+transactionAmount) return setOrderError({
                 header: 'Invalid Amount',
@@ -183,7 +193,7 @@ const AssetSidebar = () => {
 
 
             if (+transactionAmount * currentAssetLatestInfo.usd > userAssets.$$$$$.quantity) {
-                setOrderError({
+                return setOrderError({
                     header: 'Not Enough Buying Power',
                     message: `You don't have enough buying power to place this order.`
                 })
@@ -191,11 +201,15 @@ const AssetSidebar = () => {
         }
 
         if (!orderError) {
+            console.log('no order errors?!')
             return setOrderInformation({
                 transactionType,
+                asset_id: currentAssetId,
+                symbol,
+                name: currentAssetName,
+                transactionTotal,
                 transactionAmount,
                 transactionCurrencyType,
-                asset_id: currentAssetId,
                 asset_price: currentAssetLatestInfo.usd
             })
         }
@@ -253,17 +267,28 @@ const AssetSidebar = () => {
             }
 
             if (+transactionAmount > userHasCurrentAsset.quantity) {
-                setOrderError({
+                return setOrderError({
                     header: `Not Enough ${userHasCurrentAsset.name}`,
                     message: `You can sell at most ${userHasCurrentAsset.quantity} of ${userHasCurrentAsset.name}.`
                 })
             }
         }
+
+        if (!orderError) {
+            return setOrderInformation({
+                transactionType,
+                asset_id: currentAssetId,
+                symbol,
+                name: currentAssetName,
+                transactionTotal,
+                transactionAmount,
+                transactionCurrencyType,
+                asset_price: currentAssetLatestInfo.usd
+            })
+        }
     }
 
     const validateOrder = () => {
-        if (orderError) setOrderError('');
-
         if (transactionType === 'Buy') validateBuyOrder();
         else validateSellOrder();
     }
@@ -278,6 +303,7 @@ const AssetSidebar = () => {
             setDisplayBuyOption(false);
         }
 
+        setOrderError('')
         validateOrder();
     }
 
@@ -286,7 +312,22 @@ const AssetSidebar = () => {
         setDisabledInputs(false);
         setDisplaySellOption(true);
         setDisplayBuyOption(true);
+        setOrderError('')
         setOrderInformation('')
+    }
+
+    const submitOrder = (e) => {
+        e.preventDefault();
+        dispatch(processOrder(orderInformation))
+            .then(() => {
+                setDisabledInputs(false);
+                setTransactionAmount('')
+
+                setDisplaySellOption(true)
+                setDisplayBuyOption(true)
+
+                setShowCompletedOrder(true);
+            })
     }
 
     return (
@@ -294,6 +335,9 @@ const AssetSidebar = () => {
             <div id='asset-sidebar' className='flx-col'>
 
                 <div id='asset-order-container' className='flx-col-justify-align-ctr'>
+                    {showCompletedOrder ? <OrderComplete setShowCompletedOrder={setShowCompletedOrder} orderInformation={orderInformation}/> :
+                    (<>
+
                     <div id='transaction-type' className='flx-row-align-ctr flx-grow-one'>
 
                         {displayBuyOption &&
@@ -395,7 +439,7 @@ const AssetSidebar = () => {
                         {disabledInputs && !orderError &&
                         <button
                             id='submit-buy-order'
-                            onClick={cancelOrder}
+                            onClick={submitOrder}
                             >
                             Submit {transactionType}
                         </button>}
@@ -413,9 +457,23 @@ const AssetSidebar = () => {
                         {availableCurrency} available
                     </div>
 
+                    </>)}
+
                 </div>
 
-                <button>Add to Lists</button>
+                <button id='add-to-list-btn' onClick={() => setShowAddToListModal(true)}>
+                    Add to Lists
+                </button>
+
+                {showAddToListModal &&
+                    <Modal onClose={() => setShowAddToListModal(false)}>
+                        <AddToListModal
+                            setShowAddToListModal={setShowAddToListModal}
+                            currentCoinName={currentAssetName}
+                            asset_id={currentAssetId}
+                        />
+                    </Modal>
+                }
             </div>
 
         </>

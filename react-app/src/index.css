@@ -14,7 +14,7 @@
 
 body {
     margin: 0;
-    min-width: 1000px;
+    min-width: fit-content;
 }
 
 button {
@@ -79,6 +79,13 @@ a:visited {
 .flx-col {
     display: flex;
     flex-direction: column;
+}
+
+.flx-col-justify-start-align-start {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
 }
 
 .flx-col-justify-ctr {

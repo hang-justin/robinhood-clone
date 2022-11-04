@@ -1,0 +1,37 @@
+#order-complete {
+    padding: 0;
+}
+
+#order-complete > * {
+    padding: 0 15px;
+}
+
+#transaction-confirmed {
+    padding: 15px;
+    align-self: flex-start;
+
+    box-sizing: border-box;
+    width: 100%;
+    border-bottom: 0.5px solid #40494e;
+}
+
+.order-information-row {
+    margin-top: 20px;
+}
+
+.order-info-row-header {
+    font-size: 14px;
+    color: #b5cfcc;
+}
+
+#order-done-btn {
+    border: none;
+    background-color: var(--crypto-watchlist-green);
+    border-radius: 30px;
+    padding: 10px 0;
+    margin: 20px 0;
+}
+
+#order-done-btn:hover {
+    background-color: var(--main-green);
+}

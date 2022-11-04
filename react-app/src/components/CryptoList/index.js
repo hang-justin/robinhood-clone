@@ -33,7 +33,7 @@ const CryptoList = () => {
     }
 
     return (
-        <div id='crypto-list-page'>
+        <div id='crypto-list-page' className='flx-col'>
 
             <div id='crypto-list-content' className='flx-row-justify-ctr'>
 

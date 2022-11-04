@@ -7,6 +7,29 @@
     color: #8892a1;
 }
 
+#crypto-list-header {
+    box-sizing: border-box;
+    width: 822px;
+    padding: 0 10px;
+}
+
+.watchlist-title-emoji {
+    font-size: 60px;
+}
+
+.watchlist-title-name {
+    font-size: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
+}
+
+.watchlist-item-count {
+    font-size: 16px;
+    color: #9197a1;
+}
+
 .watchlist-detail-row {
     box-sizing: border-box;
     height: 60px;

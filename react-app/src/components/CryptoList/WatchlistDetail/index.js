@@ -5,10 +5,26 @@ import WatchlistDetailRow from './WatchlistDetailRow';
 import './WatchlistDetail.css';
 
 const WatchlistDetail = ({ userId, listId, itemIds }) => {
+    const allWatchlists = useSelector(state => state.watchlists)
 
     return (
         <>
             <div id='current-list-items' className='flx-col flx-grow-one'>
+
+                <div id='crypto-list-header' className='flx-col'>
+                    <div className='watchlist-title-emoji'>
+                        💡
+                    </div>
+
+                    <div className='watchlist-title-name'>
+                        {listId === 'crypto' ? 'Crypto' : allWatchlists[listId].name}
+                    </div>
+
+                    <div className='watchlist-item-count'>
+                        {itemIds.length} items
+                    </div>
+
+                </div>
 
                 <div className='flx-row-align-ctr watchlist-detail-row'>
 
