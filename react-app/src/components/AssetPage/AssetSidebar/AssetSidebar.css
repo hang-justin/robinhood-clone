@@ -1,0 +1,152 @@
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+#asset-sidebar {
+    width: 300px;
+}
+
+#asset-order-container {
+    border-radius: 5px;
+    background-color: var(--gray-hover);
+    border: 0.5px solid #40494e;
+}
+
+#asset-order-container > * {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 15px;
+}
+
+
+#transaction-type {
+    align-self: flex-start;
+
+    box-sizing: border-box;
+    width: 100%;
+    gap: 10px;
+    border-bottom: 0.5px solid #40494e;
+}
+
+.transaction-type-selection {
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    padding: 15px 0;
+}
+
+.transaction-type-selection.active-transaction-type {
+    cursor: default;
+    border-bottom: 2px solid var(--main-green);
+}
+
+#transaction-input-container {
+    padding-bottom: 5px;
+    font-size: 14px;
+}
+
+#transaction-input-container > * {
+    margin-top: 10px;
+}
+
+#amount-order-input {
+    text-align: right;
+}
+
+.order-input {
+    box-sizing: border-box;
+    width: 55%;
+    padding: 5px 10px;
+
+    border-radius: 5px;
+    outline: none;
+    border: 0.5px solid #40494e;
+
+    color: white;
+    background-color: transparent;
+}
+
+.order-input:focus {
+    border: 0.5px solid var(--crypto-watchlist-green);
+}
+
+option {
+    color: white;
+    background-color: #40494e;
+}
+
+#est-price {
+    padding: 10px 0;
+    border-bottom: 0.5px solid #40494e;
+}
+
+#est-cost-section {
+    gap: 20px;
+}
+
+#est-cost-section,
+#est-cost-number {
+    white-space: nowrap;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
+}
+
+#submit-transaction {
+    border: none;
+    background-color: var(--crypto-watchlist-green);
+    border-radius: 30px;
+    padding: 10px 0;
+    margin: 20px 0;
+}
+
+#submit-transaction:hover,
+#submit-buy-order:hover {
+    background-color: var(--main-green);
+}
+
+#submit-buy-order {
+    border: none;
+    background-color: var(--crypto-watchlist-green);
+    border-radius: 30px;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+#cancel-order {
+    border: 0.5px solid var(--main-red-loss);
+    border-radius: 30px;
+    padding: 10px 0;
+    margin: 20px 0;
+
+    color: var(--main-red-loss);
+    background-color: transparent;
+}
+
+#cancel-order:hover {
+    color: white;
+    background-color: var(--main-red-loss);
+}
+
+#buying-power {
+    border-top: 0.5px solid #40494e;
+    font-size: 14px;
+    padding: 10px 0;
+}
+
+.disabled-input {
+    cursor: not-allowed;
+    background-color: #40494e;
+}
+
+.order-error-field {
+    margin-top: 15px;
+    color: var(--main-red-loss)
+}
+
+.order-error-header {
+    font-weight: bold;
+}

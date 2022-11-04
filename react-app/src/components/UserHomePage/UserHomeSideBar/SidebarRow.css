@@ -13,3 +13,9 @@
 .sidebar-row {
     font-size: small;
 }
+
+.sidebar-row__left,
+.sparkline,
+.sidebar-row__right {
+    width: calc(100% / 3);
+}

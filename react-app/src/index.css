@@ -4,6 +4,7 @@
     --main-red-loss: #ff5000;
     --crypto-watchlist-green: #698420;
     --sidebar-border: #30363a;
+    --gray-hover: #1e2124;
 }
 
 * {
@@ -13,7 +14,7 @@
 
 body {
     margin: 0;
-    min-width: 1300px;
+    min-width: 1000px;
 }
 
 button {
@@ -45,8 +46,18 @@ a:visited {
     flex-grow: 1;
 }
 
+.flx-grow-null {
+    display: flex;
+    flex-grow: 0;
+}
+
 .flx-row {
     display: flex;
+}
+
+.flx-row-justify-end {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .flx-row-justify-ctr {
@@ -124,4 +135,12 @@ a:visited {
 
 .vis-visible {
     visibility: visible;
+}
+
+.navlink {
+    color: white;
+}
+
+.navlink:hover {
+    color: var(--main-green)
 }

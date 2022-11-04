@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import SidebarRow from "./SidebarRow"
-
-import './Watchlist.css'
-import arrow from '../../img/up-arrow.png'
-import WatchlistDropdownOptions from "./WatchlistDropdownOptions"
+import { NavLink } from "react-router-dom"
 import { Modal } from "../../../context/Modal"
+
+import SidebarRow from "./SidebarRow"
+import WatchlistDropdownOptions from "./WatchlistDropdownOptions"
 import EditWatchlistForm from "./WatchlistModals/EditWatchlistForm"
 import DeleteWatchlistForm from "./WatchlistModals/DeleteWatchlistForm"
+
+import './Watchlist.css'
 
 const Watchlist = ({ watchlist }) => {
     const [showWatchlistItems, setShowWatchlistItems] = useState(false)
     const ownedAssets = useSelector(state => state.assets)
+    const user = useSelector(state => state.session.user)
 
     // For display items in watchlist
     // Display status is for rotating the expand/collapse indicator
@@ -54,8 +56,12 @@ const Watchlist = ({ watchlist }) => {
         <>
             <div className='user-watchlist sidebar-row-content flx-row justify-space-btw' onClick={toggleItemDisplay}>
 
-                <div className='watchlist-name-header'>
-                    <span className='watchlist-emoji'>💡</span> <span className='watchlist-name'>{watchlist.name}</span>
+                <div className='watchlist-name-header flx-row-align-ctr'>
+                    <span className='sidebar__navlink-wrapper flx-row-align-ctr'>
+                        <NavLink to={`/lists/${user.id}/${watchlist.id}`} activeClassName='active__sidebar-navlink' className='navlink sidebar-navlink' onClick={e => e.stopPropagation()}>
+                            <span className='watchlist-emoji'>💡</span> <span className='watchlist-name'>{watchlist.name}</span>
+                        </NavLink>
+                    </span>
                 </div>
 
                 <div className='watchlist-buttons flx-row-justify-align-ctr margin-left-auto'>

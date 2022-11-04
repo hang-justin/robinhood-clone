@@ -7,7 +7,7 @@ import './NavBar.css'
 
 const NavBar = () => {
   const location = useLocation().pathname;
-  const [textColor, setTextColor] = useState(location === '/' ? 'white-text' : 'black-text');
+  const [textColor, setTextColor] = useState(location !== '/us/en' ? 'white-text' : 'black-text');
   const [bgColor, setBgColor] = useState(location === '/us/en' ? 'white-bg' : 'transparent-bg')
 
   return (
