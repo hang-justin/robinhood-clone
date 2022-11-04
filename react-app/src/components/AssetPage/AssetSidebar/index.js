@@ -11,6 +11,7 @@ const AssetSidebar = () => {
     const market = useSelector(state => state.market)
     const currentAssetId = market.symbol_to_asset_id[symbol.toLowerCase()]
     const currentAssetLatestInfo = market.allLatest[currentAssetId]
+    const currentAssetName = market.asset_id_to_name[currentAssetId]
 
     const userAssets = useSelector(state => state.assets)
     const userHasCurrentAsset = userAssets[currentAssetId]
@@ -30,6 +31,7 @@ const AssetSidebar = () => {
     const [displaySellOption, setDisplaySellOption] = useState(true);
 
     const [orderError, setOrderError] = useState('');
+    const [orderInformation, setOrderInformation] = useState('')
 
     const listenForValidCurrencyInputs = (keydown) => {
         // Only want this event listener to apply for USD
@@ -73,6 +75,7 @@ const AssetSidebar = () => {
         if (transactionCurrencyType !== 'USD') {
             setTransactionTotal(formatMoney(currentAssetLatestInfo.usd * transactionAmount))
         } else {
+            if (transactionAmount === '.') return setTransactionTotal('0.00');
             let tempTotal = (transactionAmount / currentAssetLatestInfo.usd).toString();
             const [whole, fraction] = tempTotal.split('.')
             if (fraction && fraction.length > 2) tempTotal = (transactionAmount / currentAssetLatestInfo.usd).toFixed(8).toString()
@@ -108,7 +111,13 @@ const AssetSidebar = () => {
         // If currency type !== USD => then the input type
         // will be a number so there no need to reformat
         if (e.target.value[0] === '0') return;
-        if (transactionCurrencyType !== 'USD') return setTransactionAmount(e.target.value)
+        if (transactionCurrencyType !== 'USD') {
+            const [whole, fraction] = e.target.value.split('.')
+
+            if (fraction && fraction.length > 8) return setTransactionAmount( (+e.target.value).toFixed(8).toString() )
+
+            return setTransactionAmount(e.target.value)
+        }
 
         // else we will reformat so that
         const [dollars, cents] = e.target.value.split('.')
@@ -121,39 +130,132 @@ const AssetSidebar = () => {
 
     const validateBuyOrder = () => {
         if (transactionCurrencyType === 'USD') {
-            if (parseInt(transactionAmount) > userAssets.$$$$$.quantity) {
-                setOrderError({
+            if (!+transactionAmount) return setOrderError({
+                header: 'Invalid Amount',
+                message: 'Please enter a valid number of dollars.'
+            })
+
+            if (+transactionAmount < 1) {
+                if (+transactionAmount / currentAssetLatestInfo.usd < 1 && currentAssetLatestInfo.usd < 1) {
+                    return setOrderError({
+                        header: 'Order Too Small',
+                        message: `${currentAssetName} orders must be at least $${currentAssetLatestInfo.usd.toFixed(2)}`
+                    })
+                } else if (+transactionAmount / currentAssetLatestInfo.usd > 1) return
+                else {
+                    return setOrderError({
+                        header: 'Order Too Small',
+                        message: `${currentAssetName} orders must be at least $1.00.`
+                    })
+                }
+
+            }
+
+            if (+(transactionAmount) > userAssets.$$$$$.quantity) {
+                return setOrderError({
                     header: 'Not Enough Buying Power',
-                    message: `You don't have enough buying power to place this order`
+                    message: `You don't have enough buying power to place this order.`
                 })
             }
         }
 
         if (transactionCurrencyType !== 'USD') {
-            if (transactionAmount * currentAssetLatestInfo.usd > userAssets.$$$$$.quantity) {
+            if (!+transactionAmount) return setOrderError({
+                header: 'Invalid Amount',
+                message: `Please enter a valid number of ${symbol}.`
+            })
+
+            if (+transactionAmount * currentAssetLatestInfo.usd < 1) {
+                if (currentAssetLatestInfo.usd < 1) {
+                    if (+transactionAmount < 1) {
+                        return setOrderError({
+                            header: 'Order Too Small',
+                            message: `${currentAssetName} orders must be at least 1 ${symbol}`
+                        })
+                    }
+                }
+                else {
+                    return setOrderError({
+                    header: 'Order Too Small',
+                    message: `${currentAssetName} orders must be at least ${(1/currentAssetLatestInfo.usd).toFixed(8)} ${symbol}.` })
+                }
+            }
+
+
+            if (+transactionAmount * currentAssetLatestInfo.usd > userAssets.$$$$$.quantity) {
                 setOrderError({
                     header: 'Not Enough Buying Power',
-                    message: `You don't have enough buying power to place this order`
+                    message: `You don't have enough buying power to place this order.`
                 })
             }
+        }
+
+        if (!orderError) {
+            return setOrderInformation({
+                transactionType,
+                transactionAmount,
+                transactionCurrencyType,
+                asset_id: currentAssetId,
+                asset_price: currentAssetLatestInfo.usd
+            })
         }
     }
 
     const validateSellOrder = () => {
         if (transactionCurrencyType === 'USD') {
-            if (parseInt(transactionAmount) > currentAssetLatestInfo.usd * userHasCurrentAsset.quantity) {
-                setOrderError({
+            if (!+transactionAmount) return setOrderError({
+                header: 'Invalid Amount',
+                message: 'Please enter a valid amount of dollars.'
+            })
+
+            if (+(transactionAmount) > currentAssetLatestInfo.usd * userHasCurrentAsset.quantity) {
+                return setOrderError({
                     header: `Not Enough ${userHasCurrentAsset.name}`,
-                    message: `You can sell at most ${formatMoney(userHasCurrentAsset.quantity * currentAssetLatestInfo.usd)} of ${userHasCurrentAsset.name}`
+                    message: `You can sell at most ${formatMoney(userHasCurrentAsset.quantity * currentAssetLatestInfo.usd)} of ${userHasCurrentAsset.name}.`
                 })
+            }
+
+            if (+transactionAmount < 1) {
+                if (currentAssetLatestInfo.usd < 1) {
+                    if (transactionAmount < currentAssetLatestInfo.usd) {
+                        return setOrderError({
+                            header: 'Order Too Small',
+                            message: `${currentAssetName} orders must be at least $${currentAssetLatestInfo.usd.toFixed(2)}.`
+                        })
+                    }
+                } else {
+                    return setOrderError({
+                        header: 'Order Too Small',
+                        message: `${currentAssetName} orders must be at least $1.00.`
+                    })
+                }
             }
         }
 
         if (transactionCurrencyType !== 'USD') {
-            if (parseInt(transactionAmount) > userHasCurrentAsset.quantity) {
+            if (!+transactionAmount) return setOrderError({
+                header: 'Invalid Amount',
+                message: `Please enter a valid number of ${symbol}.`
+            })
+
+            if (+transactionAmount < 1 && currentAssetLatestInfo.usd < 1) {
+                return setOrderError({
+                    header: 'Order Too Small',
+                    message: `${currentAssetName} orders must be at least 1.00 ${symbol}.`
+                })
+            }
+
+            if (+transactionAmount * currentAssetLatestInfo.usd < 1 && currentAssetLatestInfo.usd > 1) {
+                return setOrderError({
+                    header: 'Order Too Small',
+                    message: `${currentAssetName} orders must be at least ${(1/currentAssetLatestInfo.usd).toFixed(8)} ${symbol}.`
+                })
+            }
+
+            if (+transactionAmount > userHasCurrentAsset.quantity) {
                 setOrderError({
                     header: `Not Enough ${userHasCurrentAsset.name}`,
-                    message: `You can sell at most ${userHasCurrentAsset.quantity} of ${userHasCurrentAsset.name}`
+                    message: `You can sell at most ${userHasCurrentAsset.quantity} of ${userHasCurrentAsset.name}.`
                 })
             }
         }
@@ -161,6 +263,7 @@ const AssetSidebar = () => {
 
     const validateOrder = () => {
         if (orderError) setOrderError('');
+
         if (transactionType === 'Buy') validateBuyOrder();
         else validateSellOrder();
     }
@@ -183,6 +286,7 @@ const AssetSidebar = () => {
         setDisabledInputs(false);
         setDisplaySellOption(true);
         setDisplayBuyOption(true);
+        setOrderInformation('')
     }
 
     return (
@@ -210,7 +314,7 @@ const AssetSidebar = () => {
 
                     </div>
 
-                    <form id='transaction-input-container' className='flx-col' onSubmit={startOrder} autocomplete="off">
+                    <form id='transaction-input-container' className='flx-col' onSubmit={startOrder} autoComplete="off">
                         <div id='set-transaction-type' className='flx-row-align-ctr flx-grow-one justify-space-btw'>
                             <div>
                                 {transactionType} in
@@ -222,7 +326,7 @@ const AssetSidebar = () => {
                             onChange={handleCurrencyTypeChange}
                             disabled={disabledInputs}
                             >
-                                <option value='USD'>USD</option>
+                                <option id='usd' value='USD'>USD</option>
                                 <option value={symbol.toUpperCase()}>{symbol.toUpperCase()}</option>
                             </select>
                         </div>
@@ -235,6 +339,7 @@ const AssetSidebar = () => {
                             <input
                             id='amount-order-input'
                             type={transactionCurrencyType !== 'USD' ? 'number' : ''}
+                            min={transactionCurrencyType !== 'USD' ? '0' : ''}
                             className={`order-input ${disabledStyle}`}
                             placeholder={amountPlaceholder}
                             onChange={handleAmountInputChange}
