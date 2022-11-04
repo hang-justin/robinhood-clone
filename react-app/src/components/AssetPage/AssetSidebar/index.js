@@ -24,6 +24,13 @@ const AssetSidebar = () => {
 
     const [availableCurrency, setAvailableCurrency] = useState(formatMoney(userAssets.$$$$$.quantity))
 
+    const [disabledInputs, setDisabledInputs] = useState(false);
+    const [disabledStyle, setDisabledStyle] = useState('')
+    const [displayBuyOption, setDisplayBuyOption] = useState(true);
+    const [displaySellOption, setDisplaySellOption] = useState(true);
+
+    const [orderError, setOrderError] = useState('');
+
     const listenForValidCurrencyInputs = (keydown) => {
         // Only want this event listener to apply for USD
         if (transactionCurrencyType !== 'USD') return;
@@ -35,6 +42,10 @@ const AssetSidebar = () => {
         const amountInputField = document.getElementById('amount-order-input')
         if (keydown.key === '.' && amountInputField.value.includes('.')) keydown.preventDefault();
     }
+
+    useEffect(() => {
+        disabledInputs ? setDisabledStyle('disabled-input') : setDisabledStyle('');
+    }, [disabledInputs])
 
     useEffect(() => {
         if (transactionType === 'Buy') {
@@ -108,10 +119,70 @@ const AssetSidebar = () => {
         setTransactionAmount(e.target.value)
     }
 
-    const handleOrderSubmit = (e) => {
+    const validateBuyOrder = () => {
+        if (transactionCurrencyType === 'USD') {
+            if (parseInt(transactionAmount) > userAssets.$$$$$.quantity) {
+                setOrderError({
+                    header: 'Not Enough Buying Power',
+                    message: `You don't have enough buying power to place this order`
+                })
+            }
+        }
+
+        if (transactionCurrencyType !== 'USD') {
+            if (transactionAmount * currentAssetLatestInfo.usd > userAssets.$$$$$.quantity) {
+                setOrderError({
+                    header: 'Not Enough Buying Power',
+                    message: `You don't have enough buying power to place this order`
+                })
+            }
+        }
+    }
+
+    const validateSellOrder = () => {
+        if (transactionCurrencyType === 'USD') {
+            if (parseInt(transactionAmount) > currentAssetLatestInfo.usd * userHasCurrentAsset.quantity) {
+                setOrderError({
+                    header: `Not Enough ${userHasCurrentAsset.name}`,
+                    message: `You can sell at most ${formatMoney(userHasCurrentAsset.quantity * currentAssetLatestInfo.usd)} of ${userHasCurrentAsset.name}`
+                })
+            }
+        }
+
+        if (transactionCurrencyType !== 'USD') {
+            if (parseInt(transactionAmount) > userHasCurrentAsset.quantity) {
+                setOrderError({
+                    header: `Not Enough ${userHasCurrentAsset.name}`,
+                    message: `You can sell at most ${userHasCurrentAsset.quantity} of ${userHasCurrentAsset.name}`
+                })
+            }
+        }
+    }
+
+    const validateOrder = () => {
+        if (orderError) setOrderError('');
+        if (transactionType === 'Buy') validateBuyOrder();
+        else validateSellOrder();
+    }
+
+    const startOrder = (e) => {
         e.preventDefault();
-        console.log('hmmmm')
-        alert('Order processing system is down. Please hang on!')
+        setDisabledInputs(true)
+
+        if (transactionType === 'Buy') {
+            setDisplaySellOption(false)
+        } else if (transactionType === 'Sell') {
+            setDisplayBuyOption(false);
+        }
+
+        validateOrder();
+    }
+
+    const cancelOrder = (e) => {
+        e.preventDefault();
+        setDisabledInputs(false);
+        setDisplaySellOption(true);
+        setDisplayBuyOption(true);
     }
 
     return (
@@ -120,24 +191,26 @@ const AssetSidebar = () => {
 
                 <div id='asset-order-container' className='flx-col-justify-align-ctr'>
                     <div id='transaction-type' className='flx-row-align-ctr flx-grow-one'>
+
+                        {displayBuyOption &&
                         <div
                             className={`transaction-type-selection ${transactionType === 'Buy' ? 'active-transaction-type' : ''}`}
                             onClick={() => setTransactionType('Buy')}
-                        >
+                            >
                             Buy {symbol}
-                        </div>
+                        </div>}
 
-                        {userHasCurrentAsset &&
+                        {userHasCurrentAsset && displaySellOption &&
                         <div
-                        className={`transaction-type-selection ${transactionType === 'Sell' ? 'active-transaction-type' : ''}`}
+                            className={`transaction-type-selection ${transactionType === 'Sell' ? 'active-transaction-type' : ''}`}
                             onClick={() => setTransactionType('Sell')}
-                        >
+                            >
                             Sell {symbol}
                         </div>}
 
                     </div>
 
-                    <form id='transaction-input-container' className='flx-col' onSubmit={handleOrderSubmit} autocomplete="off">
+                    <form id='transaction-input-container' className='flx-col' onSubmit={startOrder} autocomplete="off">
                         <div id='set-transaction-type' className='flx-row-align-ctr flx-grow-one justify-space-btw'>
                             <div>
                                 {transactionType} in
@@ -145,8 +218,9 @@ const AssetSidebar = () => {
 
                             <select
                             id='currency-type-order-input'
-                            className='order-input'
+                            className={`order-input ${disabledStyle}`}
                             onChange={handleCurrencyTypeChange}
+                            disabled={disabledInputs}
                             >
                                 <option value='USD'>USD</option>
                                 <option value={symbol.toUpperCase()}>{symbol.toUpperCase()}</option>
@@ -161,11 +235,12 @@ const AssetSidebar = () => {
                             <input
                             id='amount-order-input'
                             type={transactionCurrencyType !== 'USD' ? 'number' : ''}
-                            className='order-input'
+                            className={`order-input ${disabledStyle}`}
                             placeholder={amountPlaceholder}
                             onChange={handleAmountInputChange}
                             value={transactionAmount}
                             required
+                            disabled={disabledInputs}
                             />
                         </div>
 
@@ -182,19 +257,51 @@ const AssetSidebar = () => {
                             </div>
                         </div>
 
-                        <div id='est-cost' className='flx-row-align-ctr flx-grow-one justify-space-btw'>
+                        <div id='est-cost-section' className='flx-row-align-ctr flx-grow-one justify-space-btw'>
                             <div>
                                 Est. {transactionCurrencyType === 'USD' ? symbol.toUpperCase() : transactionType === 'Buy' ? 'Cost' : 'Credit'}
                             </div>
 
-                            <div>
+                            <div id='est-cost-number'>
                                 {transactionTotal}
                             </div>
                         </div>
 
-                        <button id='submit-transaction'>
+                        {!disabledInputs &&
+                        <button
+                            id='submit-transaction'
+                            onClick={startOrder}
+                            >
                             Review Order
-                        </button>
+                        </button>}
+
+                        {disabledInputs && !!orderError && (
+                            <div className='order-error-section flx-col'>
+                                <div className='order-error-field order-error-header'>
+                                    {orderError.header}
+                                </div>
+
+                                <div className='order-error-field order-error-message'>
+                                    {orderError.message}
+                                </div>
+                            </div>
+                        )}
+
+                        {disabledInputs && !orderError &&
+                        <button
+                            id='submit-buy-order'
+                            onClick={cancelOrder}
+                            >
+                            Submit {transactionType}
+                        </button>}
+
+                        {disabledInputs &&
+                        <button
+                            id='cancel-order'
+                            onClick={cancelOrder}
+                            >
+                            Back
+                        </button>}
                     </form>
 
                     <div id='buying-power' className='flx-row-justify-align-ctr flx-grow-one'>
