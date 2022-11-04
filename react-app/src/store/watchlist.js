@@ -6,8 +6,15 @@ const DELETE_A_WATCHLIST = 'watchlists/DELETE_A_WATCHLIST'
 const ADD_ITEM_TO_WATCHLIST = 'watchlists/ADD_ITEM_TO_WATCHLIST'
 const REMOVE_ITEM_FROM_WATCHLIST = 'watchlists/REMOVE_ITEM_FROM_WATCHLIST'
 const UPDATE_WATCHLIST_ITEMS = 'watchlists/UPDATE_WATCHLIST_ITEM'
+const CLEAR_WATCHLISTS = 'watchlists/CLEAR_WATCHLISTS'
 
 const initialState = {};
+
+export const clearWatchlists = () => {
+    return {
+        type: CLEAR_WATCHLISTS
+    }
+}
 
 export const loadWatchlist = (watchlists) => {
     return {
@@ -141,6 +148,9 @@ const watchlistReducer = (state = initialState, action) => {
                 newState[watchlist.id] = watchlist
             })
             return newState;
+
+        case CLEAR_WATCHLISTS:
+            return {};
 
         case ADD_A_WATCHLIST:
             newState = { ...state };

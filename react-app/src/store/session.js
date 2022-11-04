@@ -1,5 +1,5 @@
-import { loadAssets } from "./asset";
-import { loadWatchlist } from "./watchlist";
+import { clearAssets, loadAssets } from "./asset";
+import { clearWatchlists, loadWatchlist } from "./watchlist";
 
 // constants
 const SET_USER = 'session/SET_USER';
@@ -61,6 +61,19 @@ export const login = (email, password) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
+    if (data.watchlists) {
+      dispatch(loadWatchlist(data.watchlists))
+
+      const watchlistIdArr = data.watchlists.map(watchlist => watchlist.id)
+      data.watchlists = watchlistIdArr
+    }
+
+    if (data.assets) {
+      dispatch(loadAssets(data.assets))
+
+      const assetIdArr = data.assets.map(asset => asset.asset_id)
+      data.assets = assetIdArr
+    }
     dispatch(setUser(data))
     return null;
   } else if (response.status < 500) {
@@ -83,6 +96,8 @@ export const logout = () => async (dispatch) => {
 
   if (response.ok) {
     dispatch(removeUser());
+    dispatch(clearWatchlists());
+    dispatch(clearAssets());
   }
 };
 
