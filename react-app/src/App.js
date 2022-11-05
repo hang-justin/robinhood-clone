@@ -16,6 +16,7 @@ import CryptoList from './components/CryptoList';
 import { getAllLatestPrices } from './store/market';
 import SplashPage from './components/SplashPage';
 import LoginPage from './components/auth/LoginPage';
+import SignupPage from './components/auth/SignupPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -65,8 +66,8 @@ function App() {
           <LoginPage />
         </Route>
 
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
+        <Route path='/signup' exact={true}>
+          <SignupPage />
         </Route>
 
         <Route path='/us/en' exact={true}>
