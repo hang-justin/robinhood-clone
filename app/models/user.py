@@ -21,7 +21,8 @@ class User(db.Model, UserMixin):
                         nullable=False)
     email = db.Column(
                         db.String(255),
-                        nullable=False, unique=True)
+                        nullable=False,
+                        unique=True)
     hashed_password = db.Column(
                         db.String(255),
                         nullable=False)

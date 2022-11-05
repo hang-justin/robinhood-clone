@@ -13,6 +13,7 @@ const CreateWatchlistRow = ({ setShowCreateWatchlist }) => {
     const userWatchlists = useSelector(state => state.watchlists)
     const userWatchlistsArr = Object.values(userWatchlists)
     const [uniqueNameErr, setUniqueNameErr] = useState(false);
+    const [emptyWatchlistNameErr, setEmptyWatchlistNameErr] = useState('');
 
     useEffect(() => {
         const isNameTaken = !!userWatchlistsArr.find(watchlist => watchlist.name === watchlistName)
@@ -28,6 +29,15 @@ const CreateWatchlistRow = ({ setShowCreateWatchlist }) => {
         if (watchlistNameLengthLimitColor === '') return;
         setWatchlistNameLengthLimitColor('');
         return;
+
+    }, [watchlistName])
+
+    useEffect(() => {
+        if (watchlistName.trim().length <= 0) {
+            setEmptyWatchlistNameErr(`List name can't be empty.`)
+        } else {
+            setEmptyWatchlistNameErr('')
+        }
 
     }, [watchlistName])
 
@@ -70,7 +80,7 @@ const CreateWatchlistRow = ({ setShowCreateWatchlist }) => {
                     className='flx-grow-one'
                     placeholder='List Name'
                     value={watchlistName}
-                    required={true}
+                    required
                     onChange={handleWatchlistNameInput}
                 />
 
@@ -86,6 +96,12 @@ const CreateWatchlistRow = ({ setShowCreateWatchlist }) => {
                 {watchlistName.length >= 64 &&
                     <span className='flx-row margin-right-auto main-red-text'>
                         64 character limit reached
+                    </span>
+                }
+
+                {emptyWatchlistNameErr.length >= 0 &&
+                    <span className='flx-row margin-right-auto main-red-text'>
+                        {emptyWatchlistNameErr}
                     </span>
                 }
 

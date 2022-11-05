@@ -65,7 +65,7 @@ const LoginPage = () => {
 
                     {!!errors.length &&
                         <div id='login-error-msg' className='flx-row-align-ctr'>
-                            <span class="material-symbols-outlined">
+                            <span className="material-symbols-outlined">
                                 info
                             </span>
                             <span>

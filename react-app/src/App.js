@@ -47,7 +47,7 @@ function App() {
       //   }, 2000)
       // }
 
-    }, 10 * 60 * 1000)
+    }, 4 * 60 * 1000)
 
     return () => clearInterval(interval)
   }, [])
