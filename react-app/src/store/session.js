@@ -118,6 +118,19 @@ export const signUp = (first_name, last_name, email, password) => async (dispatc
 
   if (response.ok) {
     const data = await response.json();
+
+    if (data.watchlists) {
+      dispatch(loadWatchlist(data.watchlists))
+      const watchlistIdArr = data.watchlists.map(watchlist => watchlist.id)
+      data.watchlists = watchlistIdArr
+    }
+
+    if (data.assets) {
+      dispatch(loadAssets(data.assets))
+      const assetIdArr = data.assets.map(asset => asset.asset_id)
+      data.assets = assetIdArr
+    }
+
     dispatch(setUser(data))
     return null;
   } else if (response.status < 500) {

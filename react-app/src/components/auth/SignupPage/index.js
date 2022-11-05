@@ -67,7 +67,7 @@ const SignupPage = () => {
             return;
         }
 
-        alert('hang on!')
+        history.push('/')
     }
 
     return (
