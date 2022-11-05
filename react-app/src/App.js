@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authenticate } from './store/session';
 
 import LoginForm from './components/auth/LoginForm';
@@ -14,11 +14,14 @@ import UserHomePage from './components/UserHomePage';
 import AssetPage from './components/AssetPage';
 import CryptoList from './components/CryptoList';
 import { getAllLatestPrices } from './store/market';
+import SplashPage from './components/SplashPage';
+import LoginPage from './components/auth/LoginPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   // const [hasLoaded, setHasLoaded] = useState(false)
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
 
   useEffect(() => {
     (async() => {
@@ -54,16 +57,20 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {user && <NavBar />}
 
       <Switch>
 
         <Route path='/login' exact={true}>
-          <LoginForm />
+          <LoginPage />
         </Route>
 
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
+        </Route>
+
+        <Route path='/us/en' exact={true}>
+          <SplashPage />
         </Route>
 
         <ProtectedRoute path='/users' exact={true} >

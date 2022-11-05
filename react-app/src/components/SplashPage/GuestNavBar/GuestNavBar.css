@@ -1,0 +1,38 @@
+#guest-navbar {
+    box-sizing: border-box;
+    height: 65px;
+    padding: 0 30px;
+    border-bottom: 0.5px solid black;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    background-color: white;
+}
+
+#guest-navbar__left {
+    gap: 15px;
+}
+
+#guest-session-btn-container {
+    gap: 10px;
+}
+
+#guest-session-btn-container > * {
+    height: 50px;
+    padding: 0 35px;
+    border-radius: 35px;
+}
+
+#splash-nav-login {
+    background-color: white;
+    border: 1px solid black;
+}
+
+#splash-nav-signup {
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+}

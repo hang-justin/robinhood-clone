@@ -1,0 +1,121 @@
+#splash-page {
+    min-width: 500px;
+    /* margin-top: 65px; */
+}
+
+#splash-sect-1 {
+    box-sizing: border-box;
+    height: 800px;
+    width: 100%;
+    background-image: url('../img/splash-sect-1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: #c3f53c;
+}
+
+#splash-sect-1 > * {
+    width: 500px;
+}
+
+#splash-sect-2 {
+    background: rgb(29,108,35);
+    background: linear-gradient(135deg, rgba(29,108,35,1) 0%, rgba(119,254,38,1) 82%);
+}
+
+#splash-sect-3 {
+    background: rgb(255,183,83);
+    background: linear-gradient(90deg, rgba(255,183,83,1) 0%, rgba(240,164,170,1) 100%);
+}
+
+#splash-sect-2,
+#splash-sect-3 {
+    box-sizing: border-box;
+    height: 600px;
+    width: 100%;
+}
+
+#splash-sect-2 > *,
+#splash-sect-3 > * {
+    width: 50%;
+}
+
+#splash-sect-2-img,
+#splash-sect-3-img {
+    height: 400px;
+    margin: auto;
+}
+
+span.sect-text-header {
+    width:fit-content;
+    background-color: white;
+    color: black;
+}
+
+.sect-2-text,
+.sect-3-text {
+    width: 550px;
+}
+
+#splash-sect-4 {
+    justify-content: space-evenly;
+
+    box-sizing: border-box;
+    height: 800px;
+    width: 100%;
+    margin: auto;
+    background-color: black;
+}
+
+.sect-4-img-container {
+    width: 350px;
+    margin: 0 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.sect-4-imgs {
+    height: 200px;
+    width: 200px;
+}
+
+.sect-4-img-text {
+    color: white;
+}
+
+#splash-sect-5 {
+    box-sizing: border-box;
+    height: 800px;
+    width: 100%;
+
+
+    background: url('../img/splash-sect-5.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: fill;
+}
+
+#splash-sect-5 > * {
+    margin: 60px auto;
+    width: 700px;
+}
+
+#splash-sect-5-sign-up {
+    width: 150px;
+    padding: 10px 0;
+    border-radius: 20px;
+    border: none;
+    background-color: black;
+    color: white;
+}
+
+#splash-sect-5-sign-up:hover {
+    background-color: #4a4d41;
+}
