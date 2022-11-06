@@ -12,10 +12,6 @@
     background-color: white;
 }
 
-#guest-navbar__left {
-    gap: 15px;
-}
-
 #guest-session-btn-container {
     gap: 10px;
 }
@@ -35,4 +31,12 @@
     background-color: black;
     border: 1px solid black;
     color: white;
+}
+
+#navbar-app-name {
+    font-weight: bold;
+}
+
+#splash-logo {
+    height: 30px;
 }
