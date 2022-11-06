@@ -1,3 +1,5 @@
+import { loadWeekChange } from "./market"
+
 const LOAD_SPARKLINE_DATA = 'sparklines/LOAD_SPARKLINE_DATA'
 
 const initialState = {
@@ -26,6 +28,15 @@ export const getSparklineData = () => async dispatch => {
 
     if (response.ok) {
         const data = await response.json();
+        console.log('data from response.json is ', data)
+        const weeklyPercentageChange = data.market_info.map( coinInfo => {
+            return {
+                id : coinInfo.id,
+                price_change_percentage_7d_in_currency : coinInfo.price_change_percentage_7d_in_currency
+            }
+        })
+        dispatch(loadWeekChange(weeklyPercentageChange))
+        console.log(weeklyPercentageChange)
         dispatch(loadSparklineToStore(data.market_info))
     }
 }
@@ -38,8 +49,6 @@ const sparklineReducer = ( state=initialState, action ) => {
         case LOAD_SPARKLINE_DATA:
             newState = { ...state }
             action.sparkline_data.forEach( dataObj => {
-                console.log('dataObj in the reducer is :',dataObj)
-                console.log(dataObj.sparkline_in_7d.price)
                 newState[dataObj.id] = [...dataObj.sparkline_in_7d.price]
             })
 

@@ -10,6 +10,8 @@ import splash43 from '../img/splash-sect-4-3.png'
 import splash44 from '../img/splash-sect-4-4.png'
 import { useHistory } from 'react-router-dom'
 import aboutYuan from '../img/about-yuan.png'
+import yuan from '../img/yuan-longping.jpeg'
+import yuan2 from '../img/yuan-2.png'
 
 const SplashPage = () => {
     const history = useHistory();
@@ -108,7 +110,7 @@ const SplashPage = () => {
 
                     <div id='yuan-bio' className='flx-row-align-ctr'>
                         <div>
-                            <img id='about-yuan-img' src={aboutYuan} alt='about-yuan-longping' />
+                            <img id='about-yuan-img' src={yuan2} alt='about-yuan-longping' />
                         </div>
 
                         <div id='about-content'>

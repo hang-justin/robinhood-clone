@@ -1,0 +1,17 @@
+#list-not-found {
+    height: calc(100vh - 65px);
+    min-height: 500px;
+
+    gap: 100px;
+
+    background-color: black;
+    color: white;
+}
+
+.list-not-found-nav {
+    color: var(--main-green)
+}
+
+.list-not-found-nav:hover {
+    filter: drop-shadow(0 0 5px var(--main-green))
+}

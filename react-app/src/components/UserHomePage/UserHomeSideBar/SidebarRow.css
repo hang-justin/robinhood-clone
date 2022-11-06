@@ -12,6 +12,7 @@
 
 .sidebar-row {
     font-size: small;
+    height: 50px;
 }
 
 .sidebar-row__left > span {
@@ -21,8 +22,15 @@
     text-overflow: ellipsis;
 }
 
-.sidebar-row__left,
 .sparkline,
+.sidebar-row__left {
+    width: calc(65% / 2);
+}
 .sidebar-row__right {
-    width: calc(100% / 3);
+    width: 35%;
+}
+
+.day-change {
+    color: white;
+    margin-right: auto;
 }
