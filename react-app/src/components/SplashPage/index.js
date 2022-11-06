@@ -9,6 +9,7 @@ import splash42 from '../img/splash-sect-4-2.png'
 import splash43 from '../img/splash-sect-4-3.png'
 import splash44 from '../img/splash-sect-4-4.png'
 import { useHistory } from 'react-router-dom'
+import aboutYuan from '../img/about-yuan.png'
 
 const SplashPage = () => {
     const history = useHistory();
@@ -101,7 +102,55 @@ const SplashPage = () => {
                 </button>
             </div>
 
+            <div id='splash-sect-6' className='flx-row-justify-align-ctr'>
+                <div className='flx-col'>
+                    <div id='about-yuan-header'>About Yuanhood</div>
 
+                    <div id='yuan-bio' className='flx-row-align-ctr'>
+                        <div>
+                            <img id='about-yuan-img' src={aboutYuan} alt='about-yuan-longping' />
+                        </div>
+
+                        <div id='about-content'>
+                            <p>
+                                Yuanhood is a Robinhood clone with a focus on cryptocurrency.
+                            </p>
+
+                            <p>
+                                Users are given $50,000.00 in buying power upon sign up and can buy/sell some of the most popular cryptocurrencies.
+                            </p>
+
+                            <p>
+                                Staying true to Robin Hood's ethos, Yuanhood was named after Yuan Longping. Yuan, renowned as the "Father of Hybrid Rice", dedicated his life to fighting famine. He invented the hybrid rice, a high-yield crop, with the motive of just making sure more people have enough to eat.
+                            </p>
+
+                            {/* <p>New users given a total of $50,000.00 where they can interact with real market data.</p> */}
+                        </div>
+                    </div>
+                </div>
+
+                <div id='sect-6-right' className='flx-row-justify-ctr'>
+                    <div className='flx-col sect-6__right'>
+                        Yuanhood
+                        <span>Flask</span>
+                        <span>SQLAlchemy</span>
+                        <span>React</span>
+                        <span>Redux</span>
+                        <span>NodeJS</span>
+                        <span>Postgres</span>
+                        <span>SQLite3</span>
+                        <span>CoinGecko API</span>
+                        <a id='codebase-link' href='https://github.com/hang-justin/robinhood-clone'>Link to Codebase</a>
+
+                    </div>
+
+                    <div className='flx-col sect-6__right'>
+                        Other Products
+                        <a className='other-projs-link' href='https://sonus-nimbus.herokuapp.com/'>SonusNimbus - SoundCloud Clone</a>
+                        <a className='other-projs-link' href='https://discordia-cgh.herokuapp.com/'>Discordia - Discord Clone</a>
+                    </div>
+                </div>
+            </div>
 
         </div>
     )
