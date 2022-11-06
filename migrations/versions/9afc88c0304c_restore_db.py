@@ -1,8 +1,8 @@
-"""Recreate DB with new user constraints
+"""Restore DB
 
-Revision ID: 2d810f7231e0
+Revision ID: 9afc88c0304c
 Revises: 
-Create Date: 2022-11-05 13:04:30.911879
+Create Date: 2022-11-05 17:35:31.006227
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2d810f7231e0'
+revision = '9afc88c0304c'
 down_revision = None
 branch_labels = None
 depends_on = None
