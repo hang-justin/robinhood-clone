@@ -2,8 +2,15 @@
 const LOAD_ASSETS = 'assets/LOAD_ASSETS'
 const UPDATE_ASSET_AND_CASH = 'assets/UPDATE_ASSET_AND_CASH'
 const DELETE_ASSET_AND_UPDATE_CASH  = 'assets/DELETE_ASSET_AND_UPDATE_CASH'
+const CLEAR_ASSETS = 'assets/CLEAR_ASSETS'
 
 const initialState = {};
+
+export const clearAssets = () => {
+    return {
+        type: CLEAR_ASSETS
+    }
+}
 
 export const loadAssets = (assets) => {
     return {
@@ -101,6 +108,9 @@ const assetReducer = (state = initialState, action) => {
                 newState[asset.asset_id] = asset
             })
             return newState;
+
+        case CLEAR_ASSETS:
+            return {};
 
         case UPDATE_ASSET_AND_CASH:
             console.log('action.updatedAssets is :', action.updatedAssets)

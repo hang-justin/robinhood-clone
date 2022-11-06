@@ -6,35 +6,14 @@ import LogoutButton from '../auth/LogoutButton';
 import './NavBar.css'
 
 const NavBar = () => {
-  const location = useLocation().pathname;
-  const [textColor, setTextColor] = useState(location !== '/us/en' ? 'white-text' : 'black-text');
-  const [bgColor, setBgColor] = useState(location === '/us/en' ? 'white-bg' : 'transparent-bg')
 
   return (
-    <nav id='main-nav'>
-      <ul id='main-nav__ul' className='flx-row-justify-ctr'>
+    <nav id='main-nav' className='flx-row-justify-align-ctr'>
+      <ul id='main-nav__ul' className='flx-row-align-ctr justify-space-btw'>
 
         <li className='navbar-li'>
-          <NavLink to='/' exact={true} activeClassName='active' className={`${textColor} navbar-link`}>
+          <NavLink to='/' exact={true} activeClassName='active' className={`white-text navbar-link`}>
             Home
-          </NavLink>
-        </li>
-
-        <li className='navbar-li'>
-          <NavLink to='/login' exact={true} activeClassName='active' className={`${textColor} navbar-link`}>
-            Login
-          </NavLink>
-        </li>
-
-        <li className='navbar-li'>
-          <NavLink to='/sign-up' exact={true} activeClassName='active' className={`${textColor} navbar-link`}>
-            Sign Up
-          </NavLink>
-        </li>
-
-        <li className='navbar-li'>
-          <NavLink to='/users' exact={true} activeClassName='active' className={`${textColor} navbar-link`}>
-            Users
           </NavLink>
         </li>
 

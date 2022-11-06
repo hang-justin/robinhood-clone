@@ -151,3 +151,11 @@ a:visited {
 .navlink:hover {
     color: var(--main-green)
 }
+
+.font-size-60 {
+    font-size: 60px;
+}
+
+.font-size-30 {
+    font-size: 30px;
+}
