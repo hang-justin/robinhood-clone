@@ -1,4 +1,16 @@
 #logout {
     margin: 0;
-    border: 0;
+    border: 1px solid white;
+
+    padding: 15px 25px;
+
+    border-radius: 25px;
+
+    color: white;
+    background-color: transparent;
+}
+
+#logout:hover {
+    color: var(--main-red-loss);
+    border: 1px solid var(--main-red-loss);
 }

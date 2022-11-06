@@ -72,7 +72,7 @@ const WatchlistDetailRow = ({ userId, listId, asset_id }) => {
 
                     {holdingInAsset &&
                         <span>
-                            {holdingInAsset}
+                            {holdingInAsset} {currentCoinSymbol}
                         </span>
                     }
                 </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authenticate } from './store/session';
 
 import LoginForm from './components/auth/LoginForm';
@@ -14,16 +14,22 @@ import UserHomePage from './components/UserHomePage';
 import AssetPage from './components/AssetPage';
 import CryptoList from './components/CryptoList';
 import { getAllLatestPrices } from './store/market';
+import SplashPage from './components/SplashPage';
+import LoginPage from './components/auth/LoginPage';
+import SignupPage from './components/auth/SignupPage';
+import { getSparklineData } from './store/sparklines';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   // const [hasLoaded, setHasLoaded] = useState(false)
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
 
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
       await dispatch(getAllLatestPrices())
+      await dispatch(getSparklineData())
         .then(() => setLoaded(true))
     })();
 
@@ -36,6 +42,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch(getAllLatestPrices())
+      dispatch(getSparklineData())
 
       // if (!hasLoaded) {
       //   setTimeout(()=> {
@@ -43,7 +50,7 @@ function App() {
       //   }, 2000)
       // }
 
-    }, 10 * 60 * 1000)
+    }, 4 * 60 * 1000)
 
     return () => clearInterval(interval)
   }, [])
@@ -54,21 +61,25 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {user && <NavBar />}
 
       <Switch>
 
         <Route path='/login' exact={true}>
-          <LoginForm />
+          <LoginPage />
         </Route>
 
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
+        <Route path='/signup' exact={true}>
+          <SignupPage />
         </Route>
 
-        <ProtectedRoute path='/users' exact={true} >
+        <Route path='/us/en' exact={true}>
+          <SplashPage />
+        </Route>
+
+        {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
-        </ProtectedRoute>
+        </ProtectedRoute> */}
 
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />

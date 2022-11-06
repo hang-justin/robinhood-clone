@@ -4,12 +4,14 @@ import session from './session'
 import watchlists from './watchlist'
 import assets from './asset'
 import market from './market'
+import sparkline from './sparklines'
 
 const rootReducer = combineReducers({
   session,
   assets,
   watchlists,
-  market
+  market,
+  sparkline
 });
 
 

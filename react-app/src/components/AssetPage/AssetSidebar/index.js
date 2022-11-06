@@ -151,7 +151,21 @@ const AssetSidebar = () => {
                         header: 'Order Too Small',
                         message: `${currentAssetName} orders must be at least $${currentAssetLatestInfo.usd.toFixed(2)}`
                     })
-                } else if (+transactionAmount / currentAssetLatestInfo.usd > 1) return
+                } else if (+transactionAmount / currentAssetLatestInfo.usd > 1) {
+                    // Scenario: User wants to buy a cryptocurrency where
+                    // Cryptocurrency unit price is <$1/coin
+                    // Transaction amount is <$1, BUT still greater than cryptocurrency unit price
+                    //
+                    // So the user wants to buy more than 1 coin and spend less than <$1
+                    // Allow the user to do so
+                    //
+                    //
+                    // IF the user wants to buy a fraction of a coin that is <$1,
+                    // the if statement directly before this else if will run
+                    //
+                    // If the user wants to spend <$1 on a coin with a unit price >=$1
+                    // The below else statement will run
+                }
                 else {
                     return setOrderError({
                         header: 'Order Too Small',

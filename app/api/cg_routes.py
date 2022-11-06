@@ -16,3 +16,13 @@ def get_all_crypto():
                 include_24hr_vol=True,
                 include_24hr_change=True,
                 include_last_updated_at=True)
+
+@cg_routes.route('/market')
+def get_market_info_with_sparkline():
+    coins = 'bitcoin,ethereum,binancecoin,ripple,cardano,solana,dogecoin,matic-network,polkadot,staked-ether'
+    cg_market_response = cg.get_coins_markets(
+                ids=coins,
+                vs_currency='usd',
+                sparkline=True)
+
+    return {'market_info' : cg_market_response}

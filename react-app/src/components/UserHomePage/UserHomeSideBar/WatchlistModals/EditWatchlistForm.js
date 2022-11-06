@@ -16,6 +16,7 @@ const EditWatchlistForm = ({ watchlist, setShowEditWatchlistModal }) => {
     const [watchlistName, setWatchlistName] = useState(watchlist.name);
     const [uniqueNameErr, setUniqueNameErr] = useState(false);
     const [userChangedName, setUserChangedName] = useState(false);
+    const [emptyWatchlistNameErr, setEmptyWatchlistNameErr] = useState('');
 
     useEffect(() => {
         if (!userChangedName) return;
@@ -35,6 +36,15 @@ const EditWatchlistForm = ({ watchlist, setShowEditWatchlistModal }) => {
 
     }, [watchlistName])
 
+    useEffect(() => {
+        if (watchlistName.trim().length <= 0) {
+            setEmptyWatchlistNameErr(`List name can't be empty.`)
+        } else {
+            setEmptyWatchlistNameErr('')
+        }
+
+    }, [watchlistName])
+
     const handleWatchlistNameInput = e => {
         if (!userChangedName) setUserChangedName(true);
         const watchlistNameSubmission = e.target.value.trimStart();
@@ -49,6 +59,7 @@ const EditWatchlistForm = ({ watchlist, setShowEditWatchlistModal }) => {
 
         if (watchlistName === watchlist.name) return setShowEditWatchlistModal(false);
         if (uniqueNameErr) return;
+        if (emptyWatchlistNameErr.length > 0) return;
         if (watchlistName.trim().length > 64) return;
 
         const newWatchlist = { ...watchlist };
@@ -95,6 +106,12 @@ const EditWatchlistForm = ({ watchlist, setShowEditWatchlistModal }) => {
                 {watchlistName.length >= 64 &&
                     <span className='flx-row margin-right-auto main-red-text'>
                         64 character limit reached
+                    </span>
+                }
+
+                {emptyWatchlistNameErr.length >= 0 &&
+                    <span className='flx-row margin-right-auto main-red-text'>
+                        {emptyWatchlistNameErr}
                     </span>
                 }
 

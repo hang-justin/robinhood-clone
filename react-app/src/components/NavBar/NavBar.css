@@ -1,5 +1,20 @@
 #main-nav {
     background-color: black;
+    padding: 0 75px;
+}
+
+#main-nav__ul {
+    width: 100%;
+    max-width: 1300px;
+    gap: 10px;
+    box-sizing: border-box;
+
+    height: 65px;
+
+    padding: 10px 0;
+    margin: 0;
+
+    color: white;
 }
 
 .navbar-li {
@@ -14,18 +29,6 @@
 
 .navbar-link:hover {
     color: var(--main-green)
-}
-
-#main-nav__ul {
-    gap: 10px;
-    box-sizing: border-box;
-
-    height: 65px;
-
-    padding: 10px 0;
-    margin: 0;
-
-    color: white;
 }
 
 #main-nav__ul > li {

@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
                         primary_key=True)
     username = db.Column(
                         db.String(255),
-                        nullable=False,
+                        nullable=True,
                         unique=True)
     first_name = db.Column(
                         db.String(50),
@@ -21,7 +21,8 @@ class User(db.Model, UserMixin):
                         nullable=False)
     email = db.Column(
                         db.String(255),
-                        nullable=False, unique=True)
+                        nullable=False,
+                        unique=True)
     hashed_password = db.Column(
                         db.String(255),
                         nullable=False)
