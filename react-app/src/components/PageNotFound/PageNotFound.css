@@ -1,0 +1,67 @@
+#page-not-found {
+    height: 100vh;
+
+    gap: 50px;
+
+    color: white;
+    background-color: black;
+}
+
+#page-not-found-user {
+    height: calc(100vh - 65px);
+
+    gap: 50px;
+
+    color: white;
+    background-color: black;
+}
+
+.page-not-found-header {
+    color: var(--main-red-loss)
+}
+
+.page-not-found-nav {
+    font-size: 24px;
+    color: var(--main-green)
+}
+
+.page-not-found-nav:hover {
+    filter: drop-shadow(0 0 5px var(--main-green))
+}
+
+#going-home {
+    gap: 30px;
+}
+
+#cartman-left {
+    transform: scaleX(-1)
+}
+
+#cartman-right:hover {
+    transform: scaleX(-1)
+}
+
+#going-home:hover #cartman-left {
+    animation: tilt-n-move-shaking 0.35s infinite;
+}
+
+#going-home:hover #cartman-right {
+    transform: scaleX(-1);
+    animation: tilt-n-move-shaking-flipped 0.35s infinite;
+}
+
+@keyframes tilt-n-move-shaking-flipped {
+    0% { transform: scaleX(-1) translate(0, 0) rotate(0deg); }
+    25% { transform: scaleX(-1) translate(5px, 5px) rotate(5deg); }
+    50% { transform: scaleX(-1) translate(0, 0) rotate(0eg); }
+    75% { transform: scaleX(-1) translate(-5px, 5px) rotate(-5deg); }
+    100% { transform: scaleX(-1) translate(0, 0) rotate(0deg); }
+}
+
+@keyframes tilt-n-move-shaking {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(5px, 5px) rotate(5deg); }
+    50% { transform: translate(0, 0) rotate(0eg); }
+    75% { transform: translate(-5px, 5px) rotate(-5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}

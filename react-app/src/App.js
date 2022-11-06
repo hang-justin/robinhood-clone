@@ -18,6 +18,7 @@ import SplashPage from './components/SplashPage';
 import LoginPage from './components/auth/LoginPage';
 import SignupPage from './components/auth/SignupPage';
 import { getSparklineData } from './store/sparklines';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,7 +51,7 @@ function App() {
       //   }, 2000)
       // }
 
-    }, 4 * 60 * 1000)
+    }, 5 * 60 * 1000)
 
     return () => clearInterval(interval)
   }, [])
@@ -97,8 +98,12 @@ function App() {
           <AssetPage />
         </ProtectedRoute>
 
-        <Route path='/testcg'>
+        {/* <Route path='/testcg'>
           <TestCoinGecko />
+        </Route> */}
+
+        <Route path='*'>
+          <PageNotFound />
         </Route>
 
       </Switch>

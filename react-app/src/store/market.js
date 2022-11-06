@@ -1,5 +1,6 @@
 // constants
 const LOAD_ALL_LATEST_PRICES = 'market/LOAD_ALL_LATEST_PRICES'
+const LOAD_WEEKLY_CURRENCY_CHANGE = 'market/LOAD_WEEKLY_CHANGE_CURRENCY'
 
 const initialState = {
     symbol_to_asset_id: {
@@ -47,6 +48,13 @@ const loadPricesToStore = (allPrices) => {
     }
 }
 
+export const loadWeekChange = (weeklyChange) => {
+    return {
+        type: LOAD_WEEKLY_CURRENCY_CHANGE,
+        weeklyChange
+    }
+}
+
 export const getAllLatestPrices = () => async dispatch => {
     const response = await fetch('/api/cg/all')
                             .catch(e => e)
@@ -66,6 +74,16 @@ const marketReducer = (state=initialState, action) => {
         case LOAD_ALL_LATEST_PRICES:
             newState = { ...state }
             newState.allLatest = { ...action.allPrices };
+            return newState;
+
+        case LOAD_WEEKLY_CURRENCY_CHANGE:
+            newState = { ...state }
+            newState.weeklyChange = {};
+
+            action.weeklyChange.forEach( coinInfo => {
+                newState.weeklyChange[coinInfo.id] = coinInfo.price_change_percentage_7d_in_currency
+            })
+
             return newState;
 
         default:
