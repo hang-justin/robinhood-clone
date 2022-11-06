@@ -15,7 +15,7 @@ def get_all_crypto():
                 include_market_cap=True,
                 include_24hr_vol=True,
                 include_24hr_change=True,
-                include_last_updated_at=True)
+                include_last_updated_at=True,)
 
 @cg_routes.route('/market')
 def get_market_info_with_sparkline():
@@ -23,6 +23,7 @@ def get_market_info_with_sparkline():
     cg_market_response = cg.get_coins_markets(
                 ids=coins,
                 vs_currency='usd',
-                sparkline=True)
+                sparkline=True,
+                price_change_percentage='7d')
 
     return {'market_info' : cg_market_response}

@@ -10,3 +10,10 @@
     width: 1000px;
     gap: 50px;
 }
+
+#asset-graph-caption {
+    /* align-self: center; */
+    padding-left: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid gray;
+}
