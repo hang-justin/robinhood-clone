@@ -79,21 +79,25 @@
     width: 5%;
 }
 
-.add-to-watchlist-icon {
+.add-to-watchlist-icon,
+.remove-from-watchlist-icon {
     cursor: pointer;
+    transition: rotate 1s;
 }
 
 .add-to-watchlist-icon:hover {
     color: var(--main-green);
 }
 
-.remove-from-watchlist-icon {
-    cursor: pointer;
-}
-
 .remove-from-watchlist-icon:hover {
     color: var(--main-red-loss);
 }
+
+.watchlist-detail-redirect:hover .add-to-watchlist-icon,
+.watchlist-detail-redirect:hover .remove-from-watchlist-icon {
+    rotate: 180deg;
+}
+
 
 #add-list-modal {
     padding: 20px;
@@ -174,4 +178,16 @@
 
 .choose-list-for-asset:hover {
     background-color: var(--sidebar-border);
+}
+
+#no-watchlist-container {
+    margin-top: 40px;
+}
+
+#navlink-to-master-list {
+    color: var(--main-green);
+}
+
+#navlink-to-master-list:hover {
+    filter: drop-shadow(0 0 10px var(--main-green));
 }

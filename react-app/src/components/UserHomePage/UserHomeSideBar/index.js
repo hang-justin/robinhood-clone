@@ -30,7 +30,7 @@ const UserHomeSideBar = () => {
 
             <span className='sidebar-row-header'><NavLink to='/lists/yuanhood/crypto' className='navlink sidebar-nav'>Available Cryptocurrencies</NavLink></span>
 
-            <span id='your-crypto' className='sidebar-row-header'><NavLink className='sidebar-nav' to='/'>Your cryptocurrencies</NavLink></span>
+            <span id='your-crypto' className='sidebar-row-header'><NavLink className='sidebar-nav' to='/'>Your Cryptocurrencies</NavLink></span>
 
             {!!nonCashAssetIds.length &&
                 nonCashAssetIds.map(nonCashAssetId => <SidebarRow
@@ -38,7 +38,7 @@ const UserHomeSideBar = () => {
                                                         asset={allOwnedAssets[nonCashAssetId]} />)
             }
 
-            <span className='sidebar-row-header justify-space-btw'>
+            <span id='lists-header' className='sidebar-row-header justify-space-btw'>
                 <span>Lists</span>
 
                 <span id='add-list' className="material-symbols-outlined" onClick={toggleCreateWatchlist}>
