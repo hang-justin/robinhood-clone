@@ -119,3 +119,76 @@ span.sect-text-header {
 #splash-sect-5-sign-up:hover {
     background-color: #4a4d41;
 }
+
+#splash-sect-6 {
+    width: 100%;
+    padding: 50px 0;
+    box-sizing: border-box;
+    /* height: 300px; */
+    justify-content: space-evenly;
+
+    background: rgb(205,255,3);
+    background: radial-gradient(circle, rgba(205,255,3,1) 0%, rgba(194,247,15,1) 20%, rgba(184,239,27,1) 40%, rgba(173,230,40,1) 60%, rgba(163,222,52,1) 80%, rgba(152,214,64,1) 100%);
+}
+
+#splash-sect-6 > * {
+    width: 50%;
+}
+
+#yuan-bio {
+    justify-content: flex-start;
+}
+
+#about-yuan-header {
+    margin: 0 auto;
+    padding-bottom: 15px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#about-yuan-img {
+    margin-left: 50px;
+    height: 300px;
+}
+
+#about-content {
+    margin: 0 10px;
+    font-size: 15px;
+}
+
+#sect-6-right {
+    align-self: flex-start;
+}
+
+.sect-6__right {
+    margin: 0 auto;
+    padding-bottom: 15px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.sect-6__right > * {
+    font-size: 15px;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+#codebase-link {
+    margin-top: 20px;
+    color: black;
+    text-decoration: underline;
+    font-size: 18px;
+}
+
+.other-projs-link {
+    font-size: 18px;
+    width: fit-content;
+    color: black;
+    text-decoration: underline;
+}
+
+#codebase-link:hover,
+.other-projs-link:hover {
+    box-shadow: 0 0 5px var(--main-red-loss);
+    text-decoration: none;
+}

@@ -34,9 +34,29 @@
 }
 
 #navbar-app-name {
+    font-size: 20px;
     font-weight: bold;
 }
 
 #splash-logo {
     height: 30px;
+}
+
+#splash-logo-container {
+    height: 65px;
+    padding-right: 30px;
+    border-right: 1px solid black;
+}
+
+#social-links {
+    padding-left: 30px;
+    gap: 30px;
+}
+
+.social-logo-img {
+    height: 40px;
+}
+
+.social-logo-img:hover {
+    filter: drop-shadow(0 0 5px var(--main-green));
 }
