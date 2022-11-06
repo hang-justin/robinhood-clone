@@ -9,8 +9,6 @@ import splash42 from '../img/splash-sect-4-2.png'
 import splash43 from '../img/splash-sect-4-3.png'
 import splash44 from '../img/splash-sect-4-4.png'
 import { useHistory } from 'react-router-dom'
-import aboutYuan from '../img/about-yuan.png'
-import yuan from '../img/yuan-longping.jpeg'
 import yuan2 from '../img/yuan-2.png'
 
 const SplashPage = () => {
