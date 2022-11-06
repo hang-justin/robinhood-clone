@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 
+import logo from '../img/logo.png'
+
 import './NavBar.css'
 
 const NavBar = () => {
@@ -13,7 +15,7 @@ const NavBar = () => {
 
         <li className='navbar-li'>
           <NavLink to='/' exact={true} activeClassName='active' className={`white-text navbar-link`}>
-            Home
+            <img id='nav-home-logo' alt='logo-nav-home' src={logo} />
           </NavLink>
         </li>
 
