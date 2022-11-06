@@ -34,3 +34,7 @@
 #add-list:hover {
     color: var(--main-green)
 }
+
+#your-crypto {
+    border-bottom: none;
+}

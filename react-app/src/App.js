@@ -17,6 +17,7 @@ import { getAllLatestPrices } from './store/market';
 import SplashPage from './components/SplashPage';
 import LoginPage from './components/auth/LoginPage';
 import SignupPage from './components/auth/SignupPage';
+import { getSparklineData } from './store/sparklines';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,6 +29,7 @@ function App() {
     (async() => {
       await dispatch(authenticate());
       await dispatch(getAllLatestPrices())
+      await dispatch(getSparklineData())
         .then(() => setLoaded(true))
     })();
 
@@ -40,6 +42,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch(getAllLatestPrices())
+      dispatch(getSparklineData())
 
       // if (!hasLoaded) {
       //   setTimeout(()=> {

@@ -168,7 +168,7 @@ const watchlistReducer = (state = initialState, action) => {
             return newState;
 
         case ADD_ITEM_TO_WATCHLIST:
-            newState = { ... state };
+            newState = { ...state };
             newState[action.watchlist.id] = action.watchlist;
             return newState;
 
