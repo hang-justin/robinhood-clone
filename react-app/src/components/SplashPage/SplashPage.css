@@ -189,6 +189,8 @@ span.sect-text-header {
 
 #codebase-link:hover,
 .other-projs-link:hover {
-    box-shadow: 0 0 5px var(--main-red-loss);
+    /* box-shadow: 0 0 5px var(--main-red-loss); */
+    filter: drop-shadow(0 0 5px firebrick);
+    color: var(--main-red-loss);
     text-decoration: none;
 }

@@ -78,7 +78,7 @@ const Portfolio = () => {
 
                     </div>
 
-                    {ownedAssetIds.map(asset_id => <OwnedAssetRow ownedAsset={allAssets[asset_id]} /> )}
+                    {ownedAssetIds.map(asset_id => <OwnedAssetRow key={asset_id} ownedAsset={allAssets[asset_id]} /> )}
                 </div>
 
             </div>

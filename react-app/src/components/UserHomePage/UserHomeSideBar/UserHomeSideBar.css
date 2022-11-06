@@ -29,10 +29,15 @@
 
 #add-list {
     cursor: pointer;
+    transition: rotate 1s;
 }
 
 #add-list:hover {
     color: var(--main-green)
+}
+
+#lists-header:hover #add-list {
+    rotate: 180deg;
 }
 
 #your-crypto {
