@@ -76,3 +76,7 @@
     color: var(--main-green);
     text-decoration: none;
 }
+
+.red-border {
+    border: 2px solid var(--main-red-loss)
+}

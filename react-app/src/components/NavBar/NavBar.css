@@ -34,3 +34,11 @@
 #main-nav__ul > li {
     color: white;
 }
+
+#nav-home-logo {
+    height: 40px;
+}
+
+#nav-home-logo:hover {
+    filter: drop-shadow(0 0 5px var(--main-green));
+}
