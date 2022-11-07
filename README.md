@@ -40,16 +40,18 @@ To buy an asset, first navigate to 'View Available Cryptocurrencies' located to 
 
 Fill out the form located to the right and you will have purchased your first asset!
 
-![image](https://user-images.githubusercontent.com/60123981/200231457-dcfddcf7-7aec-49be-a94a-1b7aa2a42d95.png)
+
+![buy-asset-1](https://user-images.githubusercontent.com/60123981/200235913-6082ad24-cd02-4042-a277-2a0e42ffc660.png)
 
 
-![image](https://user-images.githubusercontent.com/60123981/200231664-339ced71-767e-4823-bd6c-6c08d088971f.png)
+![buy-asset-2](https://user-images.githubusercontent.com/60123981/200235925-f4cc670f-6c03-4074-86a8-47d81375c813.png)
 
 
-![image](https://user-images.githubusercontent.com/60123981/200231771-c32bfde6-3792-4030-ac1e-948a50e310ac.png)
+![buy-asset-3](https://user-images.githubusercontent.com/60123981/200235942-902eafa4-4025-4c53-ac95-af800bfbbf28.png)
 
 
-You can sell an asset by navigating to the same page and fill out the form after clicking on the 'Sell <asset_name>' located to the top of the form. You may have not seen this initially as it is only displayed if you own that asset.
+
+You can sell an asset by navigating to the same page and fill out the form after clicking on the 'Sell <symbol>' located to the top of the form. You may have not seen this initially as it is only displayed if you own that asset.
 
 
 ![image](https://user-images.githubusercontent.com/60123981/200231961-6fc2537a-30ad-4b7d-a273-4d40fb6a7744.png)
@@ -61,7 +63,7 @@ Every new user will have a default watchlist, 'My First List', consisting of all
 Users can create a new watchlist by clicking on the '+' located to the right of 'Lists' on the sidebar.
 
 
-![image](https://user-images.githubusercontent.com/60123981/200232122-14941059-f624-498a-aae4-0e1d71cdba2a.png)
+![create-list](https://user-images.githubusercontent.com/60123981/200236174-c72d4897-e64d-4ca2-b597-491582b982ae.png)
 
 
 Users can update their watchlist by:
@@ -71,19 +73,23 @@ Users can update their watchlist by:
  3. Adding/Removing - Navigating to an asset page and clicking on 'Add to Lists' underneath the trade order form.
  4. Removing - Navigate to a specific watchlist by clicking on the watchlist name then clicking on the 'x' located to the far right of the asset
 
+
+![edit-list-1](https://user-images.githubusercontent.com/60123981/200237045-d2a9b809-9d30-40d6-a6d5-ec36cd9ed0f7.png)
+
+
+![edit-list-2](https://user-images.githubusercontent.com/60123981/200237062-bd995b97-bc5c-44d2-a4f2-15630078f582.png)
+
+
+![edit-list-3](https://user-images.githubusercontent.com/60123981/200237082-c2893e92-5201-4a7e-bb24-80cf8616a057.png)
+
+
+![edit-list-4](https://user-images.githubusercontent.com/60123981/200237449-115565d8-fe5a-4b86-9e68-eed2c3745079.png)
+
+
 Users can also delete their watchlists by clicking on the ellipses then clicking 'Delete List'.
 
 
-![image](https://user-images.githubusercontent.com/60123981/200232944-9a4ed6be-e656-4482-8429-9fb1fa5ddae2.png)
-
-
-![image](https://user-images.githubusercontent.com/60123981/200233209-1217f8c7-6251-4123-bf11-8674dd476579.png)
-
-
-![image](https://user-images.githubusercontent.com/60123981/200233323-54542446-0a32-4c04-a3fc-8b9779cc2e80.png)
-
-
-![image](https://user-images.githubusercontent.com/60123981/200233870-9ef97336-da51-4489-b200-492e9db365f9.png)
+![delete-list](https://user-images.githubusercontent.com/60123981/200237109-dd595a8d-5179-4ea4-aa0b-0c3b84385796.png)
 
 
 ## Tech used
