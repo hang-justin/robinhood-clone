@@ -105,3 +105,62 @@ Users can also delete their watchlists by clicking on the ellipses then clicking
 ![Heroku](https://camo.githubusercontent.com/d18f98a93a8ca015503870e592f96dbdf86f41048e9de1fbbbd4b2dcc7c456b1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6865726f6b752d2532333433303039382e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d6865726f6b75266c6f676f436f6c6f723d7768697465)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Docker](https://camo.githubusercontent.com/6b7f701cf0bea42833751b754688f1a27b6090fdf90bf2b226addff01be817f0/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f636b65722d2532333064623765642e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d646f636b6572266c6f676f436f6c6f723d7768697465)
+
+## To dos
+
+ - Live data
+ - Statements
+ - Search bar
+ - Newsfeed
+ - Categories
+ - Stocks
+
+## How to set up
+
+1. Clone this repository (only this branch)
+
+   ```bash
+   git clone git@github.com:hang-justin/robinhood-clone.git
+   ```
+
+2. Install dependencies
+
+      ```bash
+      pipenv install -r requirements.txt
+      ```
+3. Create a **.env** file based on the example with proper settings for your
+   development environment
+   
+4. Make sure the SQLite3 database connection URL is in the **.env** file
+
+5. Get into your pipenv, migrate your database, seed your database, and run your Flask app
+
+   ```bash
+   pipenv shell
+   ```
+
+   ```bash
+   flask db upgrade
+   ```
+
+   ```bash
+   flask seed all
+   ```
+
+   ```bash
+   flask run
+   ```
+
+6. From the root directory, cd into react-app, install your dependencies, run npm install, and WALA! You got your very own Discord clone.
+
+   ```bash
+   cd react-app
+   ```
+
+   ```bash
+   npm install
+   ```
+   
+   ```bash
+   npm start
+   ```
