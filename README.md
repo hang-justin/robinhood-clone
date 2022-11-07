@@ -12,6 +12,10 @@ https://yuanhood.herokuapp.com/
 #### Logging in
 Login by clicking on the 'Login' button located on the top right. If you're curious and want to check it out without any obligation, feel free to login as a demo user which can also be accessed on the login page.
 
+
+![image](https://user-images.githubusercontent.com/60123981/200230948-4e1414f0-2a10-441e-816e-edb08fb88a81.png)
+
+
 #### Signing Up
 Sign up by accessing the sign up page through:
 
@@ -20,20 +24,44 @@ Sign up by accessing the sign up page through:
  3. 'Create an Account' link on the login page
 
 
+![image](https://user-images.githubusercontent.com/60123981/200231118-216f73c1-8998-4e32-91f1-4f85d67bdb6f.png)
+
 
 ## Manage your portfolio and trade assets
 After logging in, you will be at your home page where you can view a breakdown of your portfolio. If you just made an account, your portfolio will only consist of your cash assets totaling to $50,000.00 courtesy of Yuanhood.
+
+
+![image](https://user-images.githubusercontent.com/60123981/200231316-801419a9-3f73-40ab-8a64-759e8c5ac991.png)
+
+
 
 To buy an asset, first navigate to 'View Available Cryptocurrencies' located to the top right of the sidebar located on the right side. Next, click on the asset that you would like to buy.
 
 Fill out the form located to the right and you will have purchased your first asset!
 
+![image](https://user-images.githubusercontent.com/60123981/200231457-dcfddcf7-7aec-49be-a94a-1b7aa2a42d95.png)
+
+
+![image](https://user-images.githubusercontent.com/60123981/200231664-339ced71-767e-4823-bd6c-6c08d088971f.png)
+
+
+![image](https://user-images.githubusercontent.com/60123981/200231771-c32bfde6-3792-4030-ac1e-948a50e310ac.png)
+
+
 You can sell an asset by navigating to the same page and fill out the form after clicking on the 'Sell <asset_name>' located to the top of the form. You may have not seen this initially as it is only displayed if you own that asset.
+
+
+![image](https://user-images.githubusercontent.com/60123981/200231961-6fc2537a-30ad-4b7d-a273-4d40fb6a7744.png)
+
 
 ## Manage your watchlists
 Every new user will have a default watchlist, 'My First List', consisting of all the supported cryptocurrencies.
 
 Users can create a new watchlist by clicking on the '+' located to the right of 'Lists' on the sidebar.
+
+
+![image](https://user-images.githubusercontent.com/60123981/200232122-14941059-f624-498a-aae4-0e1d71cdba2a.png)
+
 
 Users can update their watchlist by:
 
@@ -43,6 +71,19 @@ Users can update their watchlist by:
  4. Removing - Navigate to a specific watchlist by clicking on the watchlist name then clicking on the 'x' located to the far right of the asset
 
 Users can also delete their watchlists by clicking on the ellipses then clicking 'Delete List'.
+
+
+![image](https://user-images.githubusercontent.com/60123981/200232944-9a4ed6be-e656-4482-8429-9fb1fa5ddae2.png)
+
+
+![image](https://user-images.githubusercontent.com/60123981/200233209-1217f8c7-6251-4123-bf11-8674dd476579.png)
+
+
+![image](https://user-images.githubusercontent.com/60123981/200233323-54542446-0a32-4c04-a3fc-8b9779cc2e80.png)
+
+
+![image](https://user-images.githubusercontent.com/60123981/200233870-9ef97336-da51-4489-b200-492e9db365f9.png)
+
 
 ## Tech used
 ![Flask](https://camo.githubusercontent.com/ea92b069447aaf7b6ed27965700bc66cd0f7a450d0af50e0253e51af05ae73db/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f466c61736b2d4244424442443f7374796c653d666f722d7468652d6261646765266c6f676f3d466c61736b266c6f676f436f6c6f723d626c61636b)
