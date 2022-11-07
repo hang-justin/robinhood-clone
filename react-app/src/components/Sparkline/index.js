@@ -76,8 +76,8 @@ const Sparkline = ({ asset }) => {
                         let retVal
                         context.parsed.y > 1 ?
                             retVal = formatMoney(context.parsed.y) :
-                            retVal = context.parsed.y
-                            return '$' + retVal.toFixed(8).toString()
+                            retVal = '$' + Number(context.parsed.y).toFixed(8)
+                            return retVal
                     },
                 }
             },

@@ -31,6 +31,19 @@
 
 .owned-asset-balance {
     width: 30%;
+
+    /* white-space: nowrap;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis; */
+}
+
+.owned-asset-balance > div {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
 }
 
 .owned-asset-buy-sell {

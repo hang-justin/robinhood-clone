@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../../store/session';
 
 import './SignupPage.css'
 
 const SignupPage = () => {
     const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user)
     const history = useHistory();
 
     const [firstName, setFirstName] = useState('');
@@ -99,15 +100,16 @@ const SignupPage = () => {
 
         const data = await dispatch(signUp(firstName, lastName, email, password))
         if (data) {
-            console.log(data)
-            if (data.find(err => err === 'email : Email address is already in use.')) {
+            if (data.includes('email : Invalid email address.')) setEmailError('Invalid email address.')
+            else if (data.includes('email : Email address is already in use.')) {
                 setEmailError('Email address is already in use. Please try another.')
-            };
+            }
             return;
         }
 
-        history.push('/')
     }
+
+    if (user) return <Redirect to='/' />
 
     return (
         <div id='signup-page' className='flx-row-justify-align-ctr'>
@@ -208,11 +210,11 @@ const SignupPage = () => {
                         </span>
                     )}
 
-                    {errors.map( (error, ind) => (
+                    {/* {errors.map( (error, ind) => (
                         <div key={ind}>
                             {error}
                         </div>
-                    ))}
+                    ))} */}
 
                     <button
                     id='create-account-btn'

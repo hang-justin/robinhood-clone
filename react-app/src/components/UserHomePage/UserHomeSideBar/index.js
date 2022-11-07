@@ -28,7 +28,7 @@ const UserHomeSideBar = () => {
     return (
         <div id='user-home-sidebar' className='flx-col'>
 
-            <span className='sidebar-row-header'><NavLink to='/lists/yuanhood/crypto' className='navlink sidebar-nav'>Available Cryptocurrencies</NavLink></span>
+            <span className='sidebar-row-header'><NavLink to='/lists/yuanhood/crypto' className='navlink sidebar-nav'>View Available Cryptocurrencies</NavLink></span>
 
             <span id='your-crypto' className='sidebar-row-header'><NavLink className='sidebar-nav' to='/'>Your Cryptocurrencies</NavLink></span>
 

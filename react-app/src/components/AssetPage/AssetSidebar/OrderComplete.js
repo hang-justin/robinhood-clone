@@ -7,7 +7,6 @@ import './OrderComplete.css'
 const OrderComplete = ({ orderInformation, setShowCompletedOrder }) => {
     const history = useHistory();
     const assets = useSelector(state => state.assets);
-    console.log('order information passed into order complete component is :', orderInformation)
 
     const {
         transactionType,
