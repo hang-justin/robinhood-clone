@@ -33,6 +33,10 @@ a:visited {
     color: var(--main-red-loss)
 }
 
+.red-text {
+    color: red;
+}
+
 .black-text {
     color: black;
 }

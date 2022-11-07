@@ -41,11 +41,14 @@
     font-size: 14px;
 }
 
+.login-input-wrapper {
+    margin-bottom: 20px;
+}
+
 .login-input {
     box-sizing: border-box;
     width: 400px;
     padding: 5px 10px;
-    margin-bottom: 20px;
     border-radius: 5px;
     border: 0.5px solid rgb(180 189 194);
 }

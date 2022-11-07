@@ -10,9 +10,13 @@ import splash43 from '../img/splash-sect-4-3.png'
 import splash44 from '../img/splash-sect-4-4.png'
 import { useHistory } from 'react-router-dom'
 import yuan2 from '../img/yuan-2.png'
+import { useSelector } from 'react-redux'
 
 const SplashPage = () => {
     const history = useHistory();
+    const user = useSelector(state => state.session.user)
+
+    if (user) history.push('/')
 
     return (
         <div id='splash-page' className='flx-col-align-ctr'>
