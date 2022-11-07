@@ -43,7 +43,7 @@ const AddToListModal = ({ asset_id, currentCoinName, setShowAddToListModal }) =>
             watchlistsIncludesAssetId[watchlist.id] = !!watchlist.items.find(item => item.asset_id === asset_id)
     })
 
-    console.log(`watchlistId includes ${asset_id}:`, watchlistsIncludesAssetId)
+    // console.log(`watchlistId includes ${asset_id}:`, watchlistsIncludesAssetId)
 
     const handleFormSubmission = e => {
         e.preventDefault();
@@ -61,15 +61,15 @@ const AddToListModal = ({ asset_id, currentCoinName, setShowAddToListModal }) =>
         //      which indicates an addition
 
         Object.keys(checkedValues).forEach(watchlist_id => {
-            console.log('watchlist_id in the forEach is :', watchlist_id)
+            // console.log('watchlist_id in the forEach is :', watchlist_id)
             const itemUpdated = checkedValues[watchlist_id] ^ watchlistsIncludesAssetId[watchlist_id]
 
             if (!itemUpdated) return;
-            console.log('itemUpdated is:', itemUpdated )
+            // console.log('itemUpdated is:', itemUpdated )
             // checkedValues[watchlist_id] === true => addition
             //                             === false => removal
-            console.log('watchlist_id to be updated is :', watchlist_id)
-            console.log('watchlist to update is :', allWatchlists[watchlist_id])
+            // console.log('watchlist_id to be updated is :', watchlist_id)
+            // console.log('watchlist to update is :', allWatchlists[watchlist_id])
             if (checkedValues[watchlist_id]) {
                 dispatch(addItemToWatchlist(allWatchlists[watchlist_id], asset_id))
                     .catch(e => console.log('add to watchlist err msg: ',e))

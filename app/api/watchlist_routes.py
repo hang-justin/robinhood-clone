@@ -78,7 +78,7 @@ def edit_watchlist_items(watchlist_id, edit_action, asset_id):
     Adds/remove asset to/from a watchlist
     '''
 
-    print(f'edit action is {edit_action} and asset_id is {asset_id}')
+    # print(f'edit action is {edit_action} and asset_id is {asset_id}')
 
     # Initial guard clauses for malformed requests to avoid DB connection
     if edit_action != 'add' and edit_action != 'remove':
@@ -102,11 +102,11 @@ def edit_watchlist_items(watchlist_id, edit_action, asset_id):
     # Maybe we can search current_watchlist.items to see if those
     # Watchitem objects have the id of asset_id have the requested asset_id
     watchlist_item = Watchitem.query.filter(Watchitem.asset_id == asset_id).first()
-    print('''
+    # print('''
 
-    Did I get this far?
+    # Did I get this far?
 
-    ''')
+    # ''')
 
     if not watchlist_item:
         return { 'message' : 'Item not supported or found. Unable to add to watchlist' }, 400
@@ -125,20 +125,20 @@ def edit_watchlist_items(watchlist_id, edit_action, asset_id):
             'watchlist': current_watchlist.to_dict()}, 200
 
     if (edit_action == 'add'):
-        print(' did i make it in here? ---------------------')
-        print(current_watchlist.items)
-        print('''
+        # print(' did i make it in here? ---------------------')
+        # print(current_watchlist.items)
+        # print('''
 
-        BEFORE THE APPENDAGE
+        # BEFORE THE APPENDAGE
 
-        ''')
-        print(f'watchlist_item to be appended is: {watchlist_item}')
+        # ''')
+        # print(f'watchlist_item to be appended is: {watchlist_item}')
         current_watchlist.items.append(watchlist_item)
-        print('''
+        # print('''
 
-        AFTER THE APPENDAGE
+        # AFTER THE APPENDAGE
 
-        ''')
+        # ''')
         print(current_watchlist.items)
         db.session.commit()
         return {

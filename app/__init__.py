@@ -97,15 +97,16 @@ def get_market_chart_range():
 
 
     for key in response:
-        print(key == 'prices')
+        # print(key == 'prices')
+        pass
 
     # converted_data = [ [datetime.fromtimestamp(timestamp), price] for [timestamp, price] in response['prices'] ]
 
     first_timestamp = response['prices'][0][0]
     last_timestamp = response['prices'][ len(response['prices']) - 1][0]
 
-    print(first_timestamp)
-    print(last_timestamp)
+    # print(first_timestamp)
+    # print(last_timestamp)
 
 
     return response
