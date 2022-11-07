@@ -6,19 +6,19 @@ const TestCoinGecko = () => {
     const getBtcPrices = async () => {
         const response = await fetch('/api/testcg')
         const data = await response.json()
-        console.log('fetch data is :', data)
+        // console.log('fetch data is :', data)
     }
 
     const getAllPrices = async () => {
         const response = await fetch('/api/cg/all')
         const data = await response.json();
-        console.log('fetch data from get all prices is :', data)
+        // console.log('fetch data from get all prices is :', data)
     }
 
     const getMarketInfoWithSparkline = async () => {
         const response = await fetch('/api/cg/market')
         const data = await response.json();
-        console.log('fetch data from get market info with sparkline is :', data)
+        // console.log('fetch data from get market info with sparkline is :', data)
     }
 
     return (

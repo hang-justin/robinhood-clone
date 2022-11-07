@@ -28,7 +28,7 @@ export const getSparklineData = () => async dispatch => {
 
     if (response.ok) {
         const data = await response.json();
-        console.log('data from response.json is ', data)
+        // console.log('data from response.json is ', data)
         const weeklyPercentageChange = data.market_info.map( coinInfo => {
             return {
                 id : coinInfo.id,
@@ -36,7 +36,7 @@ export const getSparklineData = () => async dispatch => {
             }
         })
         dispatch(loadWeekChange(weeklyPercentageChange))
-        console.log(weeklyPercentageChange)
+        // console.log(weeklyPercentageChange)
         dispatch(loadSparklineToStore(data.market_info))
     }
 }

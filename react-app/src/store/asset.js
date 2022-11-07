@@ -38,11 +38,11 @@ export const processOrder = (orderInformation) => async dispatch => {
     // formulate the body
     // dispatch fetch request
     // check response
-    console.log('orderInformation is :', orderInformation)
+    // console.log('orderInformation is :', orderInformation)
     const transactionType = orderInformation.transactionType.toLowerCase();
     let quantity;
     let total;
-    console.log('orderInformation received in the store is :', orderInformation)
+    // console.log('orderInformation received in the store is :', orderInformation)
 
     // transaction currencytype => !USD then calc
     if (orderInformation.transactionCurrencyType !== 'USD') {
@@ -53,8 +53,8 @@ export const processOrder = (orderInformation) => async dispatch => {
         quantity = orderInformation.transactionTotal;
         total = orderInformation.transactionAmount;
     }
-    console.log('quantity is:', quantity)
-    console.log('total is :', total)
+    // console.log('quantity is:', quantity)
+    // console.log('total is :', total)
     if (total.includes(',')) {
         total = total.split(',').join('');
     }
@@ -68,7 +68,7 @@ export const processOrder = (orderInformation) => async dispatch => {
         total: parseFloat(total)
     }
 
-    console.log('body going into the fetch request is :', body)
+    // console.log('body going into the fetch request is :', body)
 
     const response = await fetch(`/api/assets/${orderInformation.asset_id}/${transactionType}`, {
         method: 'POST',
@@ -83,7 +83,7 @@ export const processOrder = (orderInformation) => async dispatch => {
     //      update asset and cash should also cover the create asset and update cash scenario
     if (response.ok) {
         const data = await response.json();
-        console.log('data received back from response is :', data)
+        // console.log('data received back from response is :', data)
         if (data.delete) {
             dispatch(deleteAssetAndUpdateCash({
                 'update': data.update,
@@ -113,11 +113,11 @@ const assetReducer = (state = initialState, action) => {
             return {};
 
         case UPDATE_ASSET_AND_CASH:
-            console.log('action.updatedAssets is :', action.updatedAssets)
+            // console.log('action.updatedAssets is :', action.updatedAssets)
             newState = { ...state };
 
             const updatedAssetIds = Object.keys(action.updatedAssets.update)
-            console.log('updatedAssetIds are :', updatedAssetIds)
+            // console.log('updatedAssetIds are :', updatedAssetIds)
 
             updatedAssetIds.forEach(asset_id => {
                 newState[asset_id] = action.updatedAssets.update[asset_id]
@@ -125,7 +125,7 @@ const assetReducer = (state = initialState, action) => {
             return newState;
 
         case DELETE_ASSET_AND_UPDATE_CASH:
-            console.log('action.updatedAssets for delete case is :', action.updatedAssets)
+            // console.log('action.updatedAssets for delete case is :', action.updatedAssets)
             newState = { ...state }
 
             newState['$$$$$'] = action.updatedAssets.update['$$$$$']
