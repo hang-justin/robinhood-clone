@@ -208,11 +208,11 @@ const SignupPage = () => {
                         </span>
                     )}
 
-                    {errors.map( (error, ind) => (
+                    {/* {errors.map( (error, ind) => (
                         <div key={ind}>
                             {error}
                         </div>
-                    ))}
+                    ))} */}
 
                     <button
                     id='create-account-btn'
