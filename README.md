@@ -13,7 +13,8 @@ https://yuanhood.herokuapp.com/
 Login by clicking on the 'Login' button located on the top right. If you're curious and want to check it out without any obligation, feel free to login as a demo user which can also be accessed on the login page.
 
 
-![image](https://user-images.githubusercontent.com/60123981/200230948-4e1414f0-2a10-441e-816e-edb08fb88a81.png)
+![login](https://user-images.githubusercontent.com/60123981/200235038-15a81c05-5b84-4093-9188-1023090cd71e.png)
+
 
 
 #### Signing Up
@@ -24,7 +25,7 @@ Sign up by accessing the sign up page through:
  3. 'Create an Account' link on the login page
 
 
-![image](https://user-images.githubusercontent.com/60123981/200231118-216f73c1-8998-4e32-91f1-4f85d67bdb6f.png)
+![signup](https://user-images.githubusercontent.com/60123981/200235047-7e8091f6-e132-44e8-b984-3a54d2f19308.png)
 
 
 ## Manage your portfolio and trade assets
