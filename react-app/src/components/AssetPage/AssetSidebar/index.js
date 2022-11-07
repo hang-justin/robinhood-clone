@@ -131,14 +131,10 @@ const AssetSidebar = () => {
         const [dollars, cents] = e.target.value.split('.')
         if (cents && cents.length > 2) return;
 
-        console.log('formatted money')
-        console.log(formatMoney(e.target.value))
         setTransactionAmount(e.target.value)
     }
 
     const validateBuyOrder = () => {
-        console.log('validating buy order')
-        console.log('transaction amoutn is :', transactionAmount)
         if (transactionCurrencyType === 'USD') {
             if (!+transactionAmount) return setOrderError({
                 header: 'Invalid Amount',
@@ -215,7 +211,6 @@ const AssetSidebar = () => {
         }
 
         if (!orderError) {
-            console.log('no order errors?!')
             return setOrderInformation({
                 transactionType,
                 asset_id: currentAssetId,

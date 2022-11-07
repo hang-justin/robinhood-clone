@@ -24,8 +24,6 @@ const SidebarRow = ({ asset }) => {
 
                                 const percentageChangeTextColor = coinWeeklyChange >= 0 ? 'main-green-text' : 'main-red-text';
 
-    console.log('weekly change', asset.asset_id, coinWeeklyChange)
-
     const currencyChangePastWeek = coinWeeklyChange.toFixed(2)
 
     return (
