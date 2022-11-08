@@ -21,7 +21,7 @@ from .seeds import seed_commands
 
 from .config import Config
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
 # Setup login manager
 login = LoginManager(app)
@@ -80,33 +80,33 @@ def inject_csrf_token(response):
 @app.route('/<path:path>')
 def react_root(path):
     if path == 'favicon.ico':
-        return app.send_static_file('favicon.ico')
+        return app.send_from_directory('public', 'favicon.ico')
     return app.send_static_file('index.html')
 
-@app.route('/api/testcg')
-def get_market_chart_range():
-    '''
-    this route will give btc price from inception to date until now
-    '''
-    response =  cg.get_coin_market_chart_range_by_id(
-                                                    id='bitcoin',
-                                                    vs_currency='usd',
-                                                    from_timestamp=1392577232,
-                                                    to_timestamp=datetime.now().timestamp()
-                                                    )
+# @app.route('/api/testcg')
+# def get_market_chart_range():
+#     '''
+#     this route will give btc price from inception to date until now
+#     '''
+#     response =  cg.get_coin_market_chart_range_by_id(
+#                                                     id='bitcoin',
+#                                                     vs_currency='usd',
+#                                                     from_timestamp=1392577232,
+#                                                     to_timestamp=datetime.now().timestamp()
+#                                                     )
 
 
-    for key in response:
-        # print(key == 'prices')
-        pass
+#     for key in response:
+#         # print(key == 'prices')
+#         pass
 
-    # converted_data = [ [datetime.fromtimestamp(timestamp), price] for [timestamp, price] in response['prices'] ]
+#     # converted_data = [ [datetime.fromtimestamp(timestamp), price] for [timestamp, price] in response['prices'] ]
 
-    first_timestamp = response['prices'][0][0]
-    last_timestamp = response['prices'][ len(response['prices']) - 1][0]
+#     first_timestamp = response['prices'][0][0]
+#     last_timestamp = response['prices'][ len(response['prices']) - 1][0]
 
-    # print(first_timestamp)
-    # print(last_timestamp)
+#     # print(first_timestamp)
+#     # print(last_timestamp)
 
 
-    return response
+#     return response

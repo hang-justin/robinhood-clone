@@ -1,8 +1,11 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .watchlistitems import watchlist_item
 
 class Watchlist(db.Model):
     __tablename__ = 'watchlists'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(
                         db.Integer,
@@ -15,16 +18,25 @@ class Watchlist(db.Model):
     # Foreign Key Columns
     owner_id = db.Column(
                         db.Integer,
-                        db.ForeignKey('users.id'))
+                        db.ForeignKey(add_prefix_for_prod('users.id')))
 
 
     # Unique constraint amongst combination of watchlist name and owner_id
     # Unique Index = uix
     # __table_args__ expects a tuple
-    __table_args__ = (db.UniqueConstraint(
-                                name,
-                                owner_id,
-                                name='uix_name_owner'),)
+    if environment == 'production':
+        __table_args__ = (
+                            db.UniqueConstraint(
+                                    asset_id,
+                                    owner_id,
+                                    name='uix_asset_owner'),
+                            {'schema': SCHEMA})
+    else:
+        __table_args__ = (
+                            db.UniqueConstraint(
+                                    asset_id,
+                                    owner_id,
+                                    name='uix_asset_owner'),)
 
     # Bidrectional one-to-many (user-to-watchlists)
     owner = db.relationship('User', back_populates='watchlists')
