@@ -27,14 +27,14 @@ class Watchlist(db.Model):
     if environment == 'production':
         __table_args__ = (
                             db.UniqueConstraint(
-                                    asset_id,
+                                    name,
                                     owner_id,
                                     name='uix_asset_owner'),
                             {'schema': SCHEMA})
     else:
         __table_args__ = (
                             db.UniqueConstraint(
-                                    asset_id,
+                                    name,
                                     owner_id,
                                     name='uix_asset_owner'),)
 

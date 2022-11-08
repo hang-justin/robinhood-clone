@@ -7,11 +7,12 @@ from flask import current_app
 
 from alembic import context
 
+
+# 5 lines below are for render deploy
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
 import os
-environment = os.getenv('FLASK_ENV')
+environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get('SCHEMA')
 
 # this is the Alembic Config object, which provides
@@ -60,17 +61,41 @@ def run_migrations_offline():
         context.run_migrations()
 
 
+# def run_migrations_online():
+#     """Run migrations in 'online' mode.
+
+#     In this scenario we need to create an Engine
+#     and associate a connection with the context.
+
+#     """
+
+#     # this callback is used to prevent an auto-migration from being generated
+#     # when there are no changes to the schema
+#     # reference: http://alembic.zzzcomputing.com/en/latest/cookbook.html
+#     def process_revision_directives(context, revision, directives):
+#         if getattr(config.cmd_opts, 'autogenerate', False):
+#             script = directives[0]
+#             if script.upgrade_ops.is_empty():
+#                 directives[:] = []
+#                 logger.info('No changes in schema detected.')
+
+#     connectable = current_app.extensions['migrate'].db.get_engine()
+
+#     with connectable.connect() as connection:
+#         context.configure(
+#             connection=connection,
+#             target_metadata=target_metadata,
+#             process_revision_directives=process_revision_directives,
+#             **current_app.extensions['migrate'].configure_args
+#         )
+
+#         with context.begin_transaction():
+#             context.run_migrations()
+
+
+# Modified run_migrations_online() for render deploy
 def run_migrations_online():
-    """Run migrations in 'online' mode.
 
-    In this scenario we need to create an Engine
-    and associate a connection with the context.
-
-    """
-
-    # this callback is used to prevent an auto-migration from being generated
-    # when there are no changes to the schema
-    # reference: http://alembic.zzzcomputing.com/en/latest/cookbook.html
     def process_revision_directives(context, revision, directives):
         if getattr(config.cmd_opts, 'autogenerate', False):
             script = directives[0]
@@ -78,27 +103,11 @@ def run_migrations_online():
                 directives[:] = []
                 logger.info('No changes in schema detected.')
 
-    # Commented out section below was for heroku deployment
-    #
-    # connectable = current_app.extensions['migrate'].db.get_engine()
     connectable = engine_from_config(
         config.get_section(config.config_ini_section),
         prefix='sqlalchemy.',
         poolclass=pool.NullPool,
     )
-
-    # Commented out section below was for heroku deployment
-    #
-    # with connectable.connect() as connection:
-    #     context.configure(
-    #         connection=connection,
-    #         target_metadata=target_metadata,
-    #         process_revision_directives=process_revision_directives,
-    #         **current_app.extensions['migrate'].configure_args
-    #     )
-
-    #     with context.begin_transaction():
-    #         context.run_migrations()
 
     with connectable.connect() as connection:
         context.configure(
