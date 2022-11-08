@@ -1,22 +1,21 @@
-"""restore db for render deploy
+"""Restore DB for render deploy
 
-Revision ID: ace7b16e7366
+Revision ID: c79cbed38b5e
 Revises:
-Create Date: 2022-11-07 20:31:15.804965
+Create Date: 2022-11-07 22:59:05.202692
 
 """
 from alembic import op
 import sqlalchemy as sa
 
 
-# Add for render deploy
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'ace7b16e7366'
+revision = 'c79cbed38b5e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -88,8 +87,8 @@ def upgrade():
     )
     # ### end Alembic commands ###
 
-    # Add command for schema prefix
-    if environment == "production":
+
+    if  environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE watchitems SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE assets SET SCHEMA {SCHEMA};")

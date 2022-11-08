@@ -4,8 +4,6 @@ from .watchlistitems import watchlist_item
 class Watchlist(db.Model):
     __tablename__ = 'watchlists'
 
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(
                         db.Integer,
@@ -26,17 +24,20 @@ class Watchlist(db.Model):
     # __table_args__ expects a tuple
     if environment == 'production':
         __table_args__ = (
-                            db.UniqueConstraint(
-                                    name,
-                                    owner_id,
-                                    name='uix_asset_owner'),
-                            {'schema': SCHEMA})
+            db.UniqueConstraint(
+                name,
+                owner_id,
+                name='uix_asset_owner'),
+            {'schema': SCHEMA}
+            )
     else:
         __table_args__ = (
-                            db.UniqueConstraint(
-                                    name,
-                                    owner_id,
-                                    name='uix_asset_owner'),)
+            db.UniqueConstraint(
+                name,
+                owner_id,
+                name='uix_asset_owner'),
+            )
+
 
     # Bidrectional one-to-many (user-to-watchlists)
     owner = db.relationship('User', back_populates='watchlists')
