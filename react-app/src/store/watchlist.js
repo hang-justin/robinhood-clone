@@ -88,7 +88,7 @@ export const updateWatchlist = (watchlist) => async dispatch => {
 
     if (response.ok) {
         const updatedWatchlistResponse = await response.json();
-        console.log('updated watchlist response is :', updatedWatchlistResponse)
+        // console.log('updated watchlist response is :', updatedWatchlistResponse)
         dispatch(updateWatchlistInStore(updatedWatchlistResponse.watchlist))
         return updatedWatchlistResponse
     }
