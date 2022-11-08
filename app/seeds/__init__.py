@@ -20,11 +20,12 @@ def seed():
         # Before seeding, truncate all tables prefixed with schema name
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
         # Add a truncate command here for every table that will be seeded.
-        db.session.execute(f"TRUNCATE table {SCHEMA}.watchitems RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.assets RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.transactions RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.watchitems RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.watchlists RESTART IDENTITY CASCADE;")
-        db.session.execute(f"TRUNCATE table {SCHEMA}.watchlist_item RESTART IDENTITY CASCADE;")
+        # Will this truncate table for watchlist item be needed? we aren't seeding it...
+        # db.session.execute(f"TRUNCATE table {SCHEMA}.watchlist_item RESTART IDENTITY CASCADE;")
         db.session.commit()
 
     seed_users()
