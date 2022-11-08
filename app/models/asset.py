@@ -1,4 +1,4 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Asset(db.Model):
     __tablename__ = 'assets'
@@ -32,7 +32,7 @@ class Asset(db.Model):
     # Foreign Key Columns
     owner_id = db.Column(
                         db.Integer,
-                        db.ForeignKey('users.id'))
+                        db.ForeignKey(add_prefix_for_prod('users.id')))
 
     # Bidrectional one-to-many
     owner = db.relationship('User', back_populates='assets')
@@ -41,10 +41,19 @@ class Asset(db.Model):
     # Unique constraint amongst combination of asset_id and owner_id col
     # Unique Index = uix
     # __table_args__ expects a tuple
-    __table_args__ = (db.UniqueConstraint(
-                                asset_id,
-                                owner_id,
-                                name='uix_asset_owner'),)
+    if environment == 'production':
+        __table_args__ = (
+                            db.UniqueConstraint(
+                                    asset_id,
+                                    owner_id,
+                                    name='uix_asset_owner'),
+                            {'schema': SCHEMA})
+    else:
+        __table_args__ = (
+                            db.UniqueConstraint(
+                                    asset_id,
+                                    owner_id,
+                                    name='uix_asset_owner'),)
 
 
     def add_to_asset(self, quantity):

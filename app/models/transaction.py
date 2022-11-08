@@ -1,7 +1,10 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Transaction(db.Model):
     __tablename__ = 'transactions'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(
                         db.Integer,
@@ -32,7 +35,7 @@ class Transaction(db.Model):
     # Foreign Key Columns
     party_id = db.Column(
                         db.Integer,
-                        db.ForeignKey('users.id'))
+                        db.ForeignKey(add_prefix_for_prod('users.id')))
 
 
     # Bidrectional one-to-many

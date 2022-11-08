@@ -1,13 +1,16 @@
 """Restore tables
 
 Revision ID: 866361027b67
-Revises: 
+Revises:
 Create Date: 2022-11-06 23:52:41.936402
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
 revision = '866361027b67'
@@ -81,6 +84,15 @@ def upgrade():
     sa.PrimaryKeyConstraint('watchlist_id', 'item_id')
     )
     # ### end Alembic commands ###
+
+    # Add command for schema prefix
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE watchitems SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE assets SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE transactions SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE watchlists SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE watchlist_item SET SCHEMA {SCHEMA};")
 
 
 def downgrade():

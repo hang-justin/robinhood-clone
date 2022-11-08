@@ -1,8 +1,11 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .watchlistitems import watchlist_item
 
 class Watchitem(db.Model):
     __tablename__ = 'watchitems'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(
                         db.Integer,
