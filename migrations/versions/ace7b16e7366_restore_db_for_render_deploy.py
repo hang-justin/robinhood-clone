@@ -1,19 +1,22 @@
-"""Restore tables
+"""restore db for render deploy
 
-Revision ID: 866361027b67
+Revision ID: ace7b16e7366
 Revises:
-Create Date: 2022-11-06 23:52:41.936402
+Create Date: 2022-11-07 20:31:15.804965
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+
+# Add for render deploy
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
 # revision identifiers, used by Alembic.
-revision = '866361027b67'
+revision = 'ace7b16e7366'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -74,7 +77,7 @@ def upgrade():
     sa.Column('owner_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name', 'owner_id', name='uix_name_owner')
+    sa.UniqueConstraint('name', 'owner_id', name='uix_asset_owner')
     )
     op.create_table('watchlist_item',
     sa.Column('watchlist_id', sa.Integer(), nullable=False),
