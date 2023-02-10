@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import SearchResultCard from '../SearchResultCard';
 import './SearchResults.css';
 
 const SearchResults = ({ searchInput, setSearchInput }) => {
@@ -37,7 +38,22 @@ const SearchResults = ({ searchInput, setSearchInput }) => {
 
     return (
         <ul id='search-results' className='flx-col'>
-            Search results goes here
+            {
+                possibleSearchResultByAssetIds.map(assetId =>
+                    <SearchResultCard
+                        key={assetId}
+                        assetId={assetId}
+                        setSearchInput={setSearchInput}
+                    />
+                )
+            }
+
+            {
+                possibleSearchResultByAssetIds.length === 0 &&
+                <li id='search-no-match' className='li-search-result flx-row-align-ctr'>
+                    We were unable to find any results for your search.
+                </li>
+            }
         </ul>
     )
 };

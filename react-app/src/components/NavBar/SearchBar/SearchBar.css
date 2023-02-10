@@ -3,8 +3,8 @@
 
     box-sizing: border-box;
     height: 65px;
-    width: 400px;
-    padding: 15px 0;
+    width: 500px;
+    padding: 10px 0;
 }
 
 #search-input {
@@ -17,6 +17,8 @@
     padding-left: 30px;
     padding-right: 5px;
 
+
+    border: 1px solid var(--main-green);
     background-color: var(--gray-hover);
 
     color: white;
@@ -25,5 +27,21 @@
 
 #search-input:focus {
     outline: none;
-    border: 1px solid var(--main-green);
+}
+
+#search-results {
+    display: none;
+}
+
+#search-input:focus + #search-results,
+#search-bar>#search-results:hover {
+    display: flex;
+}
+
+#search-results:focus {
+    display: flex;
+}
+
+#search-bar>#search-results>*:hover #search-input {
+    font-size: larger;
 }

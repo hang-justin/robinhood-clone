@@ -10,17 +10,17 @@ const SearchBar = () => {
         <li id='search-bar' className='navbar-li flx-row-align-ctr'>
             <input
                 id='search-input'
-                onChange={e => setSearchInput(e.target.value)}
+                onChange={e => setSearchInput(e.target.value.trimStart())}
                 placeholder='Search'
                 value={searchInput}
                 autoComplete='off'
             />
 
-            <SearchButton />
             <SearchResults
                 searchInput={searchInput}
                 setSearchInput={setSearchInput}
             />
+            <SearchButton />
 
         </li>
     )
