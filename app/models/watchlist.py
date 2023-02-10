@@ -16,27 +16,34 @@ class Watchlist(db.Model):
     # Foreign Key Columns
     owner_id = db.Column(
                         db.Integer,
-                        db.ForeignKey(add_prefix_for_prod('users.id')))
+                        db.ForeignKey('users.id'))
+                        # db.ForeignKey(add_prefix_for_prod('users.id')))
 
 
     # Unique constraint amongst combination of watchlist name and owner_id
     # Unique Index = uix
     # __table_args__ expects a tuple
-    if environment == 'production':
-        __table_args__ = (
-            db.UniqueConstraint(
-                name,
-                owner_id,
-                name='uix_asset_owner'),
-            {'schema': SCHEMA}
-            )
-    else:
-        __table_args__ = (
-            db.UniqueConstraint(
-                name,
-                owner_id,
-                name='uix_asset_owner'),
-            )
+    __table_args__ = (db.UniqueConstraint(
+                            name,
+                            owner_id,
+                            name='uix_name_owner')
+                            ,)
+
+    # if environment == 'production':
+    #     __table_args__ = (
+    #         db.UniqueConstraint(
+    #             name,
+    #             owner_id,
+    #             name='uix_asset_owner')
+    #         # {'schema': SCHEMA}
+    #         )
+    # else:
+    #     __table_args__ = (
+    #         db.UniqueConstraint(
+    #             name,
+    #             owner_id,
+    #             name='uix_asset_owner'),
+    #         )
 
 
     # Bidrectional one-to-many (user-to-watchlists)
