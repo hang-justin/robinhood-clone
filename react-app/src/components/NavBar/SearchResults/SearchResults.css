@@ -1,0 +1,14 @@
+#search-results {
+    position: absolute;
+    top: 45px;
+    left: 0;
+
+    box-sizing: border-box;
+    width: 400px;
+    padding: 0;
+    padding-top: 20px;
+    border: 1px solid var(--main-green);
+    border-top: none;
+
+    background-color: var(--gray-hover);
+}
