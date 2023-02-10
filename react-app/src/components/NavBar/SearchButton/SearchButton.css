@@ -1,0 +1,17 @@
+#search-button {
+    position: absolute;
+    left: 0;
+
+    box-sizing: border-box;
+    height: 35px;
+    border: none;
+    padding-left: 6px;
+    padding-right: 0px;
+    background-color: transparent;
+
+    color: white;
+}
+
+#search-button:hover {
+    cursor: default;
+}
