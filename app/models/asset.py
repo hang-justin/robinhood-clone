@@ -32,32 +32,37 @@ class Asset(db.Model):
     # Foreign Key Columns
     owner_id = db.Column(
                         db.Integer,
-                        db.ForeignKey(add_prefix_for_prod('users.id')))
+                        db.ForeignKey('users.id'))
+                        # db.ForeignKey(add_prefix_for_prod('users.id')))
 
     # Bidrectional one-to-many
     owner = db.relationship('User', back_populates='assets')
 
-
-    # Unique constraint amongst combination of asset_id and owner_id col
-    # Unique Index = uix
+    # # Unique constraint amongst combination of asset_id and owner_id col
+    # # Unique Index = uix
     # __table_args__ expects a tuple, dict (for keyword args), or None.
-    # kwargs can be included with a tuple
-    # kwargs must be placed at the end of tuple
-    if environment == 'production':
-        __table_args__ = (
-            db.UniqueConstraint(
-                asset_id,
-                owner_id,
-                name='uix_asset_owner'),
-            {'schema': SCHEMA}
-            )
-    else:
-        __table_args__ = (
-            db.UniqueConstraint(
-                asset_id,
-                owner_id,
-                name='uix_asset_owner'),
-            )
+    __table_args__ = (db.UniqueConstraint(
+                            asset_id,
+                            owner_id,
+                            name='uix_asset_owner'),)
+
+    # # kwargs can be included with a tuple
+    # # kwargs must be placed at the end of tuple
+    # if environment == 'production':
+    #     __table_args__ = (
+    #         db.UniqueConstraint(
+    #             asset_id,
+    #             owner_id,
+    #             name='uix_asset_owner'),
+    #         {'schema': SCHEMA}
+    #         )
+    # else:
+    #     __table_args__ = (
+    #         db.UniqueConstraint(
+    #             asset_id,
+    #             owner_id,
+    #             name='uix_asset_owner'),
+    #         )
 
 
     def add_to_asset(self, quantity):

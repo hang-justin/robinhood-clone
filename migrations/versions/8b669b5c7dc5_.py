@@ -1,21 +1,16 @@
-"""Restore DB for render deploy
+"""empty message
 
-Revision ID: c79cbed38b5e
-Revises:
-Create Date: 2022-11-07 22:59:05.202692
+Revision ID: 8b669b5c7dc5
+Revises: 
+Create Date: 2023-02-10 00:13:59.807971
 
 """
 from alembic import op
 import sqlalchemy as sa
 
 
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
-
-
 # revision identifiers, used by Alembic.
-revision = 'c79cbed38b5e'
+revision = '8b669b5c7dc5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -76,7 +71,7 @@ def upgrade():
     sa.Column('owner_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name', 'owner_id', name='uix_asset_owner')
+    sa.UniqueConstraint('name', 'owner_id', name='uix_name_owner')
     )
     op.create_table('watchlist_item',
     sa.Column('watchlist_id', sa.Integer(), nullable=False),
@@ -86,15 +81,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('watchlist_id', 'item_id')
     )
     # ### end Alembic commands ###
-
-
-    if  environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE watchitems SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE assets SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE transactions SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE watchlists SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE watchlist_item SET SCHEMA {SCHEMA};")
 
 
 def downgrade():
