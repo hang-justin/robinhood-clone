@@ -6,8 +6,10 @@ import LogoutButton from '../auth/LogoutButton';
 import logo from '../img/logo.png'
 
 import './NavBar.css'
+import SearchBar from './SearchBar';
 
 const NavBar = () => {
+  // NavBar is only rendered for logged in users
 
   return (
     <nav id='main-nav' className='flx-row-justify-align-ctr'>
@@ -18,6 +20,8 @@ const NavBar = () => {
             <img id='nav-home-logo' alt='logo-nav-home' src={logo} />
           </NavLink>
         </li>
+
+        <SearchBar />
 
         <li className='navbar-li'>
           <LogoutButton />

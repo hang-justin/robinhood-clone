@@ -144,14 +144,14 @@ const SplashPage = () => {
                         <span>Postgres</span>
                         <span>SQLite3</span>
                         <span>CoinGecko API</span>
-                        <a id='codebase-link' href='https://github.com/hang-justin/robinhood-clone'>Link to Codebase</a>
+                        <a id='codebase-link' target='_blank' href='https://github.com/hang-justin/robinhood-clone'>Link to Codebase</a>
 
                     </div>
 
                     <div className='flx-col sect-6__right'>
                         Other Products
-                        <a className='other-projs-link' href='https://sonus-nimbus.herokuapp.com/'>SonusNimbus - SoundCloud Clone</a>
-                        <a className='other-projs-link' href='https://discordia-cgh.herokuapp.com/'>Discordia - Discord Clone</a>
+                        <a className='other-projs-link' target='_blank' href='https://sonus-nimbus.herokuapp.com/'>SonusNimbus - SoundCloud Clone</a>
+                        <a className='other-projs-link' target='_blank' href='https://discordia-cgh.herokuapp.com/'>Discordia - Discord Clone</a>
                     </div>
                 </div>
             </div>

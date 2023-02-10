@@ -22,11 +22,11 @@ const GuestNavBar = () => {
                 </div>
 
                 <div id='social-links' className='flx-row-justify-align-ctr'>
-                    <a className='link-to-social flx-row-align-ctr' href='https://github.com/hang-justin'>
+                    <a className='link-to-social flx-row-align-ctr' target='_blank' href='https://github.com/hang-justin'>
                         <img id='github-logo' className='social-logo-img' src={github} alt='github-logo-link'/>
                     </a>
 
-                    <a className='link-to-social flx-row-align-ctr' href='https://www.linkedin.com/in/hang-justin/'>
+                    <a className='link-to-social flx-row-align-ctr' target='_blank' href='https://www.linkedin.com/in/hang-justin/'>
                         <img id='linkedin-logo' className='social-logo-img' src={linkedin} alt='linkedin-logo-link'/>
                     </a>
 

@@ -1,0 +1,13 @@
+.search-result-symbol {
+    width: 45px;
+    padding-left: 8px;
+}
+
+.search-result-name {
+    max-width: 400px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: break-all;
+    text-overflow: ellipsis;
+}
