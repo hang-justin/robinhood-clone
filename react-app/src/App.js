@@ -78,10 +78,6 @@ function App() {
           <SplashPage />
         </Route>
 
-        {/* <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute> */}
-
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
