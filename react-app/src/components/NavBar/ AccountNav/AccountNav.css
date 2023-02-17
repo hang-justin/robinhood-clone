@@ -13,6 +13,7 @@
     box-sizing: border-box;
     height: 100%;
     width: 100%;
+    border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
 
     padding: 10px 0px;

@@ -19,7 +19,7 @@ const LogOutOption = ({ setShowAccNavOptions }) => {
             onClick={handleLogOut}
             >
 
-            <span class="material-symbols-outlined">
+            <span className="material-symbols-outlined">
                 logout
             </span>
 

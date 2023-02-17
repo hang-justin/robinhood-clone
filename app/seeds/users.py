@@ -1,5 +1,5 @@
 from app.models import db, User
-from datetime import datetime
+from datetime import datetime, timezone
 
 def seed_users():
     demo = User(
@@ -8,24 +8,24 @@ def seed_users():
         first_name= 'Demo',
         last_name= 'Lition',
         password='password',
-        created_at=datetime.now(),
-        updated_at=datetime.now())
+        created_at=datetime.now(timezone.utc),
+        updated_at=datetime.now(timezone.utc))
     marnie = User(
         username='marnie2',
         email='marnie@aa.io',
         first_name= 'Marnie',
         last_name= 'Doe',
         password='password',
-        created_at=datetime.now(),
-        updated_at=datetime.now())
+        created_at=datetime.now(timezone.utc),
+        updated_at=datetime.now(timezone.utc))
     bobbie = User(
         username='bobbie3',
         email='bobbie@aa.io',
         first_name= 'Bobbie',
         last_name= 'Nguyen',
         password='password',
-        created_at=datetime.now(),
-        updated_at=datetime.now())
+        created_at=datetime.now(timezone.utc),
+        updated_at=datetime.now(timezone.utc))
 
     db.session.add(demo)
     db.session.add(marnie)

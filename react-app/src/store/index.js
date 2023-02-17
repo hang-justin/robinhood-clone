@@ -1,17 +1,19 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import session from './session'
-import watchlists from './watchlist'
-import assets from './asset'
-import market from './market'
-import sparkline from './sparklines'
+import session from './session';
+import watchlists from './watchlist';
+import assets from './asset';
+import market from './market';
+import sparkline from './sparklines';
+import transactions from './transactions';
 
 const rootReducer = combineReducers({
   session,
   assets,
   watchlists,
+  transactions,
   market,
-  sparkline
+  sparkline,
 });
 
 
