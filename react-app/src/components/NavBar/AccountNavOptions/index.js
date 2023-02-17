@@ -1,29 +1,16 @@
+import { useHistory } from 'react-router-dom';
 import './AccountNavOptions.css';
+import HistoryOption from './HistoryOption';
+import LogOutOption from './LogOutOption';
 
-const AccountNavOptions = () => {
+const AccountNavOptions = ({ setShowAccNavOptions }) => {
 
     return (
         <ul id='account-nav-options' onClick={e => e.stopPropagation()}>
 
-            <li className='acc-nav-li flx-row-align-ctr'>
-                <span class="material-symbols-outlined">
-                    history
-                </span>
+            <HistoryOption setShowAccNavOptions={setShowAccNavOptions}/>
 
-                <span>
-                    History
-                </span>
-            </li>
-
-            <li className='acc-nav-li flx-row-align-ctr'>
-                <span class="material-symbols-outlined">
-                    logout
-                </span>
-
-                <span>
-                    Log Out
-                </span>
-            </li>
+            <LogOutOption setShowAccNavOptions={setShowAccNavOptions} />
         </ul>
     )
 }

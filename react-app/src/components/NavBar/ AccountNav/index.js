@@ -20,14 +20,14 @@ const AccountNav = () => {
     return (
         <div className='pos-rel'>
             <button id='account-nav-btn' onClick={() => setShowAccNavOptions(prev => !prev)}>
-                <div id='account-nav'>
+                <div id='account-nav' className={showAccNavOptions ? 'account-nav-active' : ''}>
                     Account
                 </div>
             </button>
 
             {
                 showAccNavOptions &&
-                <AccountNavOptions />
+                <AccountNavOptions setShowAccNavOptions={setShowAccNavOptions}/>
             }
         </div>
     )

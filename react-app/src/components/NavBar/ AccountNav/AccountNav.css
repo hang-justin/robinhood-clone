@@ -18,6 +18,11 @@
     padding: 10px 0px;
 }
 
+#account-nav.account-nav-active {
+    color: var(--main-red-loss);
+    border-bottom: 3px solid var(--main-red-loss);
+}
+
 #account-nav:hover {
     color: var(--main-red-loss);
     border-bottom: 3px solid var(--main-red-loss);

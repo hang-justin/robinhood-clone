@@ -98,6 +98,7 @@ export const logout = () => async (dispatch) => {
     dispatch(removeUser());
     dispatch(clearWatchlists());
     dispatch(clearAssets());
+    return;
   }
 };
 
