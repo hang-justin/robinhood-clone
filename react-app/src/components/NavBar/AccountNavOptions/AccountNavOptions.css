@@ -1,0 +1,28 @@
+#account-nav-options {
+    position: absolute;
+    right: 0;
+    box-sizing: border-box;
+
+    width: 200px;
+    padding: 0;
+
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: var(--gray-hover);
+
+    list-style-type: none;
+
+    font-size: small;
+}
+
+.acc-nav-li {
+    box-sizing: border-box;
+    gap: 10px;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.acc-nav-li:hover {
+    background-color: gray;
+    cursor: pointer;
+}
