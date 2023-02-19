@@ -13,3 +13,8 @@
     padding: 15px 0;
     border-bottom: 1px solid gray;
 }
+
+.transactions-details__right {
+    align-items: flex-end;
+    justify-content: center;
+}

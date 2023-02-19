@@ -3,6 +3,7 @@
     height: calc(100vh - 65px);
     min-height: 800px;
     padding-top: 50px;
+    padding-bottom: 50px;
 
     background-color: black;
 
@@ -12,4 +13,10 @@
 #history-content {
     width: 1000px;
     gap: 20px;
+    height: 100%;
+}
+
+#history-content > span {
+    box-sizing: border-box;
+    height: 50px;
 }

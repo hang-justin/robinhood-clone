@@ -17,7 +17,7 @@ const formatDate = (dateObj) => {
 
     const month = months[dateObj.getMonth()];
     const dateNum = dateObj.getDate();
-    const year = dateObj.getFullYear().toString().slice(2);
+    const year = dateObj.getFullYear();
 
     return `${month} ${dateNum}, ${year}`
 };

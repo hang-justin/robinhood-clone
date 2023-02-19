@@ -30,6 +30,7 @@ const TransactionList = () => {
                         transaction={transaction}
                     />
                 )}
+
             </ul>
         </div>
     )

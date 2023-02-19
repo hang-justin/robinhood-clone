@@ -4,12 +4,8 @@ import './Transactions.css';
 const Transactions = () => {
 
     return (
-        <div className='flx-row'>
+        <div id='transactions-list-container' className='flx-row'>
             <TransactionList />
-
-            <div>
-                search
-            </div>
         </div>
     )
 };
