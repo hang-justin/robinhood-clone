@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTransactions } from '../../../store/transactions';
+import TransactionCard from '../TransactionCard';
 import './TransactionList.css';
 
 const TransactionList = () => {
@@ -19,8 +20,17 @@ const TransactionList = () => {
     console.log('converted date is: ', convertedDate.getDate())
 
     return (
-        <div id='transaction-list'>
-            transactions
+        <div id='transaction-container'>
+            <h3>Transactions</h3>
+
+            <ul id='transactions-list'>
+                {allTransactions.map(transaction =>
+                    <TransactionCard
+                        key={transaction.id}
+                        transaction={transaction}
+                    />
+                )}
+            </ul>
         </div>
     )
 };
