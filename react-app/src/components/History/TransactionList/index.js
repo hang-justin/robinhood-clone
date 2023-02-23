@@ -15,9 +15,9 @@ const TransactionList = () => {
 
 
     if (!allTransactions.length) return null;
-    console.log(allTransactions[0].timestamp)
-    const convertedDate = new Date(Date.parse(allTransactions[0].timestamp))
-    console.log('converted date is: ', convertedDate.getDate())
+    // console.log(allTransactions[0].timestamp)
+    // const convertedDate = new Date(Date.parse(allTransactions[0].timestamp));
+    // console.log('converted date is: ', convertedDate.getDate())
 
     return (
         <div id='transaction-container'>

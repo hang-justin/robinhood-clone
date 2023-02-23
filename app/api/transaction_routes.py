@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.forms import TransactionForm
 from app.models import db,  Transaction
+from datetime import datetime, timezone
 
 transaction_routes = Blueprint('transactions', __name__)
 
@@ -42,7 +43,7 @@ def post_transactions():
 
 
         if transaction_A.asset_id != '$$$$$':
-            transaction_A.total = -transaction_A.total
+            # transaction_A.total = -transaction_A.total
 
             transaction_B.asset_id = '$$$$$'
             transaction_B.symbol = '$$$$$'
@@ -50,14 +51,16 @@ def post_transactions():
             transaction_B.type = 'exchange'
             transaction_B.quantity = transaction_B.total
 
-            if transaction_A.total > 0:
-                # meaning that cash was added
-                # meaning that an asset was sold
-                # meaning that quantity must be negative
-                transaction_A.quantity = -transaction_A.quantity
+            # if transaction_A.total > 0:
+            #     # meaning that cash was added
+            #     # meaning that an asset was sold
+            #     # meaning that quantity must be negative
+            #     transaction_A.quantity = -transaction_A.quantity
 
+            transaction_A.timestamp = datetime.now(timezone.utc)
+            transaction_B.timestamp = datetime.now(timezone.utc)
             db.session.add(transaction_A)
-            db.session.add(transaction_B)
+            # db.session.add(transaction_B)
             db.session.commit()
             return { 'message': 'Transactions successfully posted.'}
 
@@ -68,6 +71,9 @@ def post_transactions():
             transaction_B.quantity = -transaction_A.quantity
             transaction_B.total = -transaction_A.quantity
             transaction_B.type = 'Bank Withdrawl'
+
+            transaction_A.timestamp = datetime.now(timezone.utc)
+            transaction_B.timestamp = datetime.now(timezone.utc)
             db.session.add(transaction_A)
             db.session.add(transaction_B)
             db.session.commit()
