@@ -92,7 +92,7 @@ def react_root(path):
 #                                                     id='bitcoin',
 #                                                     vs_currency='usd',
 #                                                     from_timestamp=1392577232,
-#                                                     to_timestamp=datetime.now().timestamp()
+#                                                     to_timestamp=datetime.now(timezone.utc).timestamp()
 #                                                     )
 
 

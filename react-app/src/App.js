@@ -10,6 +10,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UserHomePage from './components/UserHomePage';
 import AssetPage from './components/AssetPage';
 import CryptoList from './components/CryptoList';
+import History from './components/History';
 import { getAllLatestPrices } from './store/market';
 import SplashPage from './components/SplashPage';
 import LoginPage from './components/auth/LoginPage';
@@ -75,21 +76,21 @@ function App() {
           <SplashPage />
         </Route>
 
-        <ProtectedRoute path='/' exact={true} >
+        <ProtectedRoute path='/' exact={true}>
           <UserHomePage />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/lists/:userId/:listId' exact={true} >
+        <ProtectedRoute path='/lists/:userId/:listId' exact={true}>
           <CryptoList />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/crypto/:symbol' exact={true} >
+        <ProtectedRoute path='/crypto/:symbol' exact={true}>
           <AssetPage />
         </ProtectedRoute>
 
-        {/* <Route path='/testcg'>
-          <TestCoinGecko />
-        </Route> */}
+        <ProtectedRoute path='/account/history' exact={true}>
+          <History />
+        </ProtectedRoute>
 
         <Route path='*'>
           <PageNotFound />
