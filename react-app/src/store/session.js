@@ -22,6 +22,7 @@ export const authenticate = () => async (dispatch) => {
       'Content-Type': 'application/json'
     }
   });
+
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
@@ -98,6 +99,7 @@ export const logout = () => async (dispatch) => {
     dispatch(removeUser());
     dispatch(clearWatchlists());
     dispatch(clearAssets());
+    return;
   }
 };
 

@@ -1,0 +1,14 @@
+#transactions-list-container {
+    height: calc(100% - 50px);
+    overflow-y: scroll;
+}
+
+#transactions-list-container::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: #aaa; /* or add it to the track */
+}
+
+#transactions-list-container::-webkit-scrollbar-thumb {
+    background: var(--main-green)
+}

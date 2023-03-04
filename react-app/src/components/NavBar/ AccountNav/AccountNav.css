@@ -1,0 +1,30 @@
+#account-nav-btn {
+    position: relative;
+    box-sizing: border-box;
+
+    margin: 0;
+
+    color: white;
+    background-color: transparent;
+}
+
+#account-nav {
+    display: block;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+
+    padding: 10px 0px;
+}
+
+#account-nav.account-nav-active {
+    color: var(--main-red-loss);
+    border-bottom: 3px solid var(--main-red-loss);
+}
+
+#account-nav:hover {
+    color: var(--main-red-loss);
+    border-bottom: 3px solid var(--main-red-loss);
+}

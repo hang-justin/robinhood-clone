@@ -4,6 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 
 import logo from '../img/logo.png'
+import AccountNav from './ AccountNav';
 
 import './NavBar.css'
 import SearchBar from './SearchBar';
@@ -24,7 +25,7 @@ const NavBar = () => {
         <SearchBar />
 
         <li className='navbar-li'>
-          <LogoutButton />
+          <AccountNav />
         </li>
 
       </ul>

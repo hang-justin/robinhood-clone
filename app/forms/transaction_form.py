@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, ValidationError
 class TransactionForm(FlaskForm):
     # party_id = IntegerField('party_id',
     #                         validators=[DataRequired()])
-    asset_id = IntegerField('asset_id',
+    asset_id = StringField('asset_id',
                             validators=[DataRequired()])
     symbol = StringField('symbol',
                             validators=[DataRequired()])

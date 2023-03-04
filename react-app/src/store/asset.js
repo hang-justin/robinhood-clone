@@ -1,3 +1,5 @@
+import { postTransaction } from "./transactions";
+
 // constants
 const LOAD_ASSETS = 'assets/LOAD_ASSETS'
 const UPDATE_ASSET_AND_CASH = 'assets/UPDATE_ASSET_AND_CASH'
@@ -42,7 +44,6 @@ export const processOrder = (orderInformation) => async dispatch => {
     const transactionType = orderInformation.transactionType.toLowerCase();
     let quantity;
     let total;
-    // console.log('orderInformation received in the store is :', orderInformation)
 
     // transaction currencytype => !USD then calc
     if (orderInformation.transactionCurrencyType !== 'USD') {
@@ -94,6 +95,41 @@ export const processOrder = (orderInformation) => async dispatch => {
                 'update': data.update
             }))
         }
+
+        // Need to format data for transaction route
+        // transactionInformation = {
+        // asset_id asset_id or $$$$$
+        // symbol   symbol or $$$$$
+        // name     crypto name/$$$$$
+        // type     buy cryptocurrency/sell cryptocurrency/deposit cash/bank deposit
+        // quantity amount transacted
+        // total:   USD
+        // }
+        let quantity;
+        let total;
+
+        if (orderInformation.transactionCurrencyType === 'USD') {
+            quantity = parseFloat(orderInformation.transactionTotal);
+            total = parseFloat(orderInformation.transactionAmount);
+        } else {
+            quantity = parseFloat(orderInformation.transactionAmount);
+            total = parseFloat(orderInformation.transactionTotal.slice(1));
+        }
+
+        const transactionInformation = {
+            asset_id: orderInformation.asset_id,
+            symbol: orderInformation.symbol,
+            name: orderInformation.name,
+            type: orderInformation.transactionType.toLowerCase() + ' cryptocurrency',
+            quantity,
+            total
+        };
+
+        // Sending a dispatch to post transaction
+        // Now that asset fetch completed
+        await dispatch(postTransaction(transactionInformation));
+
+
     }
 
 }

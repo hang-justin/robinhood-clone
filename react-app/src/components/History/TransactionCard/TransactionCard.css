@@ -1,0 +1,20 @@
+.transaction-card {
+    list-style: none;
+    padding: 0 15px;
+}
+
+.transaction-card:hover {
+    border-radius: 5px;
+    background-color: var(--gray-hover);
+}
+
+.transaction-details {
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid gray;
+}
+
+.transactions-details__right {
+    align-items: flex-end;
+    justify-content: center;
+}
