@@ -34,9 +34,6 @@ const newsReducer = (state=initialState, action) => {
 
     switch(action.type) {
         case LOAD_NEWS:
-            console.log('news data: ')
-            console.log(action.news)
-
             action.news.forEach(news_item => {
                 newState[news_item.id] = news_item
             })
