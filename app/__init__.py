@@ -12,6 +12,8 @@ cg = CoinGeckoAPI()
 
 
 import finnhub
+finnhub_api_key =  os.environ.get('FINNHUB_KEY')
+finnhub_client = finnhub.Client(api_key=finnhub_api_key)
 
 
 from .models import db, User
@@ -21,6 +23,7 @@ from .api.asset_route import asset_routes
 from .api.transaction_routes import transaction_routes
 from .api.watchlist_routes import watchlist_routes
 from .api.cg_routes import cg_routes
+from .api.finnhub_routes import finnhub_routes
 
 from .seeds import seed_commands
 
@@ -48,6 +51,7 @@ app.register_blueprint(asset_routes, url_prefix='/api/assets')
 app.register_blueprint(transaction_routes, url_prefix='/api/transactions')
 app.register_blueprint(watchlist_routes, url_prefix='/api/watchlists')
 app.register_blueprint(cg_routes, url_prefix='/api/cg')
+app.register_blueprint(finnhub_routes, url_prefix='/api/finnhub')
 db.init_app(app)
 Migrate(app, db)
 
@@ -87,31 +91,3 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_from_directory('public', 'favicon.ico')
     return app.send_static_file('index.html')
-
-# @app.route('/api/testcg')
-# def get_market_chart_range():
-#     '''
-#     this route will give btc price from inception to date until now
-#     '''
-#     response =  cg.get_coin_market_chart_range_by_id(
-#                                                     id='bitcoin',
-#                                                     vs_currency='usd',
-#                                                     from_timestamp=1392577232,
-#                                                     to_timestamp=datetime.now(timezone.utc).timestamp()
-#                                                     )
-
-
-#     for key in response:
-#         # print(key == 'prices')
-#         pass
-
-#     # converted_data = [ [datetime.fromtimestamp(timestamp), price] for [timestamp, price] in response['prices'] ]
-
-#     first_timestamp = response['prices'][0][0]
-#     last_timestamp = response['prices'][ len(response['prices']) - 1][0]
-
-#     # print(first_timestamp)
-#     # print(last_timestamp)
-
-
-#     return response
