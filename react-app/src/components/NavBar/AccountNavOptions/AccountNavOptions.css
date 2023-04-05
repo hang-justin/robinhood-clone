@@ -1,8 +1,9 @@
 #account-nav-options {
     position: absolute;
     right: 0;
-    box-sizing: border-box;
+    z-index: 999;
 
+    box-sizing: border-box;
     width: 300px;
     padding: 0;
 
