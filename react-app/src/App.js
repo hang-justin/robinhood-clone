@@ -17,6 +17,7 @@ import LoginPage from './components/auth/LoginPage';
 import SignupPage from './components/auth/SignupPage';
 import { getSparklineData } from './store/sparklines';
 import PageNotFound from './components/PageNotFound';
+import { getGeneralNews } from './store/news';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,7 +30,8 @@ function App() {
       await dispatch(authenticate());
       await dispatch(getAllLatestPrices())
       await dispatch(getSparklineData())
-        .then(() => setLoaded(true))
+      await dispatch(getGeneralNews())
+      .then(() => setLoaded(true))
     })();
 
     // const latestPricesInterval = setInterval(() => dispatch(getAllLatestPrices()), 5000)

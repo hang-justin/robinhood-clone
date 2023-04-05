@@ -1,10 +1,14 @@
 #user-home-sidebar {
     box-sizing: border-box;
-    width: 350px;
+    width: 325px;
+    height: calc(100vh - 100px);
 
     margin: 24px 36px;
     border: 0.5px solid var(--sidebar-border);
     border-radius: 5px;
+
+    position: sticky;
+    top: 89px;
 }
 
 .sidebar-row-header {
