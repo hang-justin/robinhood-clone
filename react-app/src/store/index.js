@@ -6,6 +6,7 @@ import assets from './asset';
 import market from './market';
 import sparkline from './sparklines';
 import transactions from './transactions';
+import news from './news';
 
 const rootReducer = combineReducers({
   session,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   transactions,
   market,
   sparkline,
+  news
 });
 
 

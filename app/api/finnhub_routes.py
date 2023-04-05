@@ -15,10 +15,14 @@ def get_general_news():
 
     news_item = {
         category: str
-        datetime
-        headline
-        id
-        
+        datetime: UNIX timestamp
+        headline: str
+        id: int
+        image: imageUrl str
+        related: str
+        source: str
+        summary: str
+        url: url str
         }
 
     '''

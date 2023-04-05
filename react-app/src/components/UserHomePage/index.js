@@ -2,6 +2,7 @@ import PortfolioChart from './PortfolioChart'
 import Portfolio from './Portfolio'
 import './UserHomePage.css'
 import UserHomeSideBar from './UserHomeSideBar'
+import NewsFeed from '../NewsFeed'
 
 const UserHomePage = () => {
     return (
@@ -10,6 +11,10 @@ const UserHomePage = () => {
 
                 <div id='main-feed' className='flx-col flx-grow-one'>
                     <Portfolio />
+
+                    <div className='newsfeed-wrapper newsfeed-wrapper--homepage'>
+                        <NewsFeed />
+                    </div>
                 </div>
 
                 <UserHomeSideBar />
