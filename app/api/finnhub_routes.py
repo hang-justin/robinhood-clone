@@ -15,7 +15,7 @@ def get_general_news():
 
     news_item = {
         category: str
-        datetime
+        datetime: UNIX timestamp
         headline: str
         id: int
         image: imageUrl str

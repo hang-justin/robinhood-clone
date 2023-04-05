@@ -1,0 +1,43 @@
+.article-card {
+    /* border: 0.5px dashed rgba(255, 0, 0, 0.5); */
+    box-sizing: border-box;
+    min-height: 250px;
+
+    padding: 24px 24px;
+    text-decoration: none;
+}
+
+.article-card:hover {
+    background-color: rgba(128, 128, 128, 0.25);
+}
+
+.article-source-and-date {
+    font-size: small;
+    color: var(--main-green)
+}
+
+.article-headline {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.article-summary {
+    font-size: medium;
+}
+
+.article-card--right {
+    align-self: center;
+    margin-left: 45px;
+}
+
+.article-card-image {
+    height: 75px;
+    width: 125px;
+    border-radius: 5px;
+}
+
+.article-border {
+    border-bottom: 1px solid gray;
+    margin-left: 36px;
+    margin-right: 24px;
+}

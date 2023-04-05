@@ -6,18 +6,19 @@ import { useEffect, useState } from 'react';
 import NewsArticle from './NewsArticle';
 
 const getArticleIds = (newsFeedPage, articles, articlesPerPage) => {
-    const allArticleIds = Object.keys(articles);
+    const allArticles = Object.values(articles)
+    const sortedAllArticles = allArticles.sort( (a, b) => b.datetime - a.datetime)
     let articleIds = Array(articlesPerPage);
 
     for (let i = 0; i < articlesPerPage; i++) {
-        let articleIndex = newsFeedPage * articlesPerPage + i
+        let articleIndex = (newsFeedPage * articlesPerPage + i)
 
-        if (articleIndex >= allArticleIds.length) {
+        if (articleIndex >= allArticles.length) {
             console.log(articleIds)
             return articleIds
         }
 
-        articleIds[i] = allArticleIds[articleIndex]
+        articleIds[i] = sortedAllArticles[articleIndex].id
     }
 
     return articleIds;
@@ -25,7 +26,7 @@ const getArticleIds = (newsFeedPage, articles, articlesPerPage) => {
 
 const NewsFeed = () => {
     const [newsFeedPage, setNewsFeedPage] = useState(0);
-    const [articlesPerPage, setArticlesPerPage] = useState(5);
+    const [articlesPerPage, setArticlesPerPage] = useState(10);
 
     const articles = useSelector(state => state.news);
 
@@ -37,9 +38,6 @@ const NewsFeed = () => {
 
     // -1 since articlePage is 0-indexed
     const lastArticlePage = (Object.keys(articles).length / 5) - 1
-
-    console.log(articles)
-
 
     return (
         <div className='flx-col'>

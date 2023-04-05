@@ -21,7 +21,9 @@ button {
     cursor: pointer;
 }
 
+a,
 a:visited {
+    color: inherit;
     text-decoration: none;
 }
 
@@ -57,6 +59,10 @@ a:visited {
 
 .flx-row {
     display: flex;
+}
+
+.space-evenly {
+    justify-content: space-evenly;
 }
 
 .flx-row-justify-end {
