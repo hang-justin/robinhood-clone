@@ -1,0 +1,14 @@
+.newsfeed-wrapper {
+    margin-top: 36px;
+}
+
+.newsfeed-wrapper--homepage {
+    box-sizing: border-box;
+    margin-left: 36px;
+    margin-right: 10px;
+    width: 822px
+}
+
+.news-header {
+    border-bottom: 1px solid gray;
+}

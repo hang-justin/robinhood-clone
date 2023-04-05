@@ -85,10 +85,17 @@ a:visited {
     flex-direction: column;
 }
 
+.flx-col-justfiy-start-align-ctr {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .flx-col-justify-start-align-start {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: flex-start;
 }
 

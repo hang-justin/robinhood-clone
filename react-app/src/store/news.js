@@ -35,7 +35,17 @@ const newsReducer = (state=initialState, action) => {
     switch(action.type) {
         case LOAD_NEWS:
             action.news.forEach(news_item => {
+                // Normalizing data
                 newState[news_item.id] = news_item
+
+
+                // Clean the headline
+                // Some headlines start with ": "
+                while ([":", " "].includes(newState[news_item.id].headline[0])) {
+                    newState[news_item.id].headline = newState[news_item.id].headline.slice(1)
+                }
+
+
             })
             return newState;
 
