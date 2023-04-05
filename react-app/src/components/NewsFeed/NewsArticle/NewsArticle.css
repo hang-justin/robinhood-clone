@@ -1,7 +1,7 @@
 .article-card {
     /* border: 0.5px dashed rgba(255, 0, 0, 0.5); */
     box-sizing: border-box;
-    min-height: 250px;
+    height: 250px;
     width: 900px;
 
     padding: 24px 24px;
@@ -13,17 +13,30 @@
 }
 
 .article-source-and-date {
+    height: 20%;
     font-size: small;
     color: var(--main-green)
 }
 
 .article-headline {
+    height: 40%;
+    line-height: 1.45rem;
+
     font-size: larger;
     font-weight: bold;
 }
 
 .article-summary {
+    height: 40%;
     font-size: medium;
+}
+
+.article-headline,
+.article-summary,
+.article-source-and-date {
+    overflow: hidden;
+    word-break: break-word;
+    text-overflow: ellipsis;
 }
 
 .article-card--right {
