@@ -1,6 +1,9 @@
 #main-nav {
     background-color: black;
     padding: 0 75px;
+
+    position: sticky;
+    top: 0;
 }
 
 #main-nav__ul {
