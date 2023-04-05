@@ -7,7 +7,7 @@ const NewsArticle = ({ articleId }) => {
 
 
     if (articleId === undefined) {
-        console.log('RETURN A LOADING LOGO')
+        console.log('err: undefined article id')
     }
 
 

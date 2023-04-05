@@ -73,13 +73,32 @@ const Sparkline = ({ asset }) => {
                 callbacks: {
                     title: () => '',
                     label: context => {
-                        let retVal
-                        console.log(context.parsed)
+                        let d = new Date()
+                        d.setHours(d.getHours() - 167 + context.parsed.x)
+
+
+                        // Remove minutes for the past
+                        // Only keep minute marker if it is the current hour
+                        if(context.parsed.x !== 167) {
+                            d.setMinutes(0)
+                        }
+
+                        // Format date with options
+                        let options = {
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        }
+                        let d_formatted = d.toLocaleDateString([], options)
+
+
+                        let price
                         context.parsed.y > 1 ?
-                            retVal = formatMoney(context.parsed.y) :
-                            retVal = '$' + Number(context.parsed.y).toFixed(8)
-                            return retVal
-                            return [0, retVal]
+                            price = formatMoney(context.parsed.y) :
+                            price = '$' + Number(context.parsed.y).toFixed(8)
+
+                        return [d_formatted, price]
                     },
                 }
             },

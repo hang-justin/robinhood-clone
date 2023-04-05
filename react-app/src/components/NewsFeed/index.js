@@ -14,7 +14,6 @@ const getArticleIds = (newsFeedPage, articles, articlesPerPage) => {
         let articleIndex = (newsFeedPage * articlesPerPage + i)
 
         if (articleIndex >= allArticles.length) {
-            console.log(articleIds)
             return articleIds
         }
 
