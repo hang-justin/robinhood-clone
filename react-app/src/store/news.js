@@ -44,7 +44,11 @@ const newsReducer = (state=initialState, action) => {
                 while ([":", " "].includes(newState[news_item.id].headline[0])) {
                     newState[news_item.id].headline = newState[news_item.id].headline.slice(1)
                 }
+                // if headline lenght is greater than 200, delete
 
+                if (newState[news_item.id].headline.length >= 200) {
+                    delete newState[news_item.id]
+                }
 
             })
             return newState;
