@@ -9,6 +9,16 @@
 
     position: sticky;
     top: 89px;
+
+    overflow-y: scroll;
+}
+
+#user-home-sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+#user-home-sidebar > * {
+    flex-shrink: 0;
 }
 
 .sidebar-row-header {
