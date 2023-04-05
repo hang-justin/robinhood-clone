@@ -1,7 +1,6 @@
 #asset-page {
     display: flex;
     min-height: calc(100vh - 65px);
-    min-width: 100vw;
     background-color: black;
     color: white;
 }

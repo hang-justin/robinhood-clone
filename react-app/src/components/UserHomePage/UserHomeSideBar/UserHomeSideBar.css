@@ -1,14 +1,15 @@
 #user-home-sidebar {
     box-sizing: border-box;
     width: 325px;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 100px - 150px);
 
     margin: 24px 36px;
+    margin-top: 80px;
     border: 0.5px solid var(--sidebar-border);
     border-radius: 5px;
 
     position: sticky;
-    top: 89px;
+    top: 150px;
 
     overflow-y: scroll;
 }
